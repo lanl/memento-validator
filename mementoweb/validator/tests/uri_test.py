@@ -1,7 +1,8 @@
-from urllib.parse import urlparse, ParseResult
 from http.client import HTTPConnection, HTTPSConnection
-from mementoweb.validator.tests.test import TestResult
+from urllib.parse import urlparse, ParseResult
+
 from mementoweb.validator.tests.test import BaseTest
+from mementoweb.validator.tests.test import TestResult
 
 
 class URITest(BaseTest):
@@ -12,7 +13,7 @@ class URITest(BaseTest):
 
     REQUEST_FAIL: str = "HTTP(s) Request Failed"
 
-    def test(self, info: dict, params: dict = {}) -> TestResult:
+    def test(self, info: dict, params: dict = None) -> TestResult:
 
         uri: str = info['uri']
 
