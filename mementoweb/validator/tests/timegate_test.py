@@ -32,8 +32,11 @@ class TimeGateTest(BaseTest):
         status = response.status
         response_headers = dict(response.getheaders())
         vary = response_headers.get('vary', '')
-        link_header_info = parse_link_header(response_headers['Link'])
-        memento = search_link_headers(link_header_info, "rel=memento")[0]
+        link_header_info = dict()
+        if 'Link' in response_headers.keys():
+            link_header_info = parse_link_header(response_headers['Link'])
+            # Memento not required
+            # memento = search_link_headers(link_header_info, "rel=memento")[0]
 
         while 300 <= status <= 400 and not vary:
 
