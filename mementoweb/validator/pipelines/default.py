@@ -21,9 +21,9 @@ class DefaultPipeline:
             'accept': accept
         }
 
-        results = []
+        results: List[TestResult] = []
 
         for test_setting in self._tests:
-            results.append(test_setting['test'].test(info, test_setting['params']))
+            results = results + test_setting['test'].test(info, test_setting['params'])
 
         return results
