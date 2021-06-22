@@ -1,3 +1,6 @@
+import json
+from typing import List, Callable
+
 from flask import Flask, request, jsonify
 from typing_extensions import TypedDict
 
@@ -6,6 +9,7 @@ from mementoweb.validator.pipelines.timegate import TimeGate
 from mementoweb.validator.pipelines.memento import Memento
 from mementoweb.validator.pipelines.original import Original
 from mementoweb.validator.pipelines.timemap import TimeMap
+from mementoweb.validator.tests.test import TestReport
 
 app = Flask(__name__)
 
@@ -56,14 +60,15 @@ def _handle_request(pipeline):
         return {
             "errors": errors
         }
-
+    reports = pipeline.validate(uri)
     return jsonify({
         "type": "timegate",
         "uri": uri,
         "datetime": datetime,
         "pipeline": pipeline.name(),
-        "results": pipeline.validate(uri)
+        "results": [report.to_json() for report in reports]
     })
+
 
 
 class RequestError(TypedDict):

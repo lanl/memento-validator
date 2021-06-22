@@ -24,6 +24,13 @@ class TestResult:
         self.description = description
         self.status = status
 
+    def to_json(self):
+        return {
+            "name": self.description,
+            "description": self.description,
+            "status": self.status
+        }
+
 
 class TestReport:
     """
@@ -48,6 +55,14 @@ class TestReport:
         self.description = description
         self.name = name
         self.tests = tests
+
+    def to_json(self):
+        return {
+            "name": self.name,
+            "description": self.description,
+            "status": self.report_status,
+            "tests": [test.to_json() for test in self.tests]
+        }
 
 
 class TestInfo(TypedDict):
