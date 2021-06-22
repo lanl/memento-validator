@@ -1,5 +1,3 @@
-from typing import List
-
 from mementoweb.validator.errors.header_errors import HeaderTypeNotFoundError
 from mementoweb.validator.errors.uri_errors import HttpConnectionFailError, InvalidUriError, HttpRequestFailError
 from mementoweb.validator.http import HttpConnection, http
@@ -41,7 +39,7 @@ class MementoRedirectTest(BaseTest):
         )
 
     def test(self, connection: HttpConnection) -> MementoRedirectTestReport:
-
+        self._test_report.connection = connection
         response_status: int = connection.get_response().status
         while 300 <= response_status < 400:
 

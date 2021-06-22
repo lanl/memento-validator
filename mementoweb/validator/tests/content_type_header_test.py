@@ -1,5 +1,4 @@
-from mementoweb.validator.errors.header_errors import LinkHeaderNotFoundError, HeadersNotFoundError, \
-    HeaderTypeNotFoundError
+from mementoweb.validator.errors.header_errors import HeaderTypeNotFoundError
 from mementoweb.validator.http import HttpConnection
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
 

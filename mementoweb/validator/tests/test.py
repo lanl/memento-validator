@@ -1,9 +1,7 @@
 from typing import List
-
 from typing_extensions import TypedDict
 
 from mementoweb.validator.http import HttpConnection
-
 
 
 class TestResult:
@@ -50,7 +48,8 @@ class TestReport:
 
     tests: List[TestResult]
 
-    def __init__(self, report_status: int = REPORT_FAIL, description: str = "", name: str = "", tests: List[TestResult] = None):
+    def __init__(self, report_status: int = REPORT_FAIL, description: str = "", name: str = "",
+                 tests: List[TestResult] = None):
         self.report_status = report_status
         self.description = description
         self.name = name
@@ -72,7 +71,7 @@ class TestInfo(TypedDict):
 
 
 class BaseTest:
-    _description: str = "Test Description"
+    _description: str = "No description"
 
     _test_report: TestReport
 
@@ -107,8 +106,3 @@ class BaseTest:
     def _name(self) -> str:
         return self.__module__ + '.' + self.__class__.__name__
 
-
-class TestSetting(TypedDict):
-    params: dict
-
-    test: BaseTest
