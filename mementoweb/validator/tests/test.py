@@ -2,27 +2,64 @@ from typing import List
 
 from typing_extensions import TypedDict
 
-TEST_PASS: int = 1
-
-TEST_WARN: int = 0
-
-TEST_FAIL: int = -1
+from mementoweb.validator.http import HttpConnection
 
 
-class TestResult(TypedDict):
-    """
-    Attributes to a test result
-    """
+
+class TestResult:
+    TEST_PASS: int = 1
+
+    TEST_WARN: int = 0
+
+    TEST_FAIL: int = -1
+
+    name: str
+
     status: int
-
-    type: str
 
     description: str
 
+    def __init__(self, name: str = "", status: int = TEST_FAIL, description: str = ""):
+        self.name = name
+        self.description = description
+        self.status = status
+
+
+class TestReport:
+    """
+    Attributes to a test result
+    """
+    REPORT_PASS: int = 1
+
+    REPORT_WARN: int = 0
+
+    REPORT_FAIL: int = -1
+
+    report_status: int
+
+    name: str
+
+    description: str
+
+    tests: List[TestResult]
+
+    def __init__(self, report_status: int = REPORT_FAIL, description: str = "", name: str = "", tests: List[TestResult] = None):
+        self.report_status = report_status
+        self.description = description
+        self.name = name
+        self.tests = tests
+
+
+class TestInfo(TypedDict):
     uri: str
+
+    connection: HttpConnection
 
 
 class BaseTest:
+    _description: str = "Test Description"
+
+    _test_report: TestReport
 
     _headers = {
         'Accept-Datetime': 'Thu, 10 Oct 2009 12:00:00 GMT',
@@ -32,30 +69,31 @@ class BaseTest:
         'User-Agent': 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2'
     }
 
-    def test(self, info: dict, params: dict = None) -> List[TestResult]:
+    def __init__(self):
+        self._test_report = TestReport(
+            name=self._name(),
+            description=self._description,
+            report_status=TestReport.REPORT_FAIL,
+            tests=[]
+        )
+
+    def test(self, **kwargs: dict) -> TestReport:
         """
         Perform the test the specified test need to perform
 
-        :param info: information passed from the pipeline
-        :param params: test specific params in the pipeline
+        :param **kwargs:
         :return: List[TestResult]
         """
         pass
 
-    def _test_result(self, uri: str, description: str, test_status: int = TEST_FAIL) -> TestResult:
-        return {
-            'status': test_status,
-            'name': self._name(),
-            'uri': uri,
-            'description': description
-        }
+    def add_test_result(self, test_result: TestResult):
+        self._test_report.tests.append(test_result)
 
     def _name(self) -> str:
         return self.__module__ + '.' + self.__class__.__name__
 
 
 class TestSetting(TypedDict):
-
     params: dict
 
     test: BaseTest

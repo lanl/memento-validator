@@ -1,10 +1,15 @@
-from http.client import HTTPConnection
-from typing import List
-
-from mementoweb.validator import util
 from mementoweb.validator.errors.uri_errors import HttpConnectionFailError, InvalidUriError, HttpRequestFailError
-from mementoweb.validator.tests.test import BaseTest, TEST_PASS
-from mementoweb.validator.tests.test import TestResult
+from mementoweb.validator.http import HttpConnection, http
+from mementoweb.validator.tests.test import BaseTest, TestResult
+from mementoweb.validator.tests.test import TestReport
+
+
+class URITestReport(TestReport):
+    connection: HttpConnection = None
+
+    def __init__(self, connection: HttpConnection = None, *args, **kwargs):
+        super(URITestReport, self).__init__(*args, **kwargs)
+        self.connection = connection
 
 
 class URITest(BaseTest):
@@ -16,17 +21,32 @@ class URITest(BaseTest):
 
     CONNECTION_FAIL: str = "Could not connect to URI"
 
-    def test(self, info: dict, params: dict = None) -> List[TestResult]:
+    _description = "Tests for the validity of the URI of the resource including validity and connectivity"
 
-        uri: str = info['uri']
+    _test_report: URITestReport
+
+    def __init__(self):
+        super().__init__()
+        self._test_report = URITestReport(
+            name=self._name(),
+            description=self._description,
+            report_status=TestReport.REPORT_FAIL,
+            tests=[],
+            connection=None
+        )
+
+    def test(self, uri: str = None) -> URITestReport:
 
         try:
-            connection: HTTPConnection = util.http(uri)
+            connection: HttpConnection = http(uri)
+            self._test_report.connection = connection
+            self._test_report.report_status = TestReport.REPORT_PASS
+            self.add_test_result(TestResult(description=URITest.VALID_URI, status=TestResult.TEST_PASS))
         except InvalidUriError:
-            return [self._test_result(uri, URITest.INVALID_URI)]
+            self.add_test_result(TestResult(URITest.INVALID_URI))
         except HttpConnectionFailError:
-            return [self._test_result(uri, URITest.CONNECTION_FAIL)]
+            self.add_test_result(TestResult(URITest.CONNECTION_FAIL))
         except HttpRequestFailError:
-            return [self._test_result(uri, URITest.REQUEST_FAIL)]
+            self.add_test_result(TestResult(URITest.REQUEST_FAIL))
 
-        return [self._test_result(uri, URITest.VALID_URI, test_status=TEST_PASS)]
+        return self._test_report

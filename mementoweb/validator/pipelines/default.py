@@ -1,6 +1,6 @@
 from typing import List
 
-from mementoweb.validator.tests.test import TestResult, TestSetting
+from mementoweb.validator.tests.test import TestReport, TestSetting
 
 
 class DefaultPipeline:
@@ -12,7 +12,7 @@ class DefaultPipeline:
     def validate(self, uri: str,
                  accept_datetime='Thu, 10 Oct 2009 12:00:00 GMT',
                  accept=''
-                 ) -> List[TestResult]:
+                 ) -> List[TestReport]:
         uri = uri.strip()
 
         info = {
@@ -21,9 +21,9 @@ class DefaultPipeline:
             'accept': accept
         }
 
-        results: List[TestResult] = []
+        results: List[TestReport] = []
 
         for test_setting in self._tests:
-            results = results + test_setting['test'].test(info, test_setting['params'])
+            results = results + test_setting['test'].test()
 
         return results
