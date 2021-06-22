@@ -2,13 +2,12 @@ from typing import List
 
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.tests.content_negotiation_test import ContentNegotiationTest
-from mementoweb.validator.tests.header_test import HeaderTest
+from mementoweb.validator.tests.link_header_test import LinkHeaderTest
 from mementoweb.validator.tests.test import TestSetting, TestReport
 from mementoweb.validator.tests.uri_test import URITest, URITestReport
 
 
 class Original(DefaultPipeline):
-
     # TODO : Add original tests
     _tests: List[TestSetting] = [
         {'test': URITest(), 'params': None},
@@ -24,7 +23,7 @@ class Original(DefaultPipeline):
         URIResult: URITestReport = URITest().test(uri=uri)
         results.append(URIResult)
 
-        HeaderResults = HeaderTest().test(URIResult.connection)
+        HeaderResults = LinkHeaderTest().test(URIResult.connection)
         results.append(HeaderResults)
 
         results.append(ContentNegotiationTest().test(URIResult.connection))

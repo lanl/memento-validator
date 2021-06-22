@@ -1,6 +1,6 @@
 from typing import List
+
 from mementoweb.validator.pipelines import DefaultPipeline
-from mementoweb.validator.tests.header_test import HeaderTest
 from mementoweb.validator.tests.test import TestSetting, TestReport
 from mementoweb.validator.tests.timegate_test import TimeGateTest
 from mementoweb.validator.tests.uri_test import URITest
@@ -18,13 +18,9 @@ class TimeGate(DefaultPipeline):
                  accept=''
                  ) -> List[TestReport]:
 
-        args = {
-            "uri": uri
-        }
-        a = []
+        results = [URITest().test(uri=uri)]
 
-        a.append(URITest().test(**args))
-        a.append(HeaderTest().test())
+        # results.append(LinkHeaderTest().test())
         # a.append(TimeGateTest().test(**args))
 
-        return a
+        return results
