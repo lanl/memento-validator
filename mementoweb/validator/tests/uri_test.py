@@ -41,12 +41,12 @@ class URITest(BaseTest):
             connection: HttpConnection = http(uri)
             self._test_report.connection = connection
             self._test_report.report_status = TestReport.REPORT_PASS
-            self.add_test_result(TestResult(description=URITest.VALID_URI, status=TestResult.TEST_PASS))
+            self.add_test_result(TestResult(name=URITest.VALID_URI, status=TestResult.TEST_PASS))
         except InvalidUriError:
-            self.add_test_result(TestResult(URITest.INVALID_URI))
+            self.add_test_result(TestResult(name=URITest.INVALID_URI))
         except HttpConnectionFailError:
-            self.add_test_result(TestResult(URITest.CONNECTION_FAIL))
+            self.add_test_result(TestResult(name=URITest.CONNECTION_FAIL))
         except HttpRequestFailError:
-            self.add_test_result(TestResult(URITest.REQUEST_FAIL))
+            self.add_test_result(TestResult(name=URITest.REQUEST_FAIL))
 
         return self._test_report

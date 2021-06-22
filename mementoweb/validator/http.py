@@ -31,7 +31,7 @@ class HttpConnection:
     def get_response(self):
         return self._response
 
-    def get_headers(self, name: str):
+    def get_headers(self, name: str) -> str:
         if not self._response_headers:
             raise HeadersNotFoundError()
         if name in self._response_headers.keys():

@@ -3,7 +3,7 @@ from mementoweb.validator.http import HttpConnection
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
 
 
-class HeaderTest(BaseTest):
+class LinkHeaderTest(BaseTest):
     LINK_HEADER_NOT_PRESENT = "Link Header not present"
 
     HEADERS_NOT_PRESENT = "Headers not present"
@@ -26,30 +26,30 @@ class HeaderTest(BaseTest):
             self._test_report.report_status = TestReport.REPORT_PASS
 
             if not len(connection.search_link_headers("timegate")):
-                self.add_test_result(TestResult(description=HeaderTest.TIMEGATE_NOT_PRESENT))
+                self.add_test_result(TestResult(name=LinkHeaderTest.TIMEGATE_NOT_PRESENT))
                 self._test_report.report_status = TestReport.REPORT_FAIL
             else:
-                self.add_test_result(TestResult(description=HeaderTest.TIMEGATE_PRESENT, status=TestResult.TEST_PASS))
+                self.add_test_result(TestResult(name=LinkHeaderTest.TIMEGATE_PRESENT, status=TestResult.TEST_PASS))
 
             if not len(connection.search_link_headers("timebundle")):
-                self.add_test_result(TestResult(description=HeaderTest.TIMEBUNDLE_NOT_PRESENT))
+                self.add_test_result(TestResult(name=LinkHeaderTest.TIMEBUNDLE_NOT_PRESENT))
                 self._test_report.report_status = TestReport.REPORT_FAIL
             else:
-                self.add_test_result(TestResult(description=HeaderTest.TIMEBUNDLE_PRESENT, status=TestResult.TEST_PASS))
+                self.add_test_result(TestResult(name=LinkHeaderTest.TIMEBUNDLE_PRESENT, status=TestResult.TEST_PASS))
 
             if not len(connection.search_link_headers("timemap")):
-                self.add_test_result(TestResult(description=HeaderTest.TIMEMAP_NOT_PRESENT))
+                self.add_test_result(TestResult(name=LinkHeaderTest.TIMEMAP_NOT_PRESENT))
                 self._test_report.report_status = TestReport.REPORT_FAIL
             else:
-                self.add_test_result(TestResult(description=HeaderTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
+                self.add_test_result(TestResult(name=LinkHeaderTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
 
         except LinkHeaderNotFoundError:
             self._test_report.report_status = TestReport.REPORT_FAIL
-            self.add_test_result(TestResult(description=HeaderTest.LINK_HEADER_NOT_PRESENT))
+            self.add_test_result(TestResult(name=LinkHeaderTest.LINK_HEADER_NOT_PRESENT))
 
         except HeadersNotFoundError:
             self._test_report.report_status = TestReport.REPORT_FAIL
-            self.add_test_result(TestResult(description=HeaderTest.HEADERS_NOT_PRESENT))
+            self.add_test_result(TestResult(name=LinkHeaderTest.HEADERS_NOT_PRESENT))
 
         return self._test_report
 
