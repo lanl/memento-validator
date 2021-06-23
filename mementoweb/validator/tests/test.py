@@ -22,11 +22,20 @@ class TestResult:
         self.description = description
         self.status = status
 
+    def result(self) -> str:
+        if self.status == self.TEST_PASS:
+            return "Pass"
+        if self.status == self.TEST_WARN:
+            return "Warn"
+        else:
+            return "Fail"
+
     def to_json(self):
         return {
-            "name": self.description,
+            "name": self.name,
             "description": self.description,
-            "status": self.status
+            "status": self.status,
+            "result": self.result()
         }
 
 
@@ -55,11 +64,20 @@ class TestReport:
         self.name = name
         self.tests = tests
 
+    def result(self) -> str:
+        if self.report_status == self.REPORT_PASS:
+            return "Pass"
+        if self.report_status == self.REPORT_WARN:
+            return "Warn"
+        else:
+            return "Fail"
+
     def to_json(self):
         return {
             "name": self.name,
             "description": self.description,
             "status": self.report_status,
+            "result": self.result(),
             "tests": [test.to_json() for test in self.tests]
         }
 

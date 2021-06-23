@@ -18,7 +18,8 @@ class ContentNegotiationTest(BaseTest):
         try:
             memento_headers = connection.get_headers("Memento-Datetime")
             self._test_report.report_status = TestReport.REPORT_PASS
-            self.add_test_result(TestResult(name=ContentNegotiationTest.CONTENT_NEGOTIATION_HEADERS_PRESENT))
+            self.add_test_result(TestResult(name=ContentNegotiationTest.CONTENT_NEGOTIATION_HEADERS_PRESENT,
+                                            status=TestResult.TEST_PASS))
         except HeadersNotFoundError:
             self.add_test_result(TestResult(name=ContentNegotiationTest.HEADERS_NOT_PRESENT))
         except HeaderTypeNotFoundError:
