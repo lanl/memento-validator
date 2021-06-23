@@ -1,8 +1,12 @@
 from mementoweb.validator.errors.header_errors import HeaderTypeNotFoundError
 from mementoweb.validator.errors.uri_errors import HttpConnectionFailError, InvalidUriError, HttpRequestFailError
-from mementoweb.validator.http import HttpConnection, http
+from mementoweb.validator.http import HttpConnection, http, HttpResponse
 from mementoweb.validator.tests.test import BaseTest, TestResult
 from mementoweb.validator.tests.test import TestReport
+
+"""
+    Tests for memento redirection, if any and corresponding response.
+"""
 
 
 class MementoRedirectTestReport(TestReport):
@@ -38,13 +42,13 @@ class MementoRedirectTest(BaseTest):
             connection=None
         )
 
-    def test(self, connection: HttpConnection) -> MementoRedirectTestReport:
-        self._test_report.connection = connection
-        response_status: int = connection.get_response().status
+    def test(self, response: HttpResponse) -> MementoRedirectTestReport:
+        self._test_report.connection = None
+        response_status: int = response.status
         while 300 <= response_status < 400:
 
             try:
-                redirect_location = connection.get_headers("location")
+                redirect_location = response.get_headers("location")
                 connection = http(redirect_location)
                 response_status = connection.get_response().status
                 self.add_test_result(
@@ -61,7 +65,8 @@ class MementoRedirectTest(BaseTest):
 
         else:
             if response_status in [200, 204, 206]:
-                self.add_test_result(TestResult(name=MementoRedirectTest.VALID_MEMENTO_STATUS, status=TestResult.TEST_PASS))
+                self.add_test_result(
+                    TestResult(name=MementoRedirectTest.VALID_MEMENTO_STATUS, status=TestResult.TEST_PASS))
                 self._test_report.report_status = TestReport.REPORT_PASS
             else:
                 self.add_test_result(TestResult(MementoRedirectTest.INVALID_MEMENTO_STATUS))

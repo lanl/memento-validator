@@ -17,7 +17,7 @@ class TimeMap(DefaultPipeline):
         uri_result: URITestReport = URITest().test(uri=uri)
         results.append(uri_result)
 
-        header_results = ContentTypeHeaderTest().test(uri_result.connection)
+        header_results = ContentTypeHeaderTest().test(uri_result.connection.get_response())
         results.append(header_results)
 
         # results.append(ContentNegotiationTest().test(uri_result.connection))

@@ -12,6 +12,11 @@ class URITestReport(TestReport):
         self.connection = connection
 
 
+"""
+    Performs URI validation and connectivity test for a given URI.
+"""
+
+
 class URITest(BaseTest):
     VALID_URI: str = "Valid URI"
 

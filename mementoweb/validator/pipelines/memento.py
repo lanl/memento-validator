@@ -1,5 +1,6 @@
 from typing import List
 
+from mementoweb.validator.http import HttpConnection
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.tests.content_negotiation_test import ContentNegotiationTest
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
@@ -24,18 +25,20 @@ class Memento(DefaultPipeline):
         if uri_report.report_status is TestReport.REPORT_FAIL:
             return results
 
-        # Check for any redirection
-        memento_report: MementoRedirectTestReport = MementoRedirectTest().test(connection=uri_report.connection)
-        results.append(memento_report)
+        # Check for any redirection, use already established connection and response
+        connection: HttpConnection = uri_report.connection
+        redirection_report: MementoRedirectTestReport = MementoRedirectTest().test(response=connection.get_response())
+        results.append(redirection_report)
         # if memento_report.report_status is TestReport.REPORT_FAIL:
         #     return results
 
         # Check for content negotiation. i.e memento-datetime
-        content_negotiation_report: TestReport = ContentNegotiationTest().test(uri_report.connection)
+        content_negotiation_report: TestReport = ContentNegotiationTest().test(uri_report.connection.get_response())
         results.append(content_negotiation_report)
 
-        # Check for link headers and validate
-        link_header_report = LinkHeaderTest().test(memento_report.connection, resource_type="memento")
+        # Check for link headers and validate, use the updated connection response if redirected
+        connection = redirection_report.connection or connection
+        link_header_report = LinkHeaderTest().test(connection.get_response(), resource_type="memento")
         results.append(link_header_report)
 
         return results

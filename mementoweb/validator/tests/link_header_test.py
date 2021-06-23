@@ -1,7 +1,7 @@
 from typing import Dict, Callable
 
 from mementoweb.validator.errors.header_errors import LinkHeaderNotFoundError, HeadersNotFoundError
-from mementoweb.validator.http import HttpConnection
+from mementoweb.validator.http import HttpResponse
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
 
 
@@ -35,7 +35,7 @@ class LinkHeaderTest(BaseTest):
 
     TIMEMAP_TYPE_NOT_PRESENT = "Timemap type not present"
 
-    _tests: Dict[str, Callable[[HttpConnection], TestReport]]
+    _tests: Dict[str, Callable[[HttpResponse], TestReport]]
 
     def __init__(self):
         super().__init__()
@@ -44,10 +44,10 @@ class LinkHeaderTest(BaseTest):
             "memento": self._test_memento
         }
 
-    def test(self, connection: HttpConnection, resource_type="original") -> TestReport:
+    def test(self, response: HttpResponse, resource_type="original") -> TestReport:
 
         try:
-            return self._tests[resource_type](connection)
+            return self._tests[resource_type](response)
 
         except LinkHeaderNotFoundError:
             self._test_report.report_status = TestReport.REPORT_FAIL
@@ -59,23 +59,23 @@ class LinkHeaderTest(BaseTest):
 
         return self._test_report
 
-    def _test_original(self, connection: HttpConnection) -> TestReport:
+    def _test_original(self, response: HttpResponse) -> TestReport:
         # TODO : Double check tests with std
         self._test_report.report_status = TestReport.REPORT_PASS
 
-        if not len(connection.search_link_headers("timegate")):
+        if not len(response.search_link_headers("timegate")):
             self.add_test_result(TestResult(name=LinkHeaderTest.TIMEGATE_NOT_PRESENT))
             self._test_report.report_status = TestReport.REPORT_FAIL
         else:
             self.add_test_result(TestResult(name=LinkHeaderTest.TIMEGATE_PRESENT, status=TestResult.TEST_PASS))
 
-        if not len(connection.search_link_headers("timebundle")):
+        if not len(response.search_link_headers("timebundle")):
             self.add_test_result(TestResult(name=LinkHeaderTest.TIMEBUNDLE_NOT_PRESENT))
             self._test_report.report_status = TestReport.REPORT_FAIL
         else:
             self.add_test_result(TestResult(name=LinkHeaderTest.TIMEBUNDLE_PRESENT, status=TestResult.TEST_PASS))
 
-        if not len(connection.search_link_headers("timemap")):
+        if not len(response.search_link_headers("timemap")):
             self.add_test_result(TestResult(name=LinkHeaderTest.TIMEMAP_NOT_PRESENT))
             self._test_report.report_status = TestReport.REPORT_FAIL
         else:
@@ -83,22 +83,22 @@ class LinkHeaderTest(BaseTest):
 
         return self._test_report
 
-    def _test_memento(self, connection: HttpConnection):
+    def _test_memento(self, response: HttpResponse):
         # TODO: Add memento tests
         self._test_report.report_status = TestReport.REPORT_PASS
-        if not len(connection.search_link_headers("original")):
+        if not len(response.search_link_headers("original")):
             self.add_test_result(TestResult(name=LinkHeaderTest.ORIGINAL_NOT_PRESENT))
             self._test_report.report_status = TestReport.REPORT_FAIL
         else:
             self.add_test_result(TestResult(name=LinkHeaderTest.ORIGINAL_PRESENT, status=TestResult.TEST_PASS))
 
-        if not len(connection.search_link_headers("timegate")):
+        if not len(response.search_link_headers("timegate")):
             self.add_test_result(TestResult(name=LinkHeaderTest.TIMEGATE_NOT_PRESENT))
             self._test_report.report_status = TestReport.REPORT_FAIL
         else:
             self.add_test_result(TestResult(name=LinkHeaderTest.TIMEGATE_PRESENT, status=TestResult.TEST_PASS))
 
-        timemaps = connection.search_link_headers("timemap")
+        timemaps = response.search_link_headers("timemap")
         if not len(timemaps):
             self.add_test_result(TestResult(name=LinkHeaderTest.TIMEMAP_NOT_PRESENT, status=TestResult.TEST_WARN))
             self._test_report.report_status = TestReport.REPORT_WARN
@@ -112,7 +112,7 @@ class LinkHeaderTest(BaseTest):
                 else:
                     self.add_test_result(TestResult(LinkHeaderTest.TIMEMAP_TYPE_NOT_PRESENT))
 
-        mementos = connection.search_link_headers("memento")
+        mementos = response.search_link_headers("memento")
 
         if not len(mementos):
             self.add_test_result(TestResult(LinkHeaderTest.MEMENTO_NOT_PRESENT, status=TestResult.TEST_FAIL))

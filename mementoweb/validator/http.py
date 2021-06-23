@@ -7,37 +7,25 @@ from mementoweb.validator.errors.header_errors import HeadersNotFoundError, Link
     HeaderTypeNotFoundError, HeaderParseError
 from mementoweb.validator.errors.uri_errors import HttpRequestFailError, HttpConnectionFailError, InvalidUriError
 
+"""
+    
+    Http related functions and classes - Isolate the urlib (for any issues/ changes in future versions)
+    Used as an adapter in the package 
+    
+"""
 
-class HttpConnection:
-    _connection: HTTPConnection = None
 
+class HttpResponse:
     _response: HTTPResponse = None
 
-    _response_headers = None
+    _headers = None
 
-    _link_headers: List = None
+    status = None
 
-    def __init__(self, host, scheme):
-        if scheme == 'http':
-            self._connection = HTTPConnection(host)
-        else:
-            self._connection = HTTPSConnection(host)
-
-    def request(self, method, path, headers):
-        self._connection.request(method, path, headers=headers)
-        self._response = self._connection.getresponse()
-        self._response_headers = dict(self._response.getheaders())
-
-    def get_response(self):
-        return self._response
-
-    def get_headers(self, name: str) -> str:
-        if not self._response_headers:
-            raise HeadersNotFoundError()
-        if name in self._response_headers.keys():
-            return self._response_headers[name]
-        else:
-            raise HeaderTypeNotFoundError()
+    def __init__(self, response: HTTPResponse = None):
+        self._response = response
+        self._headers = dict(self._response.getheaders())
+        self.status = response.status
 
     def search_link_headers(self, relationship: str):
         try:
@@ -49,6 +37,14 @@ class HttpConnection:
             raise LinkHeaderNotFoundError()
         except Exception:
             raise HeaderParseError()
+
+    def get_headers(self, name: str) -> str:
+        if not self._headers:
+            raise HeadersNotFoundError()
+        if name in self._headers.keys():
+            return self._headers[name]
+        else:
+            raise HeaderTypeNotFoundError()
 
     def _parse_link_headers(self, link_header: str) -> List:
         link_header = link_header.strip()
@@ -78,6 +74,25 @@ class HttpConnection:
                 })
 
         return self._link_headers
+
+
+class HttpConnection:
+    _connection: HTTPConnection = None
+
+    _response: HttpResponse = None
+
+    def __init__(self, host, scheme):
+        if scheme == 'http':
+            self._connection = HTTPConnection(host)
+        else:
+            self._connection = HTTPSConnection(host)
+
+    def request(self, method, path, headers):
+        self._connection.request(method, path, headers=headers)
+        self._response = HttpResponse(self._connection.getresponse())
+
+    def get_response(self) -> HttpResponse:
+        return self._response
 
 
 def http(uri: str,

@@ -1,22 +1,25 @@
 from mementoweb.validator.errors.header_errors import HeadersNotFoundError, HeaderTypeNotFoundError
-from mementoweb.validator.http import HttpConnection
+from mementoweb.validator.http import HttpResponse
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
+
+"""
+    Tests for content negotiation using the Memento-Datetime header.
+"""
 
 
 class ContentNegotiationTest(BaseTest):
-
     HEADERS_NOT_PRESENT = "Headers not present"
 
     CONTENT_NEGOTIATION_HEADERS_NOT_PRESENT = "Resource does not support content negotiation"
 
     CONTENT_NEGOTIATION_HEADERS_PRESENT = "Resource supports content negotiation"
 
-    def test(self, connection: HttpConnection) -> TestReport:
+    def test(self, response: HttpResponse) -> TestReport:
 
         self._test_report.report_status = TestReport.REPORT_WARN
 
         try:
-            memento_headers = connection.get_headers("Memento-Datetime")
+            memento_headers = response.get_headers("Memento-Datetime")
             self._test_report.report_status = TestReport.REPORT_PASS
             self.add_test_result(TestResult(name=ContentNegotiationTest.CONTENT_NEGOTIATION_HEADERS_PRESENT,
                                             status=TestResult.TEST_PASS))
@@ -26,4 +29,3 @@ class ContentNegotiationTest(BaseTest):
             self.add_test_result(TestResult(name=ContentNegotiationTest.CONTENT_NEGOTIATION_HEADERS_NOT_PRESENT))
 
         return self._test_report
-
