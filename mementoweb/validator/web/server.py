@@ -1,15 +1,11 @@
-import json
-from typing import List, Callable
-
 from flask import Flask, request, jsonify
 from typing_extensions import TypedDict
 
 from mementoweb.validator.config import Config
-from mementoweb.validator.pipelines.timegate import TimeGate
 from mementoweb.validator.pipelines.memento import Memento
 from mementoweb.validator.pipelines.original import Original
+from mementoweb.validator.pipelines.timegate import TimeGate
 from mementoweb.validator.pipelines.timemap import TimeMap
-from mementoweb.validator.tests.test import TestReport
 
 app = Flask(__name__)
 
@@ -20,25 +16,25 @@ Config.file_path = "config.xml"
 
 @app.route("/original")
 def original():
-    return _handle_request(Original())
+    return _handle_request(Original(), "original")
 
 
 @app.route("/timegate")
 def timegate():
-    return _handle_request(TimeGate())
+    return _handle_request(TimeGate(), "timegate")
 
 
 @app.route("/memento")
 def memento():
-    return _handle_request(Memento())
+    return _handle_request(Memento(), "memento")
 
 
 @app.route("/timemap")
 def timemap():
-    return _handle_request(TimeMap())
+    return _handle_request(TimeMap(), "timemap")
 
 
-def _handle_request(pipeline):
+def _handle_request(pipeline, test_type):
     uri = request.args.get("uri")
 
     errors: [RequestError] = []
@@ -62,13 +58,12 @@ def _handle_request(pipeline):
         }
     reports = pipeline.validate(uri)
     return jsonify({
-        "type": "timegate",
+        "type": test_type,
         "uri": uri,
         "datetime": datetime,
         "pipeline": pipeline.name(),
         "results": [report.to_json() for report in reports]
     })
-
 
 
 class RequestError(TypedDict):
