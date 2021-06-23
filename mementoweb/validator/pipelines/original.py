@@ -3,16 +3,12 @@ from typing import List
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.tests.content_negotiation_test import ContentNegotiationTest
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
-from mementoweb.validator.tests.test import TestSetting, TestReport
+from mementoweb.validator.tests.test import TestReport
 from mementoweb.validator.tests.uri_test import URITest, URITestReport
 
 
 class Original(DefaultPipeline):
     # TODO : Add original tests
-    _tests: List[TestSetting] = [
-        {'test': URITest(), 'params': None},
-        {'test': URITest(), 'params': None}
-    ]
 
     def validate(self, uri: str,
                  accept_datetime='Thu, 10 Oct 2009 12:00:00 GMT',
@@ -20,12 +16,12 @@ class Original(DefaultPipeline):
                  ) -> List[TestReport]:
         results = []
 
-        URIResult: URITestReport = URITest().test(uri=uri)
-        results.append(URIResult)
+        uri_result: URITestReport = URITest().test(uri=uri)
+        results.append(uri_result)
 
-        HeaderResults = LinkHeaderTest().test(URIResult.connection)
-        results.append(HeaderResults)
+        header_results = LinkHeaderTest().test(uri_result.connection)
+        results.append(header_results)
 
-        results.append(ContentNegotiationTest().test(URIResult.connection))
+        results.append(ContentNegotiationTest().test(uri_result.connection))
 
         return results

@@ -35,7 +35,7 @@ class Memento(DefaultPipeline):
         results.append(content_negotiation_report)
 
         # Check for link headers and validate
-        link_header_report = LinkHeaderTest().test(memento_report.connection)
+        link_header_report = LinkHeaderTest().test(memento_report.connection, resource_type="memento")
         results.append(link_header_report)
 
         return results
