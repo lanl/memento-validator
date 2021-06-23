@@ -27,8 +27,8 @@ class Memento(DefaultPipeline):
         # Check for any redirection
         memento_report: MementoRedirectTestReport = MementoRedirectTest().test(connection=uri_report.connection)
         results.append(memento_report)
-        if memento_report.report_status is TestReport.REPORT_FAIL:
-            return results
+        # if memento_report.report_status is TestReport.REPORT_FAIL:
+        #     return results
 
         # Check for content negotiation. i.e memento-datetime
         content_negotiation_report: TestReport = ContentNegotiationTest().test(uri_report.connection)
