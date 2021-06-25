@@ -22,7 +22,8 @@ class HttpResponse:
 
     status = None
 
-    def __init__(self, response: HTTPResponse = None):
+    def __init__(self, response: HTTPResponse = None, uri=""):
+        self.uri = uri
         self._response = response
         self._headers = dict(self._response.getheaders())
         self.status = response.status
@@ -81,7 +82,10 @@ class HttpConnection:
 
     _response: HttpResponse = None
 
-    def __init__(self, host, scheme):
+    _uri: str = None
+
+    def __init__(self, host, scheme, uri):
+        self._uri = uri
         if scheme == 'http':
             self._connection = HTTPConnection(host)
         else:
@@ -89,7 +93,7 @@ class HttpConnection:
 
     def request(self, method, path, headers):
         self._connection.request(method, path, headers=headers)
-        self._response = HttpResponse(self._connection.getresponse())
+        self._response = HttpResponse(self._connection.getresponse(), uri=self._uri)
 
     def get_response(self) -> HttpResponse:
         return self._response
@@ -132,9 +136,9 @@ def http(uri: str,
 
     try:
         if params.scheme == 'http':
-            connection: HttpConnection = HttpConnection(host, params.scheme)
+            connection: HttpConnection = HttpConnection(host, params.scheme, uri=uri)
         else:
-            connection: HttpConnection = HttpConnection(host, params.scheme)
+            connection: HttpConnection = HttpConnection(host, params.scheme, uri=uri)
     except:
         raise HttpConnectionFailError()
 
