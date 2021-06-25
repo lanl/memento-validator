@@ -1,8 +1,8 @@
 from typing import List
 
 from mementoweb.validator import util
-from mementoweb.validator.tests.test import BaseTest, TestReport
 from mementoweb.validator.http import HttpConnection, http
+from mementoweb.validator.tests.test import BaseTest, TestReport
 
 
 class TimeGateTest(BaseTest):

@@ -5,7 +5,7 @@ from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.tests.content_negotiation_test import ContentNegotiationTest
 from mementoweb.validator.tests.link_header_memento_test import LinkHeaderMementoTest
 from mementoweb.validator.tests.link_header_original_test import LinkHeaderOriginalTest
-from mementoweb.validator.tests.link_header_test import LinkHeaderTest
+from mementoweb.validator.tests.link_header_test import LinkHeaderTest, ResourceType
 from mementoweb.validator.tests.link_header_timegate_test import LinkHeaderTimeGateTest
 from mementoweb.validator.tests.link_header_timemap_test import LinkHeaderTimeMapTest
 from mementoweb.validator.tests.memento_redirect_test import MementoRedirectTest, MementoRedirectTestReport
@@ -42,13 +42,20 @@ class Memento(DefaultPipeline):
 
         # Check for link headers and validate, use the updated connection response if redirected
         connection = redirection_report.connection or connection
-        link_header_report = LinkHeaderTest().test(connection.get_response(), resource_type="memento")
+        link_header_report = LinkHeaderTest().test(connection.get_response(), resource_type=ResourceType.MEMENTO)
         results.append(link_header_report)
 
         # Link-header tests
-        results.append(LinkHeaderMementoTest().test(response=connection.get_response(), resource_type="memento"))
-        results.append(LinkHeaderOriginalTest().test(response=connection.get_response(), resource_type="memento"))
-        results.append(LinkHeaderTimeGateTest().test(response=connection.get_response(), resource_type="memento"))
-        results.append(LinkHeaderTimeMapTest().test(response=connection.get_response(), resource_type="memento"))
+        results.append(LinkHeaderMementoTest().test(response=connection.get_response(),
+                                                    resource_type=ResourceType.MEMENTO))
+
+        results.append(LinkHeaderOriginalTest().test(response=connection.get_response(),
+                                                     resource_type=ResourceType.MEMENTO))
+
+        results.append(LinkHeaderTimeGateTest().test(response=connection.get_response(),
+                                                     resource_type=ResourceType.MEMENTO))
+
+        results.append(LinkHeaderTimeMapTest().test(response=connection.get_response(),
+                                                    resource_type=ResourceType.MEMENTO))
 
         return results

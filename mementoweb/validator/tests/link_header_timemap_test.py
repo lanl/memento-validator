@@ -7,6 +7,8 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
 
     TIMEMAP_PRESENT = "Timemap link present"
 
+    TIMEMAP_NOT_PRESENT = "Timemap link not present"
+
     TIMEMAP_TYPE_PRESENT = "Timemap type present"
 
     TIMEMAP_TYPE_NOT_PRESENT = "Timemap type not present"
@@ -16,7 +18,7 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
         timemaps = response.search_link_headers("timemap")
 
         if not len(timemaps):
-            self.add_test_result(TestResult(name=LinkHeaderTest.TIMEMAP_NOT_PRESENT, status=TestResult.TEST_WARN))
+            self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT, status=TestResult.TEST_WARN))
             self._test_report.report_status = TestReport.REPORT_WARN
         else:
             self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
@@ -33,10 +35,10 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
 
     def _test_original(self, response: HttpResponse) -> TestReport:
         if not len(response.search_link_headers("timemap")):
-            self.add_test_result(TestResult(name=LinkHeaderTest.TIMEMAP_NOT_PRESENT))
+            self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT))
             self._test_report.report_status = TestReport.REPORT_FAIL
         else:
-            self.add_test_result(TestResult(name=LinkHeaderTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
+            self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
             self._test_report.report_status = TestReport.REPORT_PASS
 
         return self._test_report
