@@ -40,10 +40,10 @@ class URITest(BaseTest):
             connection=None
         )
 
-    def test(self, uri: str = None) -> URITestReport:
+    def test(self, uri: str, datetime: str) -> URITestReport:
 
         try:
-            connection: HttpConnection = http(uri)
+            connection: HttpConnection = http(uri, datetime=datetime)
             self._test_report.connection = connection
             self._test_report.report_status = TestReport.REPORT_PASS
             self.add_test_result(TestResult(name=URITest.VALID_URI, status=TestResult.TEST_PASS))

@@ -22,6 +22,10 @@ class LinkHeaderMementoTest(LinkHeaderTest):
 
     MEMENTO_DATETIME_NOT_PARSABLE = "Memento datetime not parsable"
 
+    def _test_timegate(self, response: HttpResponse) -> TestReport:
+        # Same tests as for memento
+        return self._test_memento(response)
+
     def _test_memento(self, response: HttpResponse) -> TestReport:
 
         memento_uri = response.uri

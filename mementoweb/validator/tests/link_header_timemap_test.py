@@ -13,6 +13,22 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
 
     TIMEMAP_TYPE_NOT_PRESENT = "Timemap type not present"
 
+    def _test_timegate(self, response: HttpResponse) -> TestReport:
+        # TODO : Change pass status
+        self._test_report.report_status = TestReport.REPORT_PASS
+        timemaps = response.search_link_headers('timemap')
+        if not timemaps:
+            self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT,
+                                            status=TestResult.TEST_WARN))
+        else:
+            self.add_test_result(TestResult(LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
+
+            for timemap in timemaps:
+                if timemap['type'] == "application.link-format":
+                    self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_PRESENT,
+                                                    status=TestResult.TEST_PASS))
+        return self._test_report
+
     def _test_memento(self, response: HttpResponse) -> TestReport:
 
         timemaps = response.search_link_headers("timemap")

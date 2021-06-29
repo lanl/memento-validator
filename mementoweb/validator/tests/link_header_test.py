@@ -4,16 +4,7 @@ from typing import Dict, Callable
 from mementoweb.validator.errors.header_errors import LinkHeaderNotFoundError, HeadersNotFoundError
 from mementoweb.validator.http import HttpResponse
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
-
-
-class ResourceType(Enum):
-    ORIGINAL = "original"
-
-    MEMENTO = "memento"
-
-    TIMEMAP = "timemap"
-
-    TIMEGATE = "timegate"
+from mementoweb.validator.types import ResourceType
 
 
 class LinkHeaderTest(BaseTest):
