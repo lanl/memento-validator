@@ -47,6 +47,9 @@ class HttpResponse:
         else:
             raise HeaderTypeNotFoundError()
 
+    def header_keys(self) -> List:
+        return list(self._headers.keys())
+
     def _parse_link_headers(self, link_header: str) -> List:
         link_header = link_header.strip()
 
