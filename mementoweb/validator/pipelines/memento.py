@@ -22,7 +22,7 @@ class Memento(DefaultPipeline):
         results = []
 
         # Check for the URI validity
-        uri_report: URITestReport = URITest().test(uri=uri)
+        uri_report: URITestReport = URITest().test(uri=uri, datetime=accept_datetime)
         results.append(uri_report)
 
         # If URI invalid  stop tests

@@ -14,7 +14,7 @@ class TimeMap(DefaultPipeline):
                  ) -> List[TestReport]:
         results = []
 
-        uri_result: URITestReport = URITest().test(uri=uri)
+        uri_result: URITestReport = URITest().test(uri=uri, datetime=accept_datetime)
         results.append(uri_result)
 
         header_results = ContentTypeHeaderTest().test(uri_result.connection.get_response())
