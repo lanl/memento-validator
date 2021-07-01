@@ -24,9 +24,12 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
             self.add_test_result(TestResult(LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
 
             for timemap in timemaps:
-                if timemap['type'] == "application.link-format":
+                if timemap['type'] == "application/link-format":
                     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_PRESENT,
                                                     status=TestResult.TEST_PASS))
+                else:
+                    self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_NOT_PRESENT,
+                                                    status=TestResult.TEST_FAIL))
         return self._test_report
 
     def _test_memento(self, response: HttpResponse) -> TestReport:
