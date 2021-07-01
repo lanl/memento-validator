@@ -5,6 +5,11 @@ from mementoweb.validator.tests.test import TestReport
 
 
 class URITestReport(TestReport):
+    """
+
+    URITestReport encapsulates URI test specific results in addition to standard test results
+
+    """
     connection: HttpConnection = None
 
     def __init__(self, connection: HttpConnection = None, *args, **kwargs):
@@ -12,12 +17,13 @@ class URITestReport(TestReport):
         self.connection = connection
 
 
-"""
-    Performs URI validation and connectivity test for a given URI.
-"""
-
-
 class URITest(BaseTest):
+    """
+
+    Implements URI validation and connectivity tests
+
+    """
+
     VALID_URI: str = "Valid URI"
 
     INVALID_URI: str = "Invalid URI"
@@ -41,6 +47,14 @@ class URITest(BaseTest):
         )
 
     def test(self, uri: str, datetime: str) -> URITestReport:
+        """
+
+        Performs URI testing on a given uri
+
+        :param uri: URI for testing/ required
+        :param datetime: datetime for testing/ only used when URI is valid and on establishing connection
+        :return:
+        """
 
         try:
             connection: HttpConnection = http(uri, datetime=datetime)

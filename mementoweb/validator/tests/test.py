@@ -6,6 +6,11 @@ from mementoweb.validator.http import HttpConnection
 
 
 class TestResult:
+    """
+
+    Abstraction of a test result/ single test
+
+    """
     TEST_PASS: int = 1
 
     TEST_WARN: int = 0
@@ -42,7 +47,9 @@ class TestResult:
 
 class TestReport:
     """
-    Attributes to a test result
+
+    Abstraction to a test report/ results of collection of tests
+
     """
     REPORT_PASS: int = 1
 
@@ -90,6 +97,11 @@ class TestInfo(TypedDict):
 
 
 class BaseTest:
+    """
+
+    Abstraction for a test
+
+    """
     _description: str = "No description"
 
     _test_report: TestReport
@@ -112,10 +124,12 @@ class BaseTest:
 
     def test(self, **kwargs: dict) -> TestReport:
         """
+
         Perform the test the specified test need to perform
 
         :param **kwargs:
         :return: List[TestResult]
+
         """
         pass
 
