@@ -7,21 +7,21 @@
 
 1. Install Dependencies
 
-``
-pip install -r requirements.txt
-``
+```shell
+$ pip install -r requirements.txt
+```
 
 2. Export Flask Module (REMOVE)
 
-``
-export FLASK_APP=mementoweb/validator/web/server.py
-``
+```shell
+$ export FLASK_APP=mementoweb/validator/web/server.py
+```
 
 3. Run Server (Add Port and config)
 
-``
-flask run
-``
+```shell
+$ flask run
+```
 
 ### Original
 **[GET] /original**
@@ -47,3 +47,15 @@ flask run
 
 
 ## Package Installation (ADD)
+
+## Documentation
+Generate documentation
+```shell
+$ cd docs
+
+$ make html
+```
+
+```shell
+$ firefox build/html/index.html
+```
