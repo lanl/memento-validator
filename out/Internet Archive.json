@@ -1,0 +1,110 @@
+{
+    "type": "timegate",
+    "params": {
+        "datetime": "Thu, 10 Oct 2010 12:00:00 GMT",
+        "uri": "https://web.archive.org/web/http://mementoweb.org/"
+    },
+    "pipeline": "mementoweb.validator.pipelines.timegate.TimeGate",
+    "results": [
+        {
+            "name": "mementoweb.validator.tests.uri_test.URITest",
+            "description": "Tests for the validity of the URI of the resource including validity and connectivity",
+            "status": 1,
+            "result": "Pass",
+            "tests": [
+                {
+                    "name": "Valid URI",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                }
+            ]
+        },
+        {
+            "name": "mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest",
+            "description": "Tests for the timegate redirection. Checks for any redirection and tests for the validity",
+            "status": 1,
+            "result": "Pass",
+            "tests": [
+                {
+                    "name": "TimeGate returns 302",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                }
+            ]
+        },
+        {
+            "name": "mementoweb.validator.tests.header_test.HeaderTest",
+            "description": "No description",
+            "status": 1,
+            "result": "Pass",
+            "tests": [
+                {
+                    "name": "Location Header found",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                },
+                {
+                    "name": "Accept-Datetime not in vary header",
+                    "description": "",
+                    "status": -1,
+                    "result": "Fail"
+                }
+            ]
+        },
+        {
+            "name": "mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest",
+            "description": "No description",
+            "status": 1,
+            "result": "Pass",
+            "tests": [
+                {
+                    "name": "Timemap link present",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                },
+                {
+                    "name": "Timemap type present",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                }
+            ]
+        },
+        {
+            "name": "mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest",
+            "description": "No description",
+            "status": 1,
+            "result": "Pass",
+            "tests": [
+                {
+                    "name": "Memento link present",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                },
+                {
+                    "name": "Selected memento not in link header",
+                    "description": "",
+                    "status": 0,
+                    "result": "Warn"
+                },
+                {
+                    "name": "Memento contains datetime attribute",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                },
+                {
+                    "name": "Memento datetime parsable",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                }
+            ]
+        }
+    ]
+}
