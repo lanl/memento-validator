@@ -14,36 +14,40 @@ app = Flask(__name__)
 Config.file_path = "config.xml"
 
 
-@app.route("/original")
-def original():
-    return _handle_request(Original(), "original")
-
-
-@app.route("/timegate")
-def timegate():
-    return _handle_request(TimeGate(), "timegate")
-
-
-@app.route("/memento")
-def memento():
-    return _handle_request(Memento(), "memento")
-
-
-@app.route("/timemap")
-def timemap():
-    return _handle_request(TimeMap(), "timemap")
-
-
-def _handle_request(pipeline, test_type):
-    uri = request.args.get("uri")
-
+@app.route("/")
+def main():
     errors: [RequestError] = []
+
+    validator = None
+    request_type = request.args.get("type")
+
+    if request_type == "original":
+        validator = Original()
+    elif request_type == "memento":
+        validator = Memento()
+    elif request_type == "timemap":
+        validator = TimeMap()
+    elif request_type == "timegate":
+        validator = TimeGate()
+
+    uri = request.args.get("uri")
+    if not request_type:
+        errors.append({
+            "type": "missing parameters",
+            "description": "Type missing"
+        })
+    elif validator is None:
+        errors.append({
+            "type": "invalid parameters",
+            "description": "Type invalid"
+        })
 
     if not uri:
         errors.append({
             "type": "missing parameters",
             "description": "URI missing"
         })
+
     datetime = request.args.get("datetime")
 
     if not datetime:
@@ -56,12 +60,12 @@ def _handle_request(pipeline, test_type):
         return {
             "errors": errors
         }
-    reports = pipeline.validate(uri)
+    reports = validator.validate(uri)
     return jsonify({
-        "type": test_type,
+        "type": request_type,
         "uri": uri,
         "datetime": datetime,
-        "pipeline": pipeline.name(),
+        "pipeline": validator.name(),
         "results": [report.to_json() for report in reports]
     })
 
