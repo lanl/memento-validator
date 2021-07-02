@@ -9,12 +9,12 @@ from mementoweb.validator.tests.uri_test import URITestReport, URITest
 class TimeMap(DefaultPipeline):
 
     def validate(self, uri: str,
-                 accept_datetime='Thu, 10 Oct 2009 12:00:00 GMT',
+                 datetime='Thu, 10 Oct 2009 12:00:00 GMT',
                  accept=''
                  ) -> List[TestReport]:
         results = []
 
-        uri_result: URITestReport = URITest().test(uri=uri, datetime=accept_datetime)
+        uri_result: URITestReport = URITest().test(uri=uri, datetime=datetime)
         results.append(uri_result)
 
         header_results = ContentTypeHeaderTest().test(uri_result.connection.get_response())

@@ -8,7 +8,7 @@ from mementoweb.validator.tests.uri_test import URITestReport, URITest
 class TimeBundle(DefaultPipeline):
 
     def validate(self, uri: str,
-                 accept_datetime='Thu, 10 Oct 2009 12:00:00 GMT',
+                 datetime='Thu, 10 Oct 2009 12:00:00 GMT',
                  accept=''
                  ) -> List[TestReport]:
         results = []

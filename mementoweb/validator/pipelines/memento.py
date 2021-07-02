@@ -16,13 +16,13 @@ from mementoweb.validator.tests.uri_test import URITest, URITestReport
 class Memento(DefaultPipeline):
 
     def validate(self, uri: str,
-                 accept_datetime='Thu, 10 Oct 2009 12:00:00 GMT',
+                 datetime='Thu, 10 Oct 2009 12:00:00 GMT',
                  accept=''
                  ) -> List[TestReport]:
         results = []
 
         # Check for the URI validity
-        uri_report: URITestReport = URITest().test(uri=uri, datetime=accept_datetime)
+        uri_report: URITestReport = URITest().test(uri=uri, datetime=datetime)
         results.append(uri_report)
 
         # If URI invalid  stop tests

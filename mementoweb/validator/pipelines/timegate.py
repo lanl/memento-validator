@@ -13,18 +13,18 @@ from mementoweb.validator.types import ResourceType
 class TimeGate(DefaultPipeline):
 
     def validate(self, uri: str,
-                 accept_datetime='Thu, 10 Oct 2009 12:00:00 GMT',
+                 datetime='Thu, 10 Oct 2009 12:00:00 GMT',
                  accept=''
                  ) -> List[TestReport]:
         results: [TestReport] = []
-        uri_report = URITest().test(uri=uri, datetime=accept_datetime)
+        uri_report = URITest().test(uri=uri, datetime=datetime)
 
         results.append(uri_report)
 
         if uri_report.report_status is TestReport.REPORT_FAIL:
             return results
 
-        redirect_report = TimeGateRedirectTest().test(connection=uri_report.connection, datetime=accept_datetime)
+        redirect_report = TimeGateRedirectTest().test(connection=uri_report.connection, datetime=datetime)
         results.append(redirect_report)
 
         if redirect_report.report_status is TestReport.REPORT_FAIL:

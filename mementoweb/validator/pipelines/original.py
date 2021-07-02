@@ -12,12 +12,12 @@ class Original(DefaultPipeline):
     # TODO : Add original tests
 
     def validate(self, uri: str,
-                 accept_datetime='Thu, 10 Oct 2009 12:00:00 GMT',
+                 datetime='Thu, 10 Oct 2009 12:00:00 GMT',
                  accept=''
                  ) -> List[TestReport]:
         results = []
 
-        uri_result: URITestReport = URITest().test(uri=uri, datetime=accept_datetime)
+        uri_result: URITestReport = URITest().test(uri=uri, datetime=datetime)
         results.append(uri_result)
 
         # TODO: replace link header test with individual tests

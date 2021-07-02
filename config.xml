@@ -37,8 +37,7 @@
         <memento uri="https://web.archive.org/web/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="https://web.archive.org/web/{timestamp}id_/{url}" access-policy="public" memento-status="yes"/>
         <tests>
-            <test type="timegate" datetime="012" uri="https://web.archive.org/web/http://mementoweb.org/"/>
-            <test type="timegate" uri="https://web.archive.org/web/http://mementoweb.org/"/>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="https://web.archive.org/web/http://mementoweb.org/"/>
         </tests>
     </link>
     <!--  Proni Web Archive -->
