@@ -1,0 +1,939 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mementoweb.validator.tests package &mdash; Mementoweb 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mementoweb.validator.web package" href="mementoweb.validator.web.html" />
+    <link rel="prev" title="mementoweb.validator.pipelines package" href="mementoweb.validator.pipelines.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Mementoweb
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">memento-validator</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="daily_validator.html">daily_validator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="mementoweb.html">mementoweb package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mementoweb.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mementoweb.validator.html">mementoweb.validator package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mementoweb.html#module-mementoweb">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mementoweb</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">memento-validator</a> &raquo;</li>
+        
+          <li><a href="mementoweb.html">mementoweb package</a> &raquo;</li>
+        
+          <li><a href="mementoweb.validator.html">mementoweb.validator package</a> &raquo;</li>
+        
+      <li>mementoweb.validator.tests package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/mementoweb.validator.tests.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mementoweb-validator-tests-package">
+<h1>mementoweb.validator.tests package<a class="headerlink" href="#mementoweb-validator-tests-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mementoweb.validator.tests.content_negotiation_test">
+<span id="mementoweb-validator-tests-content-negotiation-test-module"></span><h2>mementoweb.validator.tests.content_negotiation_test module<a class="headerlink" href="#module-mementoweb.validator.tests.content_negotiation_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_negotiation_test.ContentNegotiationTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.content_negotiation_test.</span></span><span class="sig-name descname"><span class="pre">ContentNegotiationTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.content_negotiation_test.ContentNegotiationTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.BaseTest" title="mementoweb.validator.tests.test.BaseTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.BaseTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_negotiation_test.ContentNegotiationTest.CONTENT_NEGOTIATION_HEADERS_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">CONTENT_NEGOTIATION_HEADERS_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Resource</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">support</span> <span class="pre">content</span> <span class="pre">negotiation'</span></em><a class="headerlink" href="#mementoweb.validator.tests.content_negotiation_test.ContentNegotiationTest.CONTENT_NEGOTIATION_HEADERS_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_negotiation_test.ContentNegotiationTest.CONTENT_NEGOTIATION_HEADERS_PRESENT">
+<span class="sig-name descname"><span class="pre">CONTENT_NEGOTIATION_HEADERS_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Resource</span> <span class="pre">supports</span> <span class="pre">content</span> <span class="pre">negotiation'</span></em><a class="headerlink" href="#mementoweb.validator.tests.content_negotiation_test.ContentNegotiationTest.CONTENT_NEGOTIATION_HEADERS_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_negotiation_test.ContentNegotiationTest.HEADERS_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">HEADERS_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Headers</span> <span class="pre">not</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.content_negotiation_test.ContentNegotiationTest.HEADERS_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_negotiation_test.ContentNegotiationTest.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpResponse" title="mementoweb.validator.http.HttpResponse"><span class="pre">mementoweb.validator.http.HttpResponse</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><span class="pre">mementoweb.validator.tests.test.TestReport</span></a><a class="headerlink" href="#mementoweb.validator.tests.content_negotiation_test.ContentNegotiationTest.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the test the specified test need to perform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[TestResult]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.content_type_header_test">
+<span id="mementoweb-validator-tests-content-type-header-test-module"></span><h2>mementoweb.validator.tests.content_type_header_test module<a class="headerlink" href="#module-mementoweb.validator.tests.content_type_header_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.content_type_header_test.</span></span><span class="sig-name descname"><span class="pre">ContentTypeHeaderTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.BaseTest" title="mementoweb.validator.tests.test.BaseTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.BaseTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest.CONTENT_TYPE_MATCH">
+<span class="sig-name descname"><span class="pre">CONTENT_TYPE_MATCH</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Content</span> <span class="pre">type</span> <span class="pre">match'</span></em><a class="headerlink" href="#mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest.CONTENT_TYPE_MATCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest.CONTENT_TYPE_MISMATCH">
+<span class="sig-name descname"><span class="pre">CONTENT_TYPE_MISMATCH</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Content</span> <span class="pre">type</span> <span class="pre">mismatch'</span></em><a class="headerlink" href="#mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest.CONTENT_TYPE_MISMATCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest.CONTENT_TYPE_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">CONTENT_TYPE_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Content-type</span> <span class="pre">not</span> <span class="pre">present</span> <span class="pre">for</span> <span class="pre">Time-map'</span></em><a class="headerlink" href="#mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest.CONTENT_TYPE_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest.CONTENT_TYPE_PRESENT">
+<span class="sig-name descname"><span class="pre">CONTENT_TYPE_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Content-type</span> <span class="pre">present</span> <span class="pre">for</span> <span class="pre">Time-map'</span></em><a class="headerlink" href="#mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest.CONTENT_TYPE_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpResponse" title="mementoweb.validator.http.HttpResponse"><span class="pre">mementoweb.validator.http.HttpResponse</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><span class="pre">mementoweb.validator.tests.test.TestReport</span></a><a class="headerlink" href="#mementoweb.validator.tests.content_type_header_test.ContentTypeHeaderTest.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the test the specified test need to perform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[TestResult]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.header_test">
+<span id="mementoweb-validator-tests-header-test-module"></span><h2>mementoweb.validator.tests.header_test module<a class="headerlink" href="#module-mementoweb.validator.tests.header_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.header_test.HeaderTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.header_test.</span></span><span class="sig-name descname"><span class="pre">HeaderTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.header_test.HeaderTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.BaseTest" title="mementoweb.validator.tests.test.BaseTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.BaseTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.header_test.HeaderTest.HEADERS_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">HEADERS_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Headers</span> <span class="pre">not</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.header_test.HeaderTest.HEADERS_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.header_test.HeaderTest.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">response:</span> <span class="pre">mementoweb.validator.http.HttpResponse</span></em>, <em class="sig-param"><span class="pre">resource_type:</span> <span class="pre">mementoweb.validator.types.ResourceType</span> <span class="pre">=</span> <span class="pre">&lt;ResourceType.ORIGINAL:</span> <span class="pre">'original'&gt;</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><span class="pre">mementoweb.validator.tests.test.TestReport</span></a><a class="headerlink" href="#mementoweb.validator.tests.header_test.HeaderTest.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the test the specified test need to perform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[TestResult]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.link_header_memento_test">
+<span id="mementoweb-validator-tests-link-header-memento-test-module"></span><h2>mementoweb.validator.tests.link_header_memento_test module<a class="headerlink" href="#module-mementoweb.validator.tests.link_header_memento_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.link_header_memento_test.</span></span><span class="sig-name descname"><span class="pre">LinkHeaderMementoTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.link_header_test.LinkHeaderTest" title="mementoweb.validator.tests.link_header_test.LinkHeaderTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.link_header_test.LinkHeaderTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_DATETIME_NOT_PARSABLE">
+<span class="sig-name descname"><span class="pre">MEMENTO_DATETIME_NOT_PARSABLE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Memento</span> <span class="pre">datetime</span> <span class="pre">not</span> <span class="pre">parsable'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_DATETIME_NOT_PARSABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_DATETIME_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">MEMENTO_DATETIME_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Memento</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">contain</span> <span class="pre">datetime</span> <span class="pre">attribute'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_DATETIME_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_DATETIME_PARSABLE">
+<span class="sig-name descname"><span class="pre">MEMENTO_DATETIME_PARSABLE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Memento</span> <span class="pre">datetime</span> <span class="pre">parsable'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_DATETIME_PARSABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_DATETIME_PRESENT">
+<span class="sig-name descname"><span class="pre">MEMENTO_DATETIME_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Memento</span> <span class="pre">contains</span> <span class="pre">datetime</span> <span class="pre">attribute'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_DATETIME_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">MEMENTO_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Memento</span> <span class="pre">link</span> <span class="pre">not</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_PRESENT">
+<span class="sig-name descname"><span class="pre">MEMENTO_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Memento</span> <span class="pre">link</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.MEMENTO_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.SELECTED_MEMENTO_IN_LINK">
+<span class="sig-name descname"><span class="pre">SELECTED_MEMENTO_IN_LINK</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Selected</span> <span class="pre">memento</span> <span class="pre">in</span> <span class="pre">link</span> <span class="pre">header'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.SELECTED_MEMENTO_IN_LINK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.SELECTED_MEMENTO_NOT_IN_LINK">
+<span class="sig-name descname"><span class="pre">SELECTED_MEMENTO_NOT_IN_LINK</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Selected</span> <span class="pre">memento</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">link</span> <span class="pre">header'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTest.SELECTED_MEMENTO_NOT_IN_LINK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTestReport">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.link_header_memento_test.</span></span><span class="sig-name descname"><span class="pre">LinkHeaderMementoTestReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">memento_uris</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTestReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.TestReport</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTestReport.memento_uris">
+<span class="sig-name descname"><span class="pre">memento_uris</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">[]</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_memento_test.LinkHeaderMementoTestReport.memento_uris" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.link_header_original_test">
+<span id="mementoweb-validator-tests-link-header-original-test-module"></span><h2>mementoweb.validator.tests.link_header_original_test module<a class="headerlink" href="#module-mementoweb.validator.tests.link_header_original_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_original_test.LinkHeaderOriginalTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.link_header_original_test.</span></span><span class="sig-name descname"><span class="pre">LinkHeaderOriginalTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.link_header_original_test.LinkHeaderOriginalTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.link_header_test.LinkHeaderTest" title="mementoweb.validator.tests.link_header_test.LinkHeaderTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.link_header_test.LinkHeaderTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_original_test.LinkHeaderOriginalTest.ORIGINAL_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">ORIGINAL_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Original</span> <span class="pre">link</span> <span class="pre">not</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_original_test.LinkHeaderOriginalTest.ORIGINAL_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_original_test.LinkHeaderOriginalTest.ORIGINAL_PRESENT">
+<span class="sig-name descname"><span class="pre">ORIGINAL_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Original</span> <span class="pre">link</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_original_test.LinkHeaderOriginalTest.ORIGINAL_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_original_test.LinkHeaderOriginalTest.TIMEGATE_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">TIMEGATE_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timegate</span> <span class="pre">link</span> <span class="pre">not</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_original_test.LinkHeaderOriginalTest.TIMEGATE_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_original_test.LinkHeaderOriginalTest.TIMEGATE_PRESENT">
+<span class="sig-name descname"><span class="pre">TIMEGATE_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timegate</span> <span class="pre">link</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_original_test.LinkHeaderOriginalTest.TIMEGATE_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.link_header_test">
+<span id="mementoweb-validator-tests-link-header-test-module"></span><h2>mementoweb.validator.tests.link_header_test module<a class="headerlink" href="#module-mementoweb.validator.tests.link_header_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_test.LinkHeaderTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.link_header_test.</span></span><span class="sig-name descname"><span class="pre">LinkHeaderTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.link_header_test.LinkHeaderTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.BaseTest" title="mementoweb.validator.tests.test.BaseTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.BaseTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_test.LinkHeaderTest.HEADERS_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">HEADERS_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Headers</span> <span class="pre">not</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_test.LinkHeaderTest.HEADERS_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_test.LinkHeaderTest.LINK_HEADER_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">LINK_HEADER_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Link</span> <span class="pre">Header</span> <span class="pre">not</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_test.LinkHeaderTest.LINK_HEADER_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_test.LinkHeaderTest.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">response:</span> <span class="pre">mementoweb.validator.http.HttpResponse</span></em>, <em class="sig-param"><span class="pre">resource_type:</span> <span class="pre">mementoweb.validator.types.ResourceType</span> <span class="pre">=</span> <span class="pre">&lt;ResourceType.ORIGINAL:</span> <span class="pre">'original'&gt;</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><span class="pre">mementoweb.validator.tests.test.TestReport</span></a><a class="headerlink" href="#mementoweb.validator.tests.link_header_test.LinkHeaderTest.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the test the specified test need to perform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[TestResult]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.link_header_timegate_test">
+<span id="mementoweb-validator-tests-link-header-timegate-test-module"></span><h2>mementoweb.validator.tests.link_header_timegate_test module<a class="headerlink" href="#module-mementoweb.validator.tests.link_header_timegate_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_timegate_test.LinkHeaderTimeGateTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.link_header_timegate_test.</span></span><span class="sig-name descname"><span class="pre">LinkHeaderTimeGateTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.link_header_timegate_test.LinkHeaderTimeGateTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.link_header_test.LinkHeaderTest" title="mementoweb.validator.tests.link_header_test.LinkHeaderTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.link_header_test.LinkHeaderTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_timegate_test.LinkHeaderTimeGateTest.TIMEGATE_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">TIMEGATE_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timegate</span> <span class="pre">link</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_timegate_test.LinkHeaderTimeGateTest.TIMEGATE_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_timegate_test.LinkHeaderTimeGateTest.TIMEGATE_PRESENT">
+<span class="sig-name descname"><span class="pre">TIMEGATE_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timegate</span> <span class="pre">link</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_timegate_test.LinkHeaderTimeGateTest.TIMEGATE_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.link_header_timemap_test">
+<span id="mementoweb-validator-tests-link-header-timemap-test-module"></span><h2>mementoweb.validator.tests.link_header_timemap_test module<a class="headerlink" href="#module-mementoweb.validator.tests.link_header_timemap_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.link_header_timemap_test.</span></span><span class="sig-name descname"><span class="pre">LinkHeaderTimeMapTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.link_header_test.LinkHeaderTest" title="mementoweb.validator.tests.link_header_test.LinkHeaderTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.link_header_test.LinkHeaderTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">TIMEMAP_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timemap</span> <span class="pre">link</span> <span class="pre">not</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest.TIMEMAP_PRESENT">
+<span class="sig-name descname"><span class="pre">TIMEMAP_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timemap</span> <span class="pre">link</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest.TIMEMAP_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest.TIMEMAP_TYPE_NOT_PRESENT">
+<span class="sig-name descname"><span class="pre">TIMEMAP_TYPE_NOT_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timemap</span> <span class="pre">type</span> <span class="pre">not</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest.TIMEMAP_TYPE_NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest.TIMEMAP_TYPE_PRESENT">
+<span class="sig-name descname"><span class="pre">TIMEMAP_TYPE_PRESENT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timemap</span> <span class="pre">type</span> <span class="pre">present'</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTest.TIMEMAP_TYPE_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTestReport">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.link_header_timemap_test.</span></span><span class="sig-name descname"><span class="pre">LinkHeaderTimeMapTestReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_map_uris</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTestReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.TestReport</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTestReport.time_map_uris">
+<span class="sig-name descname"><span class="pre">time_map_uris</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">[]</span></em><a class="headerlink" href="#mementoweb.validator.tests.link_header_timemap_test.LinkHeaderTimeMapTestReport.time_map_uris" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.memento_redirect_test">
+<span id="mementoweb-validator-tests-memento-redirect-test-module"></span><h2>mementoweb.validator.tests.memento_redirect_test module<a class="headerlink" href="#module-mementoweb.validator.tests.memento_redirect_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.memento_redirect_test.</span></span><span class="sig-name descname"><span class="pre">MementoRedirectTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.BaseTest" title="mementoweb.validator.tests.test.BaseTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.BaseTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.BROKEN_REDIRECTION">
+<span class="sig-name descname"><span class="pre">BROKEN_REDIRECTION</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'Redirection</span> <span class="pre">URI</span> <span class="pre">broken'</span></em><a class="headerlink" href="#mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.BROKEN_REDIRECTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.INVALID_MEMENTO_STATUS">
+<span class="sig-name descname"><span class="pre">INVALID_MEMENTO_STATUS</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'Memento</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">contain</span> <span class="pre">status</span> <span class="pre">200,</span> <span class="pre">204,</span> <span class="pre">or</span> <span class="pre">206'</span></em><a class="headerlink" href="#mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.INVALID_MEMENTO_STATUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.MISSING_REDIRECTION_LOCATION">
+<span class="sig-name descname"><span class="pre">MISSING_REDIRECTION_LOCATION</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'Missing</span> <span class="pre">location</span> <span class="pre">for</span> <span class="pre">redirection'</span></em><a class="headerlink" href="#mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.MISSING_REDIRECTION_LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.REDIRECTION_BEFORE_MEMENTO">
+<span class="sig-name descname"><span class="pre">REDIRECTION_BEFORE_MEMENTO</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'Redirection</span> <span class="pre">before</span> <span class="pre">memento'</span></em><a class="headerlink" href="#mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.REDIRECTION_BEFORE_MEMENTO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.VALID_MEMENTO_STATUS">
+<span class="sig-name descname"><span class="pre">VALID_MEMENTO_STATUS</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'Memento</span> <span class="pre">contains</span> <span class="pre">status</span> <span class="pre">200,</span> <span class="pre">204,</span> <span class="pre">or</span> <span class="pre">206'</span></em><a class="headerlink" href="#mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.VALID_MEMENTO_STATUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpResponse" title="mementoweb.validator.http.HttpResponse"><span class="pre">mementoweb.validator.http.HttpResponse</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#mementoweb.validator.tests.memento_redirect_test.MementoRedirectTestReport" title="mementoweb.validator.tests.memento_redirect_test.MementoRedirectTestReport"><span class="pre">mementoweb.validator.tests.memento_redirect_test.MementoRedirectTestReport</span></a><a class="headerlink" href="#mementoweb.validator.tests.memento_redirect_test.MementoRedirectTest.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the test the specified test need to perform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[TestResult]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.memento_redirect_test.MementoRedirectTestReport">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.memento_redirect_test.</span></span><span class="sig-name descname"><span class="pre">MementoRedirectTestReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpConnection" title="mementoweb.validator.http.HttpConnection"><span class="pre">mementoweb.validator.http.HttpConnection</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.memento_redirect_test.MementoRedirectTestReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.TestReport</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.memento_redirect_test.MementoRedirectTestReport.connection">
+<span class="sig-name descname"><span class="pre">connection</span></span><em class="property"><span class="pre">:</span> <a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpConnection" title="mementoweb.validator.http.HttpConnection"><span class="pre">mementoweb.validator.http.HttpConnection</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#mementoweb.validator.tests.memento_redirect_test.MementoRedirectTestReport.connection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.test">
+<span id="mementoweb-validator-tests-test-module"></span><h2>mementoweb.validator.tests.test module<a class="headerlink" href="#module-mementoweb.validator.tests.test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.BaseTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.test.</span></span><span class="sig-name descname"><span class="pre">BaseTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.test.BaseTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstraction for a test</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.BaseTest.add_test_result">
+<span class="sig-name descname"><span class="pre">add_test_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#mementoweb.validator.tests.test.TestResult" title="mementoweb.validator.tests.test.TestResult"><span class="pre">mementoweb.validator.tests.test.TestResult</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.test.BaseTest.add_test_result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.BaseTest.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><span class="pre">mementoweb.validator.tests.test.TestReport</span></a><a class="headerlink" href="#mementoweb.validator.tests.test.BaseTest.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the test the specified test need to perform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[TestResult]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestInfo">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.test.</span></span><span class="sig-name descname"><span class="pre">TestInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.test.TestInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestInfo.connection">
+<span class="sig-name descname"><span class="pre">connection</span></span><em class="property"><span class="pre">:</span> <a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpConnection" title="mementoweb.validator.http.HttpConnection"><span class="pre">mementoweb.validator.http.HttpConnection</span></a></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestInfo.connection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestInfo.uri">
+<span class="sig-name descname"><span class="pre">uri</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestInfo.uri" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestReport">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.test.</span></span><span class="sig-name descname"><span class="pre">TestReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">report_status</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tests</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mementoweb.validator.tests.test.TestResult" title="mementoweb.validator.tests.test.TestResult"><span class="pre">mementoweb.validator.tests.test.TestResult</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.test.TestReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstraction to a test report/ results of collection of tests</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestReport.REPORT_FAIL">
+<span class="sig-name descname"><span class="pre">REPORT_FAIL</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">-1</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestReport.REPORT_FAIL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestReport.REPORT_PASS">
+<span class="sig-name descname"><span class="pre">REPORT_PASS</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestReport.REPORT_PASS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestReport.REPORT_WARN">
+<span class="sig-name descname"><span class="pre">REPORT_WARN</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestReport.REPORT_WARN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestReport.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestReport.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestReport.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestReport.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestReport.report_status">
+<span class="sig-name descname"><span class="pre">report_status</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestReport.report_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestReport.result">
+<span class="sig-name descname"><span class="pre">result</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#mementoweb.validator.tests.test.TestReport.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestReport.tests">
+<span class="sig-name descname"><span class="pre">tests</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mementoweb.validator.tests.test.TestResult" title="mementoweb.validator.tests.test.TestResult"><span class="pre">mementoweb.validator.tests.test.TestResult</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestReport.tests" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestReport.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.test.TestReport.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.test.</span></span><span class="sig-name descname"><span class="pre">TestResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.test.TestResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstraction of a test result/ single test</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestResult.TEST_FAIL">
+<span class="sig-name descname"><span class="pre">TEST_FAIL</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">-1</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestResult.TEST_FAIL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestResult.TEST_PASS">
+<span class="sig-name descname"><span class="pre">TEST_PASS</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestResult.TEST_PASS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestResult.TEST_WARN">
+<span class="sig-name descname"><span class="pre">TEST_WARN</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestResult.TEST_WARN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestResult.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestResult.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestResult.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestResult.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestResult.result">
+<span class="sig-name descname"><span class="pre">result</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#mementoweb.validator.tests.test.TestResult.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestResult.status">
+<span class="sig-name descname"><span class="pre">status</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#mementoweb.validator.tests.test.TestResult.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.test.TestResult.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.test.TestResult.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.timegate_redirect_test">
+<span id="mementoweb-validator-tests-timegate-redirect-test-module"></span><h2>mementoweb.validator.tests.timegate_redirect_test module<a class="headerlink" href="#module-mementoweb.validator.tests.timegate_redirect_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.timegate_redirect_test.</span></span><span class="sig-name descname"><span class="pre">TimeGateRedirectTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.BaseTest" title="mementoweb.validator.tests.test.BaseTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.BaseTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.BROKEN_REDIRECTION">
+<span class="sig-name descname"><span class="pre">BROKEN_REDIRECTION</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Redirection</span> <span class="pre">URI</span> <span class="pre">broken'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.BROKEN_REDIRECTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.MISSING_REDIRECTION_LOCATION">
+<span class="sig-name descname"><span class="pre">MISSING_REDIRECTION_LOCATION</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Missing</span> <span class="pre">location</span> <span class="pre">for</span> <span class="pre">redirection'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.MISSING_REDIRECTION_LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.REDIRECTION_BEFORE_TIMEGATE">
+<span class="sig-name descname"><span class="pre">REDIRECTION_BEFORE_TIMEGATE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Redirection</span> <span class="pre">before</span> <span class="pre">timegate'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.REDIRECTION_BEFORE_TIMEGATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.REDIRECTION_MISSING_ORIGINAL">
+<span class="sig-name descname"><span class="pre">REDIRECTION_MISSING_ORIGINAL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Redirection</span> <span class="pre">to</span> <span class="pre">another</span> <span class="pre">timegate'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.REDIRECTION_MISSING_ORIGINAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_BROKEN_INVALID_RETURN">
+<span class="sig-name descname"><span class="pre">TIMEGATE_BROKEN_INVALID_RETURN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timegate</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">return</span> <span class="pre">400</span> <span class="pre">for</span> <span class="pre">broken</span> <span class="pre">datetime'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_BROKEN_INVALID_RETURN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_BROKEN_RETURN_400">
+<span class="sig-name descname"><span class="pre">TIMEGATE_BROKEN_RETURN_400</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'TimeGate</span> <span class="pre">returns</span> <span class="pre">400</span> <span class="pre">for</span> <span class="pre">broken</span> <span class="pre">datetime'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_BROKEN_RETURN_400" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_FUTURE_INVALID_RETURN">
+<span class="sig-name descname"><span class="pre">TIMEGATE_FUTURE_INVALID_RETURN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timegate</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">return</span> <span class="pre">302</span> <span class="pre">for</span> <span class="pre">datetime</span> <span class="pre">in</span> <span class="pre">future'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_FUTURE_INVALID_RETURN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_FUTURE_RETURN_302">
+<span class="sig-name descname"><span class="pre">TIMEGATE_FUTURE_RETURN_302</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'TimeGate</span> <span class="pre">returns</span> <span class="pre">302</span> <span class="pre">for</span> <span class="pre">datetime</span> <span class="pre">in</span> <span class="pre">future'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_FUTURE_RETURN_302" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_PAST_INVALID_RETURN">
+<span class="sig-name descname"><span class="pre">TIMEGATE_PAST_INVALID_RETURN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Timegate</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">return</span> <span class="pre">302</span> <span class="pre">for</span> <span class="pre">datetime</span> <span class="pre">in</span> <span class="pre">past'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_PAST_INVALID_RETURN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_PAST_RETURN_302">
+<span class="sig-name descname"><span class="pre">TIMEGATE_PAST_RETURN_302</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'TimeGate</span> <span class="pre">returns</span> <span class="pre">302</span> <span class="pre">for</span> <span class="pre">datetime</span> <span class="pre">in</span> <span class="pre">past'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_PAST_RETURN_302" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_RETURN_200">
+<span class="sig-name descname"><span class="pre">TIMEGATE_RETURN_200</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'TimeGate</span> <span class="pre">returns</span> <span class="pre">200'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_RETURN_200" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_RETURN_302">
+<span class="sig-name descname"><span class="pre">TIMEGATE_RETURN_302</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'TimeGate</span> <span class="pre">returns</span> <span class="pre">302'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_RETURN_302" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_RETURN_INVALID_STATUS">
+<span class="sig-name descname"><span class="pre">TIMEGATE_RETURN_INVALID_STATUS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'TimeGate</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">return</span> <span class="pre">302/</span> <span class="pre">200'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.TIMEGATE_RETURN_INVALID_STATUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpConnection" title="mementoweb.validator.http.HttpConnection"><span class="pre">mementoweb.validator.http.HttpConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">datetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">typing_extensions.Literal['future',</span> <span class="pre">'past',</span> <span class="pre">'broken',</span> <span class="pre">'normal',</span> <span class="pre">'blank']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assert_connection</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpConnection" title="mementoweb.validator.http.HttpConnection"><span class="pre">mementoweb.validator.http.HttpConnection</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTestReport" title="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTestReport"><span class="pre">mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTestReport</span></a><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest.test" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>connection</strong> – Primary connection for testing the redirection</p></li>
+<li><p><strong>datetime</strong> – Datetime used for establishing the primary connection. Should conform the standard specification</p></li>
+<li><p><strong>test_type</strong> – Test type to perform from “normal” (or “”), “future”, “past”, “broken” defaults to “normal” (or “”)</p></li>
+<li><p><strong>assert_connection</strong> – Secondary connection for validating memento information. Ignored when test_type is “normal” or “”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTestReport">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.timegate_redirect_test.</span></span><span class="sig-name descname"><span class="pre">TimeGateRedirectTestReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpConnection" title="mementoweb.validator.http.HttpConnection"><span class="pre">mementoweb.validator.http.HttpConnection</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTestReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.TestReport</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTestReport.connection">
+<span class="sig-name descname"><span class="pre">connection</span></span><em class="property"><span class="pre">:</span> <a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpConnection" title="mementoweb.validator.http.HttpConnection"><span class="pre">mementoweb.validator.http.HttpConnection</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTestReport.connection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.timegate_test">
+<span id="mementoweb-validator-tests-timegate-test-module"></span><h2>mementoweb.validator.tests.timegate_test module<a class="headerlink" href="#module-mementoweb.validator.tests.timegate_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_test.TimeGateTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.timegate_test.</span></span><span class="sig-name descname"><span class="pre">TimeGateTest</span></span><a class="headerlink" href="#mementoweb.validator.tests.timegate_test.TimeGateTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.BaseTest" title="mementoweb.validator.tests.test.BaseTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.BaseTest</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_test.TimeGateTest.BROKEN_REDIRECTION">
+<span class="sig-name descname"><span class="pre">BROKEN_REDIRECTION</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Redirection</span> <span class="pre">to</span> <span class="pre">broken</span> <span class="pre">URI'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_test.TimeGateTest.BROKEN_REDIRECTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_test.TimeGateTest.REDIRECTION_ANOTHER">
+<span class="sig-name descname"><span class="pre">REDIRECTION_ANOTHER</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'Redirection</span> <span class="pre">to</span> <span class="pre">another</span> <span class="pre">TimeGate'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_test.TimeGateTest.REDIRECTION_ANOTHER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_test.TimeGateTest.REDIRECTION_BEFORE">
+<span class="sig-name descname"><span class="pre">REDIRECTION_BEFORE</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'Redirection</span> <span class="pre">before</span> <span class="pre">TimeGate'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_test.TimeGateTest.REDIRECTION_BEFORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_test.TimeGateTest.REDIRECTION_BEFORE_LOCATION">
+<span class="sig-name descname"><span class="pre">REDIRECTION_BEFORE_LOCATION</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Redirection</span> <span class="pre">before</span> <span class="pre">TimeGate</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">have</span> <span class="pre">a</span> <span class="pre">location</span> <span class="pre">header'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_test.TimeGateTest.REDIRECTION_BEFORE_LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_test.TimeGateTest.URI_ERROR">
+<span class="sig-name descname"><span class="pre">URI_ERROR</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'URI</span> <span class="pre">ERROR'</span></em><a class="headerlink" href="#mementoweb.validator.tests.timegate_test.TimeGateTest.URI_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.timegate_test.TimeGateTest.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><span class="pre">mementoweb.validator.tests.test.TestReport</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#mementoweb.validator.tests.timegate_test.TimeGateTest.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the test the specified test need to perform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[TestResult]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests.uri_test">
+<span id="mementoweb-validator-tests-uri-test-module"></span><h2>mementoweb.validator.tests.uri_test module<a class="headerlink" href="#module-mementoweb.validator.tests.uri_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.uri_test.URITest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.uri_test.</span></span><span class="sig-name descname"><span class="pre">URITest</span></span><a class="headerlink" href="#mementoweb.validator.tests.uri_test.URITest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.BaseTest" title="mementoweb.validator.tests.test.BaseTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.BaseTest</span></code></a></p>
+<p>Implements URI validation and connectivity tests</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.uri_test.URITest.CONNECTION_FAIL">
+<span class="sig-name descname"><span class="pre">CONNECTION_FAIL</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'Could</span> <span class="pre">not</span> <span class="pre">connect</span> <span class="pre">to</span> <span class="pre">URI'</span></em><a class="headerlink" href="#mementoweb.validator.tests.uri_test.URITest.CONNECTION_FAIL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.uri_test.URITest.INVALID_URI">
+<span class="sig-name descname"><span class="pre">INVALID_URI</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'Invalid</span> <span class="pre">URI'</span></em><a class="headerlink" href="#mementoweb.validator.tests.uri_test.URITest.INVALID_URI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.uri_test.URITest.REQUEST_FAIL">
+<span class="sig-name descname"><span class="pre">REQUEST_FAIL</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'HTTP(s)</span> <span class="pre">Request</span> <span class="pre">Failed'</span></em><a class="headerlink" href="#mementoweb.validator.tests.uri_test.URITest.REQUEST_FAIL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.uri_test.URITest.VALID_URI">
+<span class="sig-name descname"><span class="pre">VALID_URI</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'Valid</span> <span class="pre">URI'</span></em><a class="headerlink" href="#mementoweb.validator.tests.uri_test.URITest.VALID_URI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.uri_test.URITest.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#mementoweb.validator.tests.uri_test.URITestReport" title="mementoweb.validator.tests.uri_test.URITestReport"><span class="pre">mementoweb.validator.tests.uri_test.URITestReport</span></a><a class="headerlink" href="#mementoweb.validator.tests.uri_test.URITest.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs URI testing on a given uri</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uri</strong> – URI for testing/ required</p></li>
+<li><p><strong>datetime</strong> – datetime for testing/ only used when URI is valid and on establishing connection</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.uri_test.URITestReport">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">mementoweb.validator.tests.uri_test.</span></span><span class="sig-name descname"><span class="pre">URITestReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpConnection" title="mementoweb.validator.http.HttpConnection"><span class="pre">mementoweb.validator.http.HttpConnection</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mementoweb.validator.tests.uri_test.URITestReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">mementoweb.validator.tests.test.TestReport</span></code></a></p>
+<p>URITestReport encapsulates URI test specific results in addition to standard test results</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mementoweb.validator.tests.uri_test.URITestReport.connection">
+<span class="sig-name descname"><span class="pre">connection</span></span><em class="property"><span class="pre">:</span> <a class="reference internal" href="mementoweb.validator.html#mementoweb.validator.http.HttpConnection" title="mementoweb.validator.http.HttpConnection"><span class="pre">mementoweb.validator.http.HttpConnection</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#mementoweb.validator.tests.uri_test.URITestReport.connection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mementoweb.validator.tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mementoweb.validator.tests" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mementoweb.validator.web.html" class="btn btn-neutral float-right" title="mementoweb.validator.web package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mementoweb.validator.pipelines.html" class="btn btn-neutral float-left" title="mementoweb.validator.pipelines package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Bhanuka Mahanama (bhanuka@lanl.gov).
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
