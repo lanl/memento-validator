@@ -105,6 +105,62 @@
                     "result": "Pass"
                 }
             ]
+        },
+        {
+            "name": "mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest",
+            "description": "Tests for the timegate redirection. Checks for any redirection and tests for the validity",
+            "status": 1,
+            "result": "Pass",
+            "tests": [
+                {
+                    "name": "TimeGate returns 302",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                }
+            ]
+        },
+        {
+            "name": "mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest",
+            "description": "Tests for the timegate redirection. Checks for any redirection and tests for the validity",
+            "status": -1,
+            "result": "Fail",
+            "tests": [
+                {
+                    "name": "TimeGate returns 302 for datetime in past",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                }
+            ]
+        },
+        {
+            "name": "mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest",
+            "description": "Tests for the timegate redirection. Checks for any redirection and tests for the validity",
+            "status": -1,
+            "result": "Fail",
+            "tests": [
+                {
+                    "name": "TimeGate returns 302 for datetime in future",
+                    "description": "",
+                    "status": 1,
+                    "result": "Pass"
+                }
+            ]
+        },
+        {
+            "name": "mementoweb.validator.tests.timegate_redirect_test.TimeGateRedirectTest",
+            "description": "Tests for the timegate redirection. Checks for any redirection and tests for the validity",
+            "status": -1,
+            "result": "Fail",
+            "tests": [
+                {
+                    "name": "Timegate does not return 400 for broken datetime",
+                    "description": "",
+                    "status": -1,
+                    "result": "Fail"
+                }
+            ]
         }
     ]
 }
