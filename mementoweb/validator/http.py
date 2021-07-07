@@ -59,23 +59,25 @@ class HttpResponse:
 
         for item in link_header_splits:
             # relationship is mandatory
-            relationship = re.findall('((?<=rel=")[^"]*)', item)
+            relationships = re.findall('((?<=rel=")[^"]*)', item)
 
             # Append only if theres relationship
-            if relationship:
+            if relationships:
                 link = item.split(";")[0]
-                relationship = relationship[0]
-                type = (re.findall('((?<=type=")[^"]*)', item) or [None])[0]
-                datetime = (re.findall('((?<=datetime=")[^"]*)', item) or [None])[0]
-                lic = (re.findall('((?<=license=")[^"]*)', item) or [None])[0]
+                relationships = relationships[0].strip().split(" ")
+                for relationship in relationships:
 
-                self._link_headers.append({
-                    "link": link,
-                    "relationship": relationship,
-                    "type": type,
-                    "datetime": datetime,
-                    "license": lic
-                })
+                    type = (re.findall('((?<=type=")[^"]*)', item) or [None])[0]
+                    datetime = (re.findall('((?<=datetime=")[^"]*)', item) or [None])[0]
+                    lic = (re.findall('((?<=license=")[^"]*)', item) or [None])[0]
+
+                    self._link_headers.append({
+                        "link": link,
+                        "relationship": relationship,
+                        "type": type,
+                        "datetime": datetime,
+                        "license": lic
+                    })
 
         return self._link_headers
 

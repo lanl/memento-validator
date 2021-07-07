@@ -1,6 +1,9 @@
-from mementoweb.validator.errors.header_errors import HeaderTypeNotFoundError, HeadersNotFoundError, HeaderParseError
+from typing_extensions import Literal
+
+from mementoweb.validator.errors.header_errors import HeaderTypeNotFoundError, HeadersNotFoundError, HeaderParseError, \
+    LinkHeaderNotFoundError
 from mementoweb.validator.errors.uri_errors import HttpRequestFailError, InvalidUriError, HttpConnectionFailError
-from mementoweb.validator.http import HttpResponse, http, HttpConnection
+from mementoweb.validator.http import http, HttpConnection
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
 
 
@@ -27,6 +30,18 @@ class TimeGateRedirectTest(BaseTest):
 
     TIMEGATE_RETURN_INVALID_STATUS = "TimeGate does not return 302/ 200"
 
+    TIMEGATE_FUTURE_RETURN_302 = "TimeGate returns 302 for datetime in future"
+
+    TIMEGATE_FUTURE_INVALID_RETURN = "Timegate does not return 302 for datetime in future"
+
+    TIMEGATE_PAST_RETURN_302 = "TimeGate returns 302 for datetime in past"
+
+    TIMEGATE_PAST_INVALID_RETURN = "Timegate does not return 302 for datetime in past"
+
+    TIMEGATE_BROKEN_RETURN_400 = "TimeGate returns 400 for broken datetime"
+
+    TIMEGATE_BROKEN_INVALID_RETURN = "Timegate does not return 400 for broken datetime"
+
     _description = "Tests for the timegate redirection. Checks for any redirection and tests for the validity"
 
     _test_report: TimeGateRedirectTestReport
@@ -42,8 +57,82 @@ class TimeGateRedirectTest(BaseTest):
         )
 
     def test(self, connection: HttpConnection,
-             datetime) -> TimeGateRedirectTestReport:
+             datetime: str,
+             test_type=Literal["future", "past", "broken", "normal", "blank"],
+             assert_connection: HttpConnection = None
+             ) -> TimeGateRedirectTestReport:
+        """
+
+        :param connection: Primary connection for testing the redirection
+        :param datetime: Datetime used for establishing the primary connection. Should conform the standard specification
+        :param test_type: Test type to perform from "normal" (or ""), "future", "past", "broken" defaults to "normal" (or "")
+        :param assert_connection: Secondary connection for validating memento information. Ignored when test_type is "normal" or ""
+        :return:
+        """
+
+        if test_type is None:
+            test_type = "normal"
         self._test_report.connection = connection
+
+        if test_type == "future":
+            return self._future(assert_connection)
+        elif test_type == "past":
+            return self._past(assert_connection)
+        elif test_type == "broken":
+            return self._broken(assert_connection)
+        else:
+            return self._normal(connection, datetime)
+
+    def _broken(self, assert_connection):
+        response_status: int = assert_connection.get_response().status
+
+        if response_status != 400:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BROKEN_INVALID_RETURN,
+                                            status=TestResult.TEST_FAIL))
+        else:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BROKEN_RETURN_400,
+                                            status=TestResult.TEST_PASS))
+        return self._test_report
+
+    def _past(self, assert_connection: HttpConnection = None
+              ) -> TimeGateRedirectTestReport:
+
+        response = assert_connection.get_response()
+        response_status: int = response.status
+
+        if response_status != 302:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_PAST_INVALID_RETURN,
+                                            status=TestResult.TEST_FAIL))
+        else:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_PAST_RETURN_302,
+                                            status=TestResult.TEST_PASS))
+
+            mementos = assert_connection.get_response().search_link_headers("memento")
+        # TODO sort mementos and check
+
+        return self._test_report
+
+    def _future(self, assert_connection: HttpConnection = None
+                ) -> TimeGateRedirectTestReport:
+
+        response = assert_connection.get_response()
+        response_status: int = response.status
+
+        if response_status != 302:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_FUTURE_INVALID_RETURN,
+                                            status=TestResult.TEST_FAIL))
+        else:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_FUTURE_RETURN_302,
+                                            status=TestResult.TEST_PASS))
+
+            mementos = assert_connection.get_response().search_link_headers("memento")
+            # TODO sort mementos and check
+
+        return self._test_report
+
+    def _normal(self, connection: HttpConnection,
+                datetime: str,
+                ) -> TimeGateRedirectTestReport:
 
         response = connection.get_response()
         response_status: int = response.status
@@ -59,7 +148,7 @@ class TimeGateRedirectTest(BaseTest):
                 original_uri = response.search_link_headers("original")
                 self.add_test_result(TestResult(name=TimeGateRedirectTest.REDIRECTION_MISSING_ORIGINAL,
                                                 status=TestResult.TEST_PASS))
-            except (HeadersNotFoundError, HeaderTypeNotFoundError, HeaderParseError):
+            except (HeadersNotFoundError, HeaderTypeNotFoundError, HeaderParseError, LinkHeaderNotFoundError):
                 # Modify test result or description
                 self.add_test_result(TestResult(name=TimeGateRedirectTest.REDIRECTION_MISSING_ORIGINAL,
                                                 status=TestResult.TEST_WARN))

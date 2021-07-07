@@ -1,8 +1,20 @@
+from typing import List
+
 from dateutil import parser
 
 from mementoweb.validator.http import HttpResponse
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
 from mementoweb.validator.tests.test import TestReport, TestResult
+
+
+class LinkHeaderMementoTestReport(TestReport):
+    memento_uris: List[str] = []
+
+    def __init__(self, memento_uris=None, *args, **kwargs):
+        super(LinkHeaderMementoTestReport, self).__init__(*args, **kwargs)
+        if memento_uris is None:
+            memento_uris = []
+        self.memento_uris = memento_uris
 
 
 class LinkHeaderMementoTest(LinkHeaderTest):

@@ -20,6 +20,9 @@
                 un-rewritten-api-url="uri/uri-pattern where an un-rewritten version of the memento could be obtained."
                 access-policy="public/private; if the archive is accessible to the public or not"
                 memento-status="yes/no; does the archive natively support memento or not" />
+    <tests>
+        <test type="timegate|timemap|memento|original" datetime="" uri="uri for the validation">
+    </tests>
 
 </link>
 -->
@@ -57,6 +60,9 @@
         <calendar uri="http://web.archive.bibalex.org/web/*/"/>
         <memento uri="http://web.archive.bibalex.org/web/*/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="http://web.archive.bibalex.org/web/{timestamp}id_/{url}" access-policy="public" memento-status="yes"/>
+        <tests>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="http://web.archive.bibalex.org/web/http://www.bbc.com" />
+        </tests>
     </link>
     <!--  British Library Archive  -->
     <link id="blarchive" longname="UK Web Archive">
@@ -66,6 +72,9 @@
         <calendar uri="https://webarchive.org.uk/wayback/archive/*/"/>
         <memento uri="https://webarchive.org.uk/wayback/memento/*/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="https://www.webarchive.org.uk/wayback/archive/{timestamp}id_/{url}" access-policy="public" memento-status="yes"/>
+        <tests>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="https://www.webarchive.org.uk/wayback/archive/http://www.adampriceblog.org.uk" />
+        </tests>
     </link>
     <!--  Bavarian Library Archive  -->
     <link id="bsb" longname="Bayerische Staatsbibliothek">
@@ -75,6 +84,9 @@
         <calendar uri="https://langzeitarchivierung.bib-bvb.de/wayback/*/"/>
         <memento uri="https://langzeitarchivierung.bib-bvb.de/wayback/*/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="https://langzeitarchivierung.bib-bvb.de/wayback/{timestamp}id_/{url}" access-policy="public" memento-status="yes"/>
+        <tests>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="https://langzeitarchivierung.bib-bvb.de/wayback/http://www.bombenkrieg.historicum-archiv.net/" />
+        </tests>
     </link>
     <!--  webcitation.org  -->
     <link id="webcite" longname="Web Citation">
@@ -88,6 +100,9 @@
         <calendar uri=""/>
         <memento uri="n/a"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="" memento-status="no" access-policy="public"/>
+        <tests>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="http://timetravel.mementoweb.org/webcite/timegate/http://www.ehealthinnovation.org" />
+        </tests>
     </link>
     <!--
    <link id="sg" longname="Web Archive Singapore">
@@ -111,6 +126,9 @@
         <calendar uri="http://webarchive.loc.gov/all/*/"/>
         <memento uri="http://webarchive.loc.gov/all/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="http://webarchive.loc.gov/all/{timestamp}id_/{url}" access-policy="public" memento-status="yes"/>
+        <tests>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="http://webarchive.loc.gov/all/http://whitehouse.gov" />
+        </tests>
     </link>
     <link id="archiveit" longname="Archive-It">
         <timegate uri="http://wayback.archive-it.org/all/" redirect="no"/>
@@ -119,6 +137,9 @@
         <calendar uri="http://wayback.archive-it.org/all/*/"/>
         <memento uri="http://wayback.archive-it.org/all/*/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="http://wayback.archive-it.org/all/{timestamp}id_/{url}" access-policy="public" memento-status="yes"/>
+        <tests>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="ttp://wayback.archive-it.org/all/http://www.cia.gov" />
+        </tests>
     </link>
     <link id="ukparliament" longname="UK Parliament Web Archive">
         <timegate uri="http://webarchive.parliament.uk/timegate/" redirect="no"/>
@@ -129,6 +150,9 @@
         <calendar uri="http://webarchive.parliament.uk/*/"/>
         <memento uri="http://webarchive.parliament.uk/*/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="" memento-status="yes" access-policy="public"/>
+        <tests>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="http://webarchive.parliament.uk/timegate/http://animatingcardiff.wordpress.com" />
+        </tests>
     </link>
     <link id="uknationalarchives" longname="UK National Archives Web Archive">
         <timegate uri="https://webarchive.nationalarchives.gov.uk/timegate/" redirect="no"/>
@@ -137,6 +161,9 @@
         <calendar uri="http://webarchive.nationalarchives.gov.uk/*/"/>
         <memento uri="http://webarchive.nationalarchives.gov.uk/*/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="" memento-status="yes" access-policy="public"/>
+        <tests>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="https://webarchive.nationalarchives.gov.uk/timegate/http://www.number10.gov.uk/" />
+        </tests>
     </link>
     <!--  orain.org -->
     <link id="orain" longname="Orain">
@@ -174,6 +201,9 @@
         <calendar uri=""/>
         <archive type="cms" rewritten-urls="no" un-rewritten-api-url="" access-policy="public" memento-status="no"/>
         <memento uri="n/a"/>
+        <tests>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="http://timetravel.mementoweb.org/wikia/timegate/http://india.wikia.com/wiki/Government_of_India" />
+        </tests>
     </link>
     <!-- Canadian Archive aka http://www.canada.gc.ca/  -->
     <link id="gcwa" longname="Canadian Archive">
@@ -183,6 +213,9 @@
         <calendar uri=""/>
         <memento uri="http://collectionscanada.gc.ca/webarchives/*/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="" access-policy="public" memento-status="yes"/>
+        <tests>
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="http://webarchive.bac-lac.gc.ca:8080/wayback/http://acst-ccst.gc.ca/" />
+        </tests>
     </link>
     <link id="archive.is" longname="archive.is">
         <timegate uri="http://archive.is/timegate/" redirect="no"/>

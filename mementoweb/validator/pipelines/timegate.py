@@ -1,5 +1,6 @@
 from typing import List
 
+from mementoweb.validator.http import HttpConnection, http
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.tests.header_test import HeaderTest
 from mementoweb.validator.tests.link_header_memento_test import LinkHeaderMementoTest
@@ -14,7 +15,9 @@ class TimeGate(DefaultPipeline):
 
     def validate(self, uri: str,
                  datetime='Thu, 10 Oct 2009 12:00:00 GMT',
-                 accept=''
+                 accept='',
+                 past_datetime="Mon, 03 Feb 1992 00:00:00 GMT",
+                 future_datetime="Tue, 03 Feb 2032 00:00:00 GMT",
                  ) -> List[TestReport]:
         results: [TestReport] = []
         uri_report = URITest().test(uri=uri, datetime=datetime)
@@ -37,6 +40,32 @@ class TimeGate(DefaultPipeline):
             LinkHeaderMementoTest().test(response=redirect_report.connection.get_response(),
                                          resource_type=ResourceType.TIMEGATE)
         ])
+
+        # Redirection tests for different date time combinations
+
+        blank_connection: HttpConnection = http(uri, datetime="")
+        results.append(TimeGateRedirectTest().test(connection=redirect_report.connection,
+                                                   test_type="blank",
+                                                   datetime="",
+                                                   assert_connection=blank_connection))
+
+        past_connection: HttpConnection = http(uri, datetime=past_datetime)
+        results.append(TimeGateRedirectTest().test(connection=redirect_report.connection,
+                                                   test_type="past",
+                                                   datetime=past_datetime,
+                                                   assert_connection=past_connection))
+
+        future_connection: HttpConnection = http(uri, datetime=future_datetime)
+        results.append(TimeGateRedirectTest().test(connection=redirect_report.connection,
+                                                   test_type="future",
+                                                   datetime=future_datetime,
+                                                   assert_connection=future_connection))
+
+        broken_connection: HttpConnection = http(uri, datetime="BROKEN_DATETIME")
+        results.append(TimeGateRedirectTest().test(connection=redirect_report.connection,
+                                                   test_type="broken",
+                                                   assert_connection=broken_connection,
+                                                   datetime="BROKEN_DATETIME"))
 
         # Do link_header tests
 
