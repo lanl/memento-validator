@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from typing_extensions import TypedDict
 
 from mementoweb.validator.config import Config
@@ -7,11 +7,16 @@ from mementoweb.validator.pipelines.original import Original
 from mementoweb.validator.pipelines.timegate import TimeGate
 from mementoweb.validator.pipelines.timemap import TimeMap
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='', static_url_path='')
 
 # TODO : transfer web server configuration to env file
 #  Add endpoint to serve html page??
 Config.file_path = "config.xml"
+
+
+@app.route("/docs/<path:path>")
+def docs(path):
+    return send_from_directory('../../../docs/build/html/', path)
 
 
 @app.route("/")
