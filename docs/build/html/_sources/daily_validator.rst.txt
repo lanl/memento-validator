@@ -1,0 +1,7 @@
+daily\_validator module
+=======================
+
+.. automodule:: daily_validator
+   :members:
+   :undoc-members:
+   :show-inheritance:
