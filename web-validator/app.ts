@@ -41,10 +41,10 @@ class App {
         let inputType = this.inputTypeElement.value;
 
         let requestParams = {
-            // datetime: requestDate,
-            // uri: uri,
-            // type: inputType,
-            // timegate: defaultTimegate
+            datetime: requestDate,
+            uri: uri,
+            type: inputType,
+            timegate: defaultTimegate
         };
         this.submitButton.disabled = true;
         axios.get("http://labs.mementoweb.org/validator/",{
