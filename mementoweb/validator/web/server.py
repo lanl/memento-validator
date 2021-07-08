@@ -14,9 +14,16 @@ app = Flask(__name__, static_folder='', static_url_path='')
 Config.file_path = "config.xml"
 
 
-@app.route("/docs/<path:path>")
+@app.route("/docs/", defaults={'path': 'index.html'})
+@app.route("/docs/<path:path>", defaults={'path': 'index.html'})
 def docs(path):
     return send_from_directory('../../../docs/build/html/', path)
+
+
+@app.route("/app/", defaults={'path': 'index.html'})
+@app.route("/app/<path:path>", defaults={'path': 'index.html'})
+def webapp(path):
+    return send_from_directory('../../../web-validator/dist/', path)
 
 
 @app.route("/")
