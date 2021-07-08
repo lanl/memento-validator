@@ -15,14 +15,14 @@ Config.file_path = "config.xml"
 
 
 @app.route("/docs/", defaults={'path': 'index.html'})
-@app.route("/docs/<path:path>", defaults={'path': 'index.html'})
+@app.route("/docs/<path:path>")
 def docs(path):
     return send_from_directory('../../../docs/build/html/', path)
 
 
-@app.route("/app/", defaults={'path': 'index.html'})
-@app.route("/app/<path:path>", defaults={'path': 'index.html'})
-def webapp(path):
+@app.route("/app/", defaults={'path': "index.html"})
+@app.route("/app/<path:path>")
+def webapp_static(path):
     return send_from_directory('../../../web-validator/dist/', path)
 
 
