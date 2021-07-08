@@ -6,9 +6,11 @@ class App {
 
     private requestDateElement: HTMLInputElement;
 
-    private defaultTGElement: HTMLInputElement;
-
     private inputTypeElement: HTMLInputElement;
+
+    private followLinksElement: HTMLInputElement;
+
+    private fullTMCheckElement: HTMLInputElement;
 
     private resultElement: HTMLElement;
 
@@ -22,8 +24,9 @@ class App {
 
         this.uriElement = document.getElementById("inputUri") as HTMLInputElement;
         this.requestDateElement = document.getElementById("inputRequestDate") as HTMLInputElement;
-        this.defaultTGElement = document.getElementById("inputDefaultTimegate") as HTMLInputElement;
         this.inputTypeElement = document.getElementById("inputType") as HTMLInputElement;
+        this.followLinksElement = document.getElementById("inputFollowLinks") as HTMLInputElement;
+        this.fullTMCheckElement = document.getElementById("inputTMFullCheck") as HTMLInputElement;
 
         this.resultElement = document.getElementById("result");
         this.errorTemplate = document.getElementById("errorTemplate").innerHTML;
@@ -37,35 +40,48 @@ class App {
 
         let uri = this.uriElement.value;
         let requestDate = this.requestDateElement.value;
-        let defaultTimegate = this.defaultTGElement.value;
         let inputType = this.inputTypeElement.value;
+        let followLinks = this.followLinksElement.checked;
+        let fullTMCheck = this.fullTMCheckElement.checked;
 
         let requestParams = {
             datetime: requestDate,
             uri: uri,
             type: inputType,
-            timegate: defaultTimegate
+            followLinks: followLinks,
+            fullTMCheck: fullTMCheck
         };
+
         this.submitButton.disabled = true;
+
         axios.get("http://labs.mementoweb.org/validator/",{
             params: requestParams
         }).then(
-            result => this.showResult(result.data),
-            error => console.log("error"));
+            result => {
+                this.submitButton.disabled = false;
+                this.showResult(result.data)
+            },
+            error => {
+                console.log(error);
+                this.showError();
+            });
 
         return true;
 
     }
 
     public showResult(data: object){
-        console.log(data);
-        this.submitButton.disabled = false;
+
         if( data.hasOwnProperty("errors")){
             this.resultElement.innerHTML = Mustache.render(this.errorTemplate, {data: data});
         }
         else{
             this.resultElement.innerHTML = Mustache.render(this.successTemplate, {data: data});
         }
+    }
+
+    public showError(){
+        this.requestDateElement.innerHTML = "Error, Please try again."
     }
 }
 
