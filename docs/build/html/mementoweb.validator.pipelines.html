@@ -208,7 +208,39 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="mementoweb.validator.pipelines.memento.Memento.validate">
 <span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datetime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Thu,</span> <span class="pre">10</span> <span class="pre">Oct</span> <span class="pre">2009</span> <span class="pre">12:00:00</span> <span class="pre">GMT'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mementoweb.validator.tests.html#mementoweb.validator.tests.test.TestReport" title="mementoweb.validator.tests.test.TestReport"><span class="pre">mementoweb.validator.tests.test.TestReport</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#mementoweb.validator.pipelines.memento.Memento.validate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Test sequence for Memento resource type.
+Steps</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Check the validity of the URI</dt><dd><p>Checks the URI compliance with standard format and by establishing connection</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Check redirection</dt><dd><p>Check the response status of connection by performing redirection (status 3xx)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Check content negotiation</dt><dd><p>Check for memento datetime header</p>
+</dd>
+</dl>
+</li>
+<li><p>Link header tests</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uri</strong> – URI of the memento</p></li>
+<li><p><strong>datetime</strong> – </p></li>
+<li><p><strong>accept</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Test reports</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
