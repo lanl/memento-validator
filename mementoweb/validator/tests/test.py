@@ -84,7 +84,7 @@ class TestReport:
         else:
             return "Fail"
 
-    def to_json(self):
+    def to_json(self) -> dict:
         return {
             "name": self.name.split(".")[-1],
             "source": self.name,

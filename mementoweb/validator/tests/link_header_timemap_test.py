@@ -14,6 +14,11 @@ class LinkHeaderTimeMapTestReport(TestReport):
             time_map_uris = []
         self.time_map_uris = time_map_uris
 
+    def to_json(self):
+        return_value = TestReport.to_json(self)
+        return_value['timemaps'] = self.time_map_uris
+        return return_value
+
 
 class LinkHeaderTimeMapTest(LinkHeaderTest):
     TIMEMAP_PRESENT = "Timemap link present"
@@ -76,6 +81,7 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
                     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_PRESENT,
                                                     status=TestResult.TEST_PASS))
                     self._test_report.report_status = TestReport.REPORT_PASS
+                    self._test_report.time_map_uris.append(timemap['link'])
                 else:
                     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_NOT_PRESENT))
 

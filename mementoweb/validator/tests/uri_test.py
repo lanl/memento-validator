@@ -46,7 +46,7 @@ class URITest(BaseTest):
             connection=None
         )
 
-    def test(self, uri: str, datetime: str) -> URITestReport:
+    def test(self, uri: str, datetime: str, method="HEAD") -> URITestReport:
         """
 
         Performs URI testing on a given uri
@@ -57,7 +57,7 @@ class URITest(BaseTest):
         """
 
         try:
-            connection: HttpConnection = http(uri, datetime=datetime)
+            connection: HttpConnection = http(uri, datetime=datetime, method=method)
             self._test_report.connection = connection
             self._test_report.report_status = TestReport.REPORT_PASS
             self.add_test_result(TestResult(name=URITest.VALID_URI, status=TestResult.TEST_PASS))
