@@ -1,5 +1,10 @@
 import axios from "axios";
-import * as Mustache from "mustache"
+import * as Handlebars from "handlebars"
+
+const config = {
+    apiPath: "http://labs.mementoweb.org/validator/",
+    // apiPath: "http://localhost:5000/"
+};
 
 class App {
     public uriElement: HTMLInputElement;
@@ -34,6 +39,13 @@ class App {
 
         this.submitButton = document.getElementById("submit") as HTMLButtonElement;
         this.submitButton.addEventListener("click", () => {this.submit();});
+
+        Handlebars.registerHelper('equal', function () {
+            const args = Array.prototype.slice.call(arguments, 0, -1);
+            return args.every(function (expression) {
+                return args[0] === expression;
+            });
+        });
     }
 
     public submit(){
@@ -54,7 +66,7 @@ class App {
 
         this.submitButton.disabled = true;
 
-        axios.get("http://labs.mementoweb.org/validator/",{
+        axios.get(config.apiPath,{
             params: requestParams
         }).then(
             result => {
@@ -73,10 +85,12 @@ class App {
     public showResult(data: object){
 
         if( data.hasOwnProperty("errors")){
-            this.resultElement.innerHTML = Mustache.render(this.errorTemplate, {data: data});
+            let source = Handlebars.compile(this.errorTemplate)
+            this.resultElement.innerHTML = source(this.errorTemplate, {data: data});
         }
         else{
-            this.resultElement.innerHTML = Mustache.render(this.successTemplate, {data: data});
+            let source = Handlebars.compile(this.successTemplate);
+            this.resultElement.innerHTML = source({data: data});
         }
     }
 

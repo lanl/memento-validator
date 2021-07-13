@@ -20,22 +20,26 @@
                       <h4>{{ result }}</h4>
                     </div>
                     <p class="mb-1">{{ description }}</p>
-                    <small>{{ description }}</small>
+                    <small>{{ source }}</small>
                 </div>
                 {{#tests}}
-                    <div class="list-group">
-                        <div href="#" class="list-group-item list-group-item-action" aria-current="true">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">{{ name }}</h6>
-                                <h6>{{ result }}</h6>
-                            </div>
-                            <p class="mb-1">{{ description }}</p>
-                            <small>And some small print.</small>
+                    {{#if (equal result 'Pass') }}
+                        <div href="#" class="list-group-item list-group-item-action text-success" aria-current="true">
+                    {{else if (equal result 'Warn') }}
+                        <div href="#" class="list-group-item list-group-item-action text-warning" aria-current="true">
+                    {{else }}
+                        <div href="#" class="list-group-item list-group-item-action text-danger" aria-current="true">
+                    {{/if}}
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">{{ name }}</h6>
+                            <h6>{{ result }}</h6>
                         </div>
+                        <p class="mb-1">{{ description }}</p>
+                        <small>And some small print.</small>
                     </div>
                 {{/tests}}
                 <br>
             </div>
         {{/data.results}}
 
-    </script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin></script> <script src="app.2ebcac3b.js"></script> </body></html>
+    </script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin></script> <script src="app.08ff0c0f.js"></script> </body></html>

@@ -134,18 +134,22 @@
                       <h4>{{ result }}</h4>
                     </div>
                     <p class="mb-1">{{ description }}</p>
-                    <small>{{ description }}</small>
+                    <small>{{ source }}</small>
                 </div>
                 {{#tests}}
-                    <div class="list-group">
-                        <div href="#" class="list-group-item list-group-item-action" aria-current="true">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">{{ name }}</h6>
-                                <h6>{{ result }}</h6>
-                            </div>
-                            <p class="mb-1">{{ description }}</p>
-                            <small>And some small print.</small>
+                    {{#if (equal result 'Pass') }}
+                        <div href="#" class="list-group-item list-group-item-action text-success" aria-current="true">
+                    {{else if (equal result 'Warn') }}
+                        <div href="#" class="list-group-item list-group-item-action text-warning" aria-current="true">
+                    {{else }}
+                        <div href="#" class="list-group-item list-group-item-action text-danger" aria-current="true">
+                    {{/if}}
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">{{ name }}</h6>
+                            <h6>{{ result }}</h6>
                         </div>
+                        <p class="mb-1">{{ description }}</p>
+                        <small>And some small print.</small>
                     </div>
                 {{/tests}}
                 <br>
