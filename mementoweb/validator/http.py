@@ -22,15 +22,18 @@ class HttpResponse:
 
     status = None
 
+    body = None
+
     def __init__(self, response: HTTPResponse = None, uri=""):
         self.uri = uri
         self._response = response
         self._headers = dict(self._response.getheaders())
         self.status = response.status
+        self.body = response.read().decode('utf-8')
 
     def search_link_headers(self, relationship: str):
         try:
-            self._parse_link_headers(self.get_headers("Link"))
+            self._link_headers = self._parse_link_headers(self.get_headers("Link"))
             return [x for x in self._link_headers if x['relationship'] == relationship]
         except HeadersNotFoundError:
             raise HeadersNotFoundError()
@@ -50,12 +53,22 @@ class HttpResponse:
     def header_keys(self) -> List:
         return list(self._headers.keys())
 
-    def _parse_link_headers(self, link_header: str) -> List:
+    def get_body(self):
+        return self.body
+
+    def parse_body(self):
+        return self._parse_link_headers(self.body.replace("\n", ""))
+
+    @staticmethod
+    def _parse_link_headers(link_header: str) -> List:
         link_header = link_header.strip()
 
-        self._link_headers = []
+        _link_headers = []
 
-        link_header_splits = [x.replace('>', '').replace('<', '') for x in link_header.split(', <')]
+        split_point = re.compile("[,]\s*[<]")
+
+        link_header_splits = [x.replace('>', '').replace('<', '') for x in split_point.split(link_header)]
+        # link_header_splits = [x.replace('>', '').replace('<', '') for x in link_header.split(', <')]
 
         for item in link_header_splits:
             # relationship is mandatory
@@ -71,7 +84,7 @@ class HttpResponse:
                     datetime = (re.findall('((?<=datetime=")[^"]*)', item) or [None])[0]
                     lic = (re.findall('((?<=license=")[^"]*)', item) or [None])[0]
 
-                    self._link_headers.append({
+                    _link_headers.append({
                         "link": link,
                         "relationship": relationship,
                         "type": type,
@@ -79,7 +92,7 @@ class HttpResponse:
                         "license": lic
                     })
 
-        return self._link_headers
+        return _link_headers
 
 
 class HttpConnection:
