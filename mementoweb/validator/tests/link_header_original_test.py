@@ -13,6 +13,7 @@ class LinkHeaderOriginalTest(LinkHeaderTest):
     TIMEGATE_PRESENT = "Timegate link present"
 
     def _test_memento(self, response: HttpResponse) -> TestReport:
+        #  Original mandatory for memento
         self._test_report.report_status = TestReport.REPORT_PASS
 
         if not len(response.search_link_headers("original")):

@@ -21,4 +21,7 @@ class LinkHeaderTimeGateTest(LinkHeaderTest):
 
         return self._test_report
 
+    def _test_memento(self, response: HttpResponse) -> TestReport:
+        return self._test_original(response)
+
 

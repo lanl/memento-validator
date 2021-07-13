@@ -75,6 +75,7 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
                 if "type" in timemap.keys() and timemap["type"] == "application/link-format":
                     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_PRESENT,
                                                     status=TestResult.TEST_PASS))
+                    self._test_report.report_status = TestReport.REPORT_PASS
                 else:
                     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_NOT_PRESENT))
 

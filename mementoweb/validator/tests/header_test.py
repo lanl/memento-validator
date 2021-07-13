@@ -59,7 +59,7 @@ class HeaderTest(BaseTest):
             self.add_test_result(TestResult(name="Vary header not found", status=TestResult.TEST_FAIL))
 
         else:
-            if "Accept-Datetime" in response.get_headers("Vary"):
+            if "accept-datetime" in response.get_headers("Vary").lower():
                 self.add_test_result(TestResult(name="Accept-Datetime in vary header", status=TestResult.TEST_PASS))
             else:
                 self.add_test_result(TestResult(name="Accept-Datetime not in vary header", status=TestResult.TEST_FAIL))

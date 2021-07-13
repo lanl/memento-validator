@@ -80,10 +80,14 @@ class TimeGateRedirectTest(BaseTest):
             return self._past(assert_connection)
         elif test_type == "broken":
             return self._broken(assert_connection)
+        elif test_type == "blank":
+            return self._blank(assert_connection)
         else:
             return self._normal(connection, datetime)
 
     def _broken(self, assert_connection):
+        self._test_report.name += "-broken"
+
         response_status: int = assert_connection.get_response().status
 
         if response_status != 400:
@@ -96,6 +100,8 @@ class TimeGateRedirectTest(BaseTest):
 
     def _past(self, assert_connection: HttpConnection = None
               ) -> TimeGateRedirectTestReport:
+
+        self._test_report.name += "-past"
 
         response = assert_connection.get_response()
         response_status: int = response.status
@@ -114,6 +120,8 @@ class TimeGateRedirectTest(BaseTest):
 
     def _future(self, assert_connection: HttpConnection = None
                 ) -> TimeGateRedirectTestReport:
+
+        self._test_report.name += "-future"
 
         response = assert_connection.get_response()
         response_status: int = response.status
@@ -182,5 +190,23 @@ class TimeGateRedirectTest(BaseTest):
         else:
             self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_RETURN_INVALID_STATUS,
                                             status=TestResult.TEST_FAIL))
+
+        return self._test_report
+
+    def _blank(self, assert_connection):
+        self._test_report.name += "-blank"
+
+        response = assert_connection.get_response()
+        response_status: int = response.status
+
+        if response_status != 302:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_FUTURE_INVALID_RETURN,
+                                            status=TestResult.TEST_FAIL))
+        else:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_FUTURE_RETURN_302,
+                                            status=TestResult.TEST_PASS))
+
+            # mementos = assert_connection.get_response().search_link_headers("memento")
+            # TODO sort mementos and check
 
         return self._test_report

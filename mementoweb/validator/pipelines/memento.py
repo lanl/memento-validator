@@ -19,6 +19,27 @@ class Memento(DefaultPipeline):
                  datetime='Thu, 10 Oct 2009 12:00:00 GMT',
                  accept=''
                  ) -> List[TestReport]:
+        """
+        Test sequence for Memento resource type.
+        Steps
+
+        1. Check the validity of the URI
+            Checks the URI compliance with standard format and by establishing connection
+
+        2. Check redirection
+            Check the response status of connection by performing redirection (status 3xx)
+
+        3. Check content negotiation
+            Check for memento datetime header
+
+        4. Link header tests
+
+        :param uri: URI of the memento
+        :param datetime:
+        :param accept:
+        :return: Test reports
+        """
+
         results = []
 
         # Check for the URI validity
@@ -42,13 +63,10 @@ class Memento(DefaultPipeline):
 
         # Check for link headers and validate, use the updated connection response if redirected
         connection = redirection_report.connection or connection
-        link_header_report = LinkHeaderTest().test(connection.get_response(), resource_type=ResourceType.MEMENTO)
-        results.append(link_header_report)
+        # link_header_report = LinkHeaderTest().test(connection.get_response(), resource_type=ResourceType.MEMENTO)
+        # results.append(link_header_report)
 
         # Link-header tests
-        results.append(LinkHeaderMementoTest().test(response=connection.get_response(),
-                                                    resource_type=ResourceType.MEMENTO))
-
         results.append(LinkHeaderOriginalTest().test(response=connection.get_response(),
                                                      resource_type=ResourceType.MEMENTO))
 
@@ -56,6 +74,9 @@ class Memento(DefaultPipeline):
                                                      resource_type=ResourceType.MEMENTO))
 
         results.append(LinkHeaderTimeMapTest().test(response=connection.get_response(),
+                                                    resource_type=ResourceType.MEMENTO))
+
+        results.append(LinkHeaderMementoTest().test(response=connection.get_response(),
                                                     resource_type=ResourceType.MEMENTO))
 
         return results

@@ -11,11 +11,13 @@ class TestResult:
     Abstraction of a test result/ single test
 
     """
-    TEST_PASS: int = 1
+    TEST_PASS: int = 2
 
-    TEST_WARN: int = 0
+    TEST_WARN: int = 1
 
     TEST_FAIL: int = -1
+
+    TEST_INFO: int = 0
 
     name: str
 
@@ -31,6 +33,8 @@ class TestResult:
     def result(self) -> str:
         if self.status == self.TEST_PASS:
             return "Pass"
+        if self.status == self.TEST_INFO:
+            return "Info"
         if self.status == self.TEST_WARN:
             return "Warn"
         else:
@@ -82,7 +86,8 @@ class TestReport:
 
     def to_json(self):
         return {
-            "name": self.name,
+            "name": self.name.split(".")[-1],
+            "source": self.name,
             "description": self.description,
             "status": self.report_status,
             "result": self.result(),
