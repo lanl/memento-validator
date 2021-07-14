@@ -26,6 +26,8 @@ class TimeGateRedirectTest(BaseTest):
 
     TIMEGATE_RETURN_302 = "TimeGate returns 302"
 
+    TIMEGATE_RETURN_307 = "TimeGate returns 307"
+
     TIMEGATE_RETURN_200 = "TimeGate returns 200"
 
     TIMEGATE_RETURN_INVALID_STATUS = "TimeGate does not return 302/ 200"
@@ -41,6 +43,8 @@ class TimeGateRedirectTest(BaseTest):
     TIMEGATE_BROKEN_RETURN_400 = "TimeGate returns 400 for broken datetime"
 
     TIMEGATE_BROKEN_INVALID_RETURN = "Timegate does not return 400 for broken datetime"
+
+    REDIRECT_THRESH_PASSED = "Redirect threshold passed"
 
     _description = "Tests for the timegate redirection. Checks for any redirection and tests for the validity"
 
@@ -59,7 +63,8 @@ class TimeGateRedirectTest(BaseTest):
     def test(self, connection: HttpConnection,
              datetime: str,
              test_type=Literal["future", "past", "broken", "normal", "blank"],
-             assert_connection: HttpConnection = None
+             assert_connection: HttpConnection = None,
+             redirect_threshold: int = 5
              ) -> TimeGateRedirectTestReport:
         """
 
@@ -67,6 +72,7 @@ class TimeGateRedirectTest(BaseTest):
         :param datetime: Datetime used for establishing the primary connection. Should conform the standard specification
         :param test_type: Test type to perform from "normal" (or ""), "future", "past", "broken" defaults to "normal" (or "")
         :param assert_connection: Secondary connection for validating memento information. Ignored when test_type is "normal" or ""
+        :param redirect_threshold: Maximum number of redirects for warning (Applicable only for test_type = "normal", otherwise ignored)
         :return:
         """
 
@@ -83,7 +89,7 @@ class TimeGateRedirectTest(BaseTest):
         elif test_type == "blank":
             return self._blank(assert_connection)
         else:
-            return self._normal(connection, datetime)
+            return self._normal(connection, datetime, max_redirects=redirect_threshold)
 
     def _broken(self, assert_connection):
         self._test_report.name += "-broken"
@@ -140,6 +146,7 @@ class TimeGateRedirectTest(BaseTest):
 
     def _normal(self, connection: HttpConnection,
                 datetime: str,
+                max_redirects
                 ) -> TimeGateRedirectTestReport:
 
         response = connection.get_response()
@@ -149,7 +156,11 @@ class TimeGateRedirectTest(BaseTest):
         except HeaderTypeNotFoundError:
             vary = ''
 
+        redirect_count = 0
+
         while 300 <= response_status < 400 and not vary:
+
+            redirect_count = redirect_count + 1
 
             # Check for link rel original
             try:
@@ -180,12 +191,18 @@ class TimeGateRedirectTest(BaseTest):
                 break
 
             response_status = response.status
+        if redirect_count >= max_redirects:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.REDIRECT_THRESH_PASSED,
+                                            status=TestResult.TEST_WARN))
 
         if response_status == 302:
             self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_RETURN_302, status=TestResult.TEST_PASS))
             self._test_report.report_status = TestReport.REPORT_PASS
         elif response_status == 200:
             self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_RETURN_200, status=TestResult.TEST_PASS))
+            self._test_report.report_status = TestReport.REPORT_PASS
+        elif response_status == 307:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_RETURN_307, status=TestResult.TEST_WARN))
             self._test_report.report_status = TestReport.REPORT_PASS
         else:
             self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_RETURN_INVALID_STATUS,
