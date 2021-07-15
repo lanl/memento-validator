@@ -26,13 +26,13 @@ class LinkHeaderOriginalTest(LinkHeaderTest):
         return self._test_report
 
     def _test_timegate(self, response: HttpResponse) -> TestReport:
-
-        if not len(response.search_link_headers("timegate")):
-            self.add_test_result(
-                TestResult(name=LinkHeaderOriginalTest.TIMEGATE_NOT_PRESENT, status=TestResult.TEST_FAIL))
-            self._test_report.report_status = TestReport.REPORT_FAIL
-        else:
-            self.add_test_result(TestResult(name=LinkHeaderOriginalTest.TIMEGATE_PRESENT, status=TestResult.TEST_PASS))
-            self._test_report.report_status = TestReport.REPORT_PASS
-
-        return self._test_report
+        return self._test_memento(response)
+        # if not len(response.search_link_headers("timegate")):
+        #     self.add_test_result(
+        #         TestResult(name=LinkHeaderOriginalTest.TIMEGATE_NOT_PRESENT, status=TestResult.TEST_FAIL))
+        #     self._test_report.report_status = TestReport.REPORT_FAIL
+        # else:
+        #     self.add_test_result(TestResult(name=LinkHeaderOriginalTest.TIMEGATE_PRESENT, status=TestResult.TEST_PASS))
+        #     self._test_report.report_status = TestReport.REPORT_PASS
+        #
+        # return self._test_report

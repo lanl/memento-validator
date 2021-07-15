@@ -54,15 +54,16 @@ class Memento(DefaultPipeline):
         connection: HttpConnection = uri_report.connection
         redirection_report: MementoRedirectTestReport = MementoRedirectTest().test(response=connection.get_response())
         results.append(redirection_report)
-        # if memento_report.report_status is TestReport.REPORT_FAIL:
-        #     return results
+        if redirection_report.report_status is TestReport.REPORT_FAIL:
+            return results
+
+        connection = redirection_report.connection or connection
 
         # Check for content negotiation. i.e memento-datetime
         content_negotiation_report: TestReport = ContentNegotiationTest().test(uri_report.connection.get_response())
         results.append(content_negotiation_report)
 
         # Check for link headers and validate, use the updated connection response if redirected
-        connection = redirection_report.connection or connection
         # link_header_report = LinkHeaderTest().test(connection.get_response(), resource_type=ResourceType.MEMENTO)
         # results.append(link_header_report)
 

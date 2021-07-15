@@ -4,6 +4,7 @@ from mementoweb.validator.http import HttpConnection, http
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.tests.header_test import HeaderTest
 from mementoweb.validator.tests.link_header_memento_test import LinkHeaderMementoTest
+from mementoweb.validator.tests.link_header_original_test import LinkHeaderOriginalTest
 from mementoweb.validator.tests.link_header_timemap_test import LinkHeaderTimeMapTest
 from mementoweb.validator.tests.test import TestReport
 from mementoweb.validator.tests.timegate_redirect_test import TimeGateRedirectTest
@@ -35,6 +36,8 @@ class TimeGate(DefaultPipeline):
 
         results.extend([
             HeaderTest().test(response=redirect_report.connection.get_response(), resource_type=ResourceType.TIMEGATE),
+            LinkHeaderOriginalTest().test(response=redirect_report.connection.get_response(),
+                                          resource_type=ResourceType.TIMEGATE),
             LinkHeaderTimeMapTest().test(response=redirect_report.connection.get_response(),
                                          resource_type=ResourceType.TIMEGATE),
             LinkHeaderMementoTest().test(response=redirect_report.connection.get_response(),
