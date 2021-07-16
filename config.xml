@@ -39,7 +39,7 @@
         <calendar uri="https://web.archive.org/web/*/"/>
         <memento uri="https://web.archive.org/web/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="https://web.archive.org/web/{timestamp}id_/{url}" access-policy="public" memento-status="yes"/>
-        <tests>
+        <tests email="mahanama94@gmail.com,mahanama94@hotmail.com">
             <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="https://web.archive.org/web/http://mementoweb.org/"/>
         </tests>
     </link>
@@ -60,7 +60,7 @@
         <calendar uri="http://web.archive.bibalex.org/web/*/"/>
         <memento uri="http://web.archive.bibalex.org/web/*/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="http://web.archive.bibalex.org/web/{timestamp}id_/{url}" access-policy="public" memento-status="yes"/>
-        <tests>
+        <tests email="mahanama94@hotmail.com">
             <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="http://web.archive.bibalex.org/web/http://www.bbc.com" />
         </tests>
     </link>
