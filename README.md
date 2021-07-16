@@ -53,6 +53,35 @@ $ flask run
 
 ## Web Front-end
 
+## Python API
+You can use python API to run single tests, selected pipelines, extend tests, extend pipelines,
+write customized tests, customized pipelines. To use Python API first install you need to install 
+**mementoweb** package. 
+
+1. Install with PIP
+```shell
+pip install https://github.com/mahanama94/memento-validator
+```
+
+2. Import into your application
+```python
+# main.py
+
+from mementoweb.validator.tests.uri_test import URITest
+
+report = URITest().test(uri="http://webarchive.parliament.uk/timegate/http://animatingcardiff.wordpress.com",
+                        datetime='Thu, 10 Oct 2009 12:00:00 GMT')
+print(report.to_json())
+```
+
+3. Run Application
+```shell
+python test.py
+
+{'name': 'URITest', 'source': 'mementoweb.validator.tests.uri_test.URITest', 'description': 'Tests for the validity of the URI of the resource including validity and connectivity', 'status': 1, 'result': 'Pass', 'tests': [{'name': 'Valid URI', 'description': '', 'status': 2, 'result': 'Pass'}]}
+
+```
+
 ### Installation Instructions
 
 ## CLI Tool
