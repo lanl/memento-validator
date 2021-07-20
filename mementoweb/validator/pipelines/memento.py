@@ -1,11 +1,10 @@
-from typing import List
-
 from mementoweb.validator.http import HttpConnection
 from mementoweb.validator.pipelines import DefaultPipeline
+from mementoweb.validator.pipelines.default import PipelineResult
 from mementoweb.validator.tests.content_negotiation_test import ContentNegotiationTest
 from mementoweb.validator.tests.link_header_memento_test import LinkHeaderMementoTest
 from mementoweb.validator.tests.link_header_original_test import LinkHeaderOriginalTest
-from mementoweb.validator.tests.link_header_test import LinkHeaderTest, ResourceType
+from mementoweb.validator.tests.link_header_test import ResourceType
 from mementoweb.validator.tests.link_header_timegate_test import LinkHeaderTimeGateTest
 from mementoweb.validator.tests.link_header_timemap_test import LinkHeaderTimeMapTest
 from mementoweb.validator.tests.memento_redirect_test import MementoRedirectTest, MementoRedirectTestReport
@@ -15,10 +14,14 @@ from mementoweb.validator.tests.uri_test import URITest, URITestReport
 
 class Memento(DefaultPipeline):
 
+    def __init__(self):
+
+        super().__init__()
+
     def validate(self, uri: str,
                  datetime='Thu, 10 Oct 2009 12:00:00 GMT',
                  accept=''
-                 ) -> List[TestReport]:
+                 ) -> PipelineResult:
         """
         Test sequence for Memento resource type.
         Steps
@@ -40,44 +43,46 @@ class Memento(DefaultPipeline):
         :return: Test reports
         """
 
-        results = []
+        self.result.reports = []
+
+        self.result.reports = []
 
         # Check for the URI validity
         uri_report: URITestReport = URITest().test(uri=uri, datetime=datetime)
-        results.append(uri_report)
+        self.result.reports.append(uri_report)
 
         # If URI invalid  stop tests
         if uri_report.report_status is TestReport.REPORT_FAIL:
-            return results
+            return self.result
 
         # Check for any redirection, use already established connection and response
         connection: HttpConnection = uri_report.connection
         redirection_report: MementoRedirectTestReport = MementoRedirectTest().test(response=connection.get_response())
-        results.append(redirection_report)
+        self.result.reports.append(redirection_report)
         if redirection_report.report_status is TestReport.REPORT_FAIL:
-            return results
+            return self.result
 
         connection = redirection_report.connection or connection
 
         # Check for content negotiation. i.e memento-datetime
         content_negotiation_report: TestReport = ContentNegotiationTest().test(uri_report.connection.get_response())
-        results.append(content_negotiation_report)
+        self.result.reports.append(content_negotiation_report)
 
         # Check for link headers and validate, use the updated connection response if redirected
         # link_header_report = LinkHeaderTest().test(connection.get_response(), resource_type=ResourceType.MEMENTO)
-        # results.append(link_header_report)
+        # self.result.reports.append(link_header_report)
 
         # Link-header tests
-        results.append(LinkHeaderOriginalTest().test(response=connection.get_response(),
-                                                     resource_type=ResourceType.MEMENTO))
+        self.result.reports.append(LinkHeaderOriginalTest().test(response=connection.get_response(),
+                                                                 resource_type=ResourceType.MEMENTO))
 
-        results.append(LinkHeaderTimeGateTest().test(response=connection.get_response(),
-                                                     resource_type=ResourceType.MEMENTO))
+        self.result.reports.append(LinkHeaderTimeGateTest().test(response=connection.get_response(),
+                                                                 resource_type=ResourceType.MEMENTO))
 
-        results.append(LinkHeaderTimeMapTest().test(response=connection.get_response(),
-                                                    resource_type=ResourceType.MEMENTO))
+        self.result.reports.append(LinkHeaderTimeMapTest().test(response=connection.get_response(),
+                                                                resource_type=ResourceType.MEMENTO))
 
-        results.append(LinkHeaderMementoTest().test(response=connection.get_response(),
-                                                    resource_type=ResourceType.MEMENTO))
+        self.result.reports.append(LinkHeaderMementoTest().test(response=connection.get_response(),
+                                                                resource_type=ResourceType.MEMENTO))
 
-        return results
+        return self.result

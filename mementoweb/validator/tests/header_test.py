@@ -49,7 +49,7 @@ class HeaderTest(BaseTest):
 
         elif "Content-Location" in response.header_keys():
             self.add_test_result(TestResult(name="Content Location Header found", status=TestResult.TEST_PASS))
-            return self._test_report
+
         else:
             self.add_test_result(TestResult(name="Location/ Content-Location header not found",
                                             status=TestResult.TEST_FAIL))

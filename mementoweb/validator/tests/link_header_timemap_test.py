@@ -1,8 +1,10 @@
+import typing
 from typing import List
 
 from mementoweb.validator.http import HttpResponse
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
 from mementoweb.validator.tests.test import TestReport, TestResult
+from mementoweb.validator.types import ResourceType
 
 
 class LinkHeaderTimeMapTestReport(TestReport):
@@ -40,6 +42,12 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
             tests=[],
             time_map_uris=[]
         )
+
+    def test(self, response: HttpResponse, resource_type: ResourceType = ResourceType.ORIGINAL) -> \
+            LinkHeaderTimeMapTestReport:
+        # Just for typing support
+        return typing.cast(LinkHeaderTimeMapTestReport,
+                           super(LinkHeaderTimeMapTest, self).test(response, resource_type))
 
     def _test_timegate(self, response: HttpResponse) -> LinkHeaderTimeMapTestReport:
         self._test_report.report_status = TestReport.REPORT_PASS

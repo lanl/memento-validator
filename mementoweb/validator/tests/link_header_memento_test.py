@@ -1,10 +1,12 @@
+import typing
 from typing import List
 
 from dateutil import parser
 
-from mementoweb.validator.http import HttpResponse
+from mementoweb.validator.http import HttpResponse, http
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
 from mementoweb.validator.tests.test import TestReport, TestResult
+from mementoweb.validator.types import ResourceType
 
 
 class LinkHeaderMementoTestReport(TestReport):
@@ -34,6 +36,23 @@ class LinkHeaderMementoTest(LinkHeaderTest):
 
     MEMENTO_DATETIME_NOT_PARSABLE = "Memento datetime not parsable"
 
+    _test_report: LinkHeaderMementoTestReport
+
+    def __init__(self):
+        super().__init__()
+        self._test_report = LinkHeaderMementoTestReport(
+            name=self._name(),
+            description=self._description,
+            report_status=TestReport.REPORT_FAIL,
+            tests=[]
+        )
+
+    def test(self, response: HttpResponse, resource_type: ResourceType = ResourceType.ORIGINAL) -> \
+            LinkHeaderMementoTestReport:
+        # Just for typing support
+        return typing.cast(LinkHeaderMementoTestReport,
+                           super(LinkHeaderMementoTest, self).test(response, resource_type))
+
     def _test_timegate(self, response: HttpResponse) -> TestReport:
         # Same tests as for memento
         return self._test_memento(response)
@@ -49,6 +68,7 @@ class LinkHeaderMementoTest(LinkHeaderTest):
         else:
             self.add_test_result(TestResult(name=LinkHeaderMementoTest.MEMENTO_PRESENT, status=TestResult.TEST_PASS))
             memento_uris = list(map(lambda x: x['link'], mementos))
+            self._test_report.memento_uris = memento_uris
 
             if memento_uri in memento_uris:
                 self.add_test_result(TestResult(name=LinkHeaderMementoTest.SELECTED_MEMENTO_IN_LINK,
@@ -74,5 +94,21 @@ class LinkHeaderMementoTest(LinkHeaderTest):
                                                     status=TestResult.TEST_FAIL))
 
             self._test_report.report_status = TestReport.REPORT_PASS
+
+            try:
+                mementos.sort(key=lambda x: parser.parse(x['datetime']))
+                timemaps = response.search_link_headers("timemap")
+
+                if not timemaps:
+                    print("No timemap link present")
+
+                else:
+                    http(timemaps[0]['link'])
+
+            #         Check partial timemap
+            # If not partial timemap then check first lasks
+
+            except:
+                print("Cannot sort mementos found")
 
         return self._test_report

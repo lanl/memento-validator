@@ -74,6 +74,8 @@ class TestReport:
         self.report_status = report_status
         self.description = description
         self.name = name
+        if tests is None:
+            tests = []
         self.tests = tests
 
     def result(self) -> str:
