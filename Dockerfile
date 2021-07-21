@@ -1,6 +1,5 @@
-LABEL   maintainer="Bhanuka Mahanama <bhanuka@lanl.gov>"
-
 FROM node:14.15.5
+COPY . .
 WORKDIR ./
 RUN sh make-static.sh
 COPY static ./staic
