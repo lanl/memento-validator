@@ -23,6 +23,8 @@ class App {
 
     private successTemplate: string;
 
+    private followTemplate: string;
+
     private submitButton: HTMLButtonElement;
 
     initialize(){
@@ -36,6 +38,7 @@ class App {
         this.resultElement = document.getElementById("result");
         this.errorTemplate = document.getElementById("errorTemplate").innerHTML;
         this.successTemplate = document.getElementById("successTemplate").innerHTML;
+        this.followTemplate = document.getElementById("followTemplate").innerHTML;
 
         this.submitButton = document.getElementById("submit") as HTMLButtonElement;
         this.submitButton.addEventListener("click", () => {this.submit();});
@@ -82,15 +85,22 @@ class App {
 
     }
 
-    public showResult(data: object){
+    public showResult(data: {follow: object,}){
 
         if( data.hasOwnProperty("errors")){
             let source = Handlebars.compile(this.errorTemplate)
             this.resultElement.innerHTML = source(this.errorTemplate, {data: data});
         }
         else{
-            let source = Handlebars.compile(this.successTemplate);
-            this.resultElement.innerHTML = source({data: data});
+            let mainSource = Handlebars.compile(this.successTemplate);
+            let followHtml = ""
+            for( const followType of Object.keys(data.follow)){
+                followHtml = data.follow[followType].reduce((accumulator, data) => {
+                    let followSource = Handlebars.compile(this.followTemplate);
+                    return accumulator + followSource({data: data, type: followType});
+                }, followHtml);
+            }
+            this.resultElement.innerHTML = mainSource({data: data})+ followHtml;
         }
     }
 
