@@ -146,7 +146,7 @@ class TimeGateRedirectTest(BaseTest):
             self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_FUTURE_RETURN_302,
                                             status=TestResult.TEST_PASS))
 
-            mementos = assert_connection.get_response().search_link_headers("memento")
+            # mementos = assert_connection.get_response().search_link_headers("memento")
             self._test_report.report_status = TestReport.REPORT_PASS
             # TODO sort mementos and check
 
