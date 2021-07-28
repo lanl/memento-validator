@@ -72,35 +72,40 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
 
         return self._test_report
 
-    def _test_memento(self, response: HttpResponse) -> TestReport:
+    def _test_memento(self, response: HttpResponse) -> LinkHeaderTimeMapTestReport:
+        return self._test_timegate(response)
 
-        timemaps = response.search_link_headers("timemap")
+        # Duplicate code - test same as timegate
+        # timemaps = response.search_link_headers("timemap")
+        #
+        # if not len(timemaps):
+        #     self.add_test_result(
+        #         TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT, status=TestResult.TEST_WARN))
+        #     self._test_report.report_status = TestReport.REPORT_WARN
+        # else:
+        #     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
+        #     timemap: dict
+        #     for timemap in timemaps:
+        #         # TODO : add matching content type
+        #         if "type" in timemap.keys() and timemap["type"] == "application/link-format":
+        #             self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_PRESENT,
+        #                                             status=TestResult.TEST_PASS))
+        #             self._test_report.report_status = TestReport.REPORT_PASS
+        #             self._test_report.time_map_uris.append(timemap['link'])
+        #         else:
+        #             self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_NOT_PRESENT))
+        #
+        # return self._test_report
 
-        if not len(timemaps):
-            self.add_test_result(
-                TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT, status=TestResult.TEST_WARN))
-            self._test_report.report_status = TestReport.REPORT_WARN
-        else:
-            self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
-            timemap: dict
-            for timemap in timemaps:
-                # TODO : add matching content type
-                if "type" in timemap.keys() and timemap["type"] == "application/link-format":
-                    self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_PRESENT,
-                                                    status=TestResult.TEST_PASS))
-                    self._test_report.report_status = TestReport.REPORT_PASS
-                    self._test_report.time_map_uris.append(timemap['link'])
-                else:
-                    self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_NOT_PRESENT))
+    def _test_original(self, response: HttpResponse) -> LinkHeaderTimeMapTestReport:
+        return self._test_timegate(response)
 
-        return self._test_report
-
-    def _test_original(self, response: HttpResponse) -> TestReport:
-        if not len(response.search_link_headers("timemap")):
-            self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT))
-            self._test_report.report_status = TestReport.REPORT_FAIL
-        else:
-            self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
-            self._test_report.report_status = TestReport.REPORT_PASS
-
-        return self._test_report
+        # Duplicate code - tests same as timegate
+        # if not len(response.search_link_headers("timemap")):
+        #     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT))
+        #     self._test_report.report_status = TestReport.REPORT_FAIL
+        # else:
+        #     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
+        #     self._test_report.report_status = TestReport.REPORT_PASS
+        #
+        # return self._test_report
