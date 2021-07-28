@@ -55,9 +55,9 @@ if __name__ == '__main__':
                 if validator is None:
                     print("Invalid resource type")
                 else:
-                    reports = validator.validate(**test_params)
+                    result = validator.validate(**test_params)
 
-                    html_report = generate_html(test_params, reports)
+                    html_report = generate_html(test_params, result.reports)
 
                     if not html_report == "" and "email" in tests_node.attrib.keys():
                         emails = tests_node.attrib["email"].split(",")
@@ -69,6 +69,6 @@ if __name__ == '__main__':
                         "type": resource_type,
                         "params": test_params,
                         "pipeline": validator.name(),
-                        "results": [report.to_json() for report in reports]
+                        "results": [report.to_json() for report in result.reports]
                     }, output_file, ensure_ascii=False, indent=4)
             output_file.close()
