@@ -3,7 +3,8 @@ Memento validator toolkit lets you validate your memento implementation.
 Toolkit includes
 1. Web API
 2. Web GUI
-3. Validation CLI
+3. CLI Toolset
+4. Python API
 
 ## 1. Web API
 
@@ -51,21 +52,59 @@ $ export FLASK_APP=mementoweb/validator/web/server.py
 $ flask run
 ```
 
-## Web Front-end
+## 2. Web GUI
 
-## Python API
+### Installation Instructions
+
+## 3. CLI Toolset
+
+CLI tool provides easy access to mementoweb toolset.
+```shell
+python main.py [OPTIONS] COMMAND [ARGS]
+```
+
+### Daily validator
+
+```shell
+python main.py daily [OPTIONS]
+
+Options:
+  --env TEXT  Location of the .env configuration
+  --help      Show help message and exit.
+```
+
+### Resource validator
+
+```shell
+python main.py cli [OPTIONS]
+
+Options:
+  --uri TEXT                      URI of the resource
+  --type [original|memento|timemap|timegate]
+                                  Type of resource
+  --date TEXT                     Date Time for testing the resource
+  --follow BOOLEAN                Follow up tests or not
+  --help                          Show this message and exit.
+
+```
+
+## 4. Python API
 You can use python API to run single tests, selected pipelines, extend tests, extend pipelines,
-write customized tests, customized pipelines. To use Python API first install you need to install 
-**mementoweb** package. 
+write customized tests, customized pipelines. To use Python API first install you need to install
+**mementoweb** package.
 
 1. Install with PIP
 ```shell
 pip install https://github.com/mahanama94/memento-validator
+
+# or
+
+pip install path/to/package/directory
 ```
 
 2. Import into your application
 ```python
-# main.py
+# test.py
 
 from mementoweb.validator.tests.uri_test import URITest
 
@@ -82,14 +121,12 @@ python test.py
 
 ```
 
-### Installation Instructions
+## Documentations
 
-## CLI Tool
-
-## Package Installation (ADD)
-
-## Documentation
-
+| | |
+|--- |--- |
+| API Documentation| https://github.com/mahanama94/memento-validator#1-web-api |
+| Package Documentation | http://labs.mementoweb.org/validator/docs/ |
 ### API Documentation
 
 ### Package Documentation
@@ -104,4 +141,14 @@ $ make html
 
 ```shell
 $ firefox build/html/index.html
+```
+
+### Docker 
+
+```shell
+docker build -t web-validator .
+```
+
+```shell
+docker run -dp 9000:9000 web-validator
 ```
