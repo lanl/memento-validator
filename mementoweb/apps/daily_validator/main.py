@@ -1,10 +1,11 @@
 import json
 import xml.etree.ElementTree as ElementTree
 from typing import Union
+
 from dotenv import dotenv_values
 
 from mementoweb.apps.daily_validator.email_client import Email
-from mementoweb.apps.daily_validator.report import generate_html
+from mementoweb.apps.daily_validator.email_report_generator import HTMLReportGenerator
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.pipelines.memento import Memento
 from mementoweb.validator.pipelines.original import Original
@@ -32,10 +33,15 @@ if __name__ == '__main__':
     email_username: str = config.get("email-username", "username")
     email_password: str = config.get("email-password", "password")
 
+    master_emails: str = config.get("master-emails", "prototeam@googlegroups.com")
+
     email_server = Email(username=email_username, password=email_password)
 
     tree = ElementTree.parse(archive_list_path)
     root = tree.getroot()
+
+    report_generator = HTMLReportGenerator()
+    master_report = ""
 
     links = root.findall(".//link")
     for link in links:
@@ -57,7 +63,9 @@ if __name__ == '__main__':
                 else:
                     result = validator.validate(**test_params)
 
-                    html_report = generate_html(test_params, result.reports)
+                    html_report = report_generator.generate(test_params, result, name)
+                    master_report = master_report + report_generator.generate(test_params, result, name,
+                                                                              encapsulate_html=False)
 
                     if not html_report == "" and "email" in tests_node.attrib.keys():
                         emails = tests_node.attrib["email"].split(",")
@@ -72,3 +80,7 @@ if __name__ == '__main__':
                         "results": [report.to_json() for report in result.reports]
                     }, output_file, ensure_ascii=False, indent=4)
             output_file.close()
+
+
+    email_server.send_email(receiver=master_emails.split(","), subject="Daily Validator Report",
+                            html_message=report_generator._html_start_text + master_report + report_generator._html_end_text)

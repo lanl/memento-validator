@@ -20,7 +20,7 @@
                 un-rewritten-api-url="uri/uri-pattern where an un-rewritten version of the memento could be obtained."
                 access-policy="public/private; if the archive is accessible to the public or not"
                 memento-status="yes/no; does the archive natively support memento or not" />
-    <tests>
+    <tests email="email addresses to notify seperated by ,user1@gmail.com,user2@gmail.como">
         <test type="timegate|timemap|memento|original" datetime="" uri="uri for the validation">
     </tests>
 
@@ -39,7 +39,7 @@
         <calendar uri="https://web.archive.org/web/*/"/>
         <memento uri="https://web.archive.org/web/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="https://web.archive.org/web/{timestamp}id_/{url}" access-policy="public" memento-status="yes"/>
-        <tests email="mahanama94@gmail.com,mahanama94@hotmail.com">
+        <tests email="mahanama94@gmail.com,mahanama94@hotmail.com,bhanuka@cs.odu.edu">
             <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="https://web.archive.org/web/http://mementoweb.org/"/>
         </tests>
     </link>
