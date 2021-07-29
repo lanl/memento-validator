@@ -17,7 +17,8 @@ COPY --from=node ../static ./static
 WORKDIR .
 RUN pip install -r requirements.txt
 
-RUN sphinx-build docs/source mementoweb/ -b html
+RUN sphinx-apidoc -o docs/source mementoweb/
+RUN sphinx-build docs/source docs/build/html -b html
 RUN mkdir static/docs
 RUN cp -r docs/build/html/* static/docs/
 
