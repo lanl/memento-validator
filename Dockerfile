@@ -1,14 +1,27 @@
-FROM node:14.15.5
+FROM node:14.15.5 as node
 COPY . .
-WORKDIR ./
-RUN sh make-static.sh
-COPY static ./staic
+WORKDIR ./web-validator
 
-FROM    python:3.7
+RUN rm -rf static
+RUN mkdir ../static
 
+RUN rm -rf dist/
+RUN npm run build
+RUN mkdir ../static/app
+RUN cp -r dist/* ../static/app/
+
+
+FROM    python:3.9
 COPY . .
+COPY --from=node ../static ./static
+WORKDIR .
 RUN pip install -r requirements.txt
+
+RUN sphinx-build docs/source mementoweb/ -b html
+RUN mkdir static/docs
+RUN cp -r docs/build/html/* static/docs/
+
 RUN pip install gunicorn
 
-CMD     ["gunicorn", "--bind=0.0.0.0:9000", "mementoweb.validator.web.server:app"]
+CMD ["gunicorn", "--bind=0.0.0.0:9000", "mementoweb.validator.web.server:app"]
 
