@@ -6,6 +6,7 @@ RUN rm -rf static
 RUN mkdir ../static
 
 RUN rm -rf dist/
+RUN npm install
 RUN npm run build
 RUN mkdir ../static/app
 RUN cp -r dist/* ../static/app/
