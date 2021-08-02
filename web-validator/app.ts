@@ -19,6 +19,8 @@ class App {
 
     private resultElement: HTMLElement;
 
+    private loadingTemplate: string;
+
     private errorTemplate: string;
 
     private successTemplate: string;
@@ -36,6 +38,7 @@ class App {
         this.fullTMCheckElement = document.getElementById("inputTMFullCheck") as HTMLInputElement;
 
         this.resultElement = document.getElementById("result");
+        this.loadingTemplate = document.getElementById("loadingTemplate").innerText;
         this.errorTemplate = document.getElementById("errorTemplate").innerHTML;
         this.successTemplate = document.getElementById("successTemplate").innerHTML;
         this.followTemplate = document.getElementById("followTemplate").innerHTML;
@@ -49,6 +52,13 @@ class App {
                 return args[0] === expression;
             });
         });
+
+        Handlebars.registerHelper('title-case', function(value){
+            return value
+                .split(' ')
+                .map(s => s[0].toUpperCase() + s.substr(1).toLowerCase())
+                .join(' ')
+        })
     }
 
     public submit(){
@@ -68,6 +78,8 @@ class App {
         };
 
         this.submitButton.disabled = true;
+        let source = Handlebars.compile(this.loadingTemplate);
+        this.resultElement.innerHTML = source(this.loadingTemplate, {});
 
         axios.get(config.apiPath,{
             params: requestParams
@@ -77,19 +89,18 @@ class App {
                 this.showResult(result.data)
             },
             error => {
-                console.log(error);
-                this.showError();
+                this.showError([{type: error.message, description: "Connection Error"}]);
             });
+
 
         return true;
 
     }
 
-    public showResult(data: {follow: object,}){
+    public showResult(data: {follow: object,errors: Array<object>}){
 
         if( data.hasOwnProperty("errors")){
-            let source = Handlebars.compile(this.errorTemplate)
-            this.resultElement.innerHTML = source(this.errorTemplate, {data: data});
+            this.showError(data.errors);
         }
         else{
             let mainSource = Handlebars.compile(this.successTemplate);
@@ -106,8 +117,9 @@ class App {
         }
     }
 
-    public showError(){
-        this.requestDateElement.innerHTML = "Error, Please try again."
+    public showError(errors){
+        let source = Handlebars.compile(this.errorTemplate);
+        this.resultElement.innerHTML = source({data: {errors: errors}});
     }
 }
 

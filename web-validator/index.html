@@ -112,18 +112,21 @@
         </div>
     </div>
     <script id="errorTemplate" type="x-tmpl-mustache">
-        {{#data.errors}}
+        <div class="card">
+            <div class="card-header">
+                Errors
+            </div>
             <div class="list-group">
-                <div href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="d-flex w-100 justify-content-between">
-                        <p class="mb-1">{{ description }}</p>
-                        <small>{{ type }}</small>
+                {{#data.errors}}
+                    <div href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                            <p class="mb-1">{{ title-case description }}</p>
+                            <small>{{ title-case type }}</small>
+                        </div>
                     </div>
-                    <small>And some small print.</small>
-                </div>
-                <br>
-             </div>
-        {{/data.errors}}
+                {{/data.errors}}
+            </div>
+        </div>
     </script>
 
     <script id="successTemplate" type="x-tmpl-mustache">
@@ -196,6 +199,20 @@
             </ul>
         </div>
         <br>
+    </script>
+
+    <script id="loadingTemplate" type="x-tmpl-mustache">
+        <div class="card text-center">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-grow text-secondary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <br>
+                <strong>Loading ... </strong>
+            </body>
+        </body>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="app.ts"></script>
