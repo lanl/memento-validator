@@ -93,12 +93,14 @@ class App {
         }
         else{
             let mainSource = Handlebars.compile(this.successTemplate);
-            let followHtml = ""
-            for( const followType of Object.keys(data.follow)){
-                followHtml = data.follow[followType].reduce((accumulator, data) => {
-                    let followSource = Handlebars.compile(this.followTemplate);
-                    return accumulator + followSource({data: data, type: followType});
-                }, followHtml);
+            let followHtml = "";
+            if(data.follow){
+                for( const followType of Object.keys(data.follow)){
+                    followHtml = data.follow[followType].reduce((accumulator, data) => {
+                        let followSource = Handlebars.compile(this.followTemplate);
+                        return accumulator + followSource({data: data, type: followType});
+                    }, followHtml);
+                }
             }
             this.resultElement.innerHTML = mainSource({data: data})+ followHtml;
         }

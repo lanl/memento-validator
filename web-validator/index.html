@@ -127,6 +127,23 @@
     </script>
 
     <script id="successTemplate" type="x-tmpl-mustache">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row">URI</th>
+                    <td>{{ data.uri }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Datetime</th>
+                    <td>{{ data.datetime }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Type</th>
+                    <td>{{ data.type }}</td>
+                </tr>
+            </tbody>
+        </table>
+
         {{#data.result.reports}}
             <div class="list-group">
                 <div href="#" class="list-group-item list-group-item-action" aria-current="true">
