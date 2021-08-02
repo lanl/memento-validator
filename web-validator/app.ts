@@ -2,7 +2,7 @@ import axios from "axios";
 import * as Handlebars from "handlebars"
 
 const config = {
-    apiPath: "http://labs.mementoweb.org/validator/",
+    apiPath: "/",
     // apiPath: "http://localhost:5000/"
 };
 
