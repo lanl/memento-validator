@@ -14,7 +14,8 @@ RUN cp -r dist/* ../static/app/
 
 FROM    python:3.9
 COPY . .
-COPY --from=node ../static ./static
+WORKDIR .
+COPY --from=node ./static ./static
 WORKDIR .
 RUN pip install -r requirements.txt
 
