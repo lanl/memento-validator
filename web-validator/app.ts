@@ -1,9 +1,11 @@
 import axios from "axios";
 import * as Handlebars from "handlebars"
+import dotenv from "dotenv";
 
-const config = {
-    apiPath: "/validator/",
-    // apiPath: "http://localhost:5000/"
+dotenv.config();
+
+let config = {
+    apiPath: process.env.API_PATH
 };
 
 class App {
