@@ -2,7 +2,7 @@ import axios from "axios";
 import * as Handlebars from "handlebars"
 
 const config = {
-    apiPath: "/",
+    apiPath: "/validator/",
     // apiPath: "http://localhost:5000/"
 };
 
@@ -89,6 +89,7 @@ class App {
                 this.showResult(result.data)
             },
             error => {
+                this.submitButton.disabled = false;
                 this.showError([{type: error.message, description: "Connection Error"}]);
             });
 
