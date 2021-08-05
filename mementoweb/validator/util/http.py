@@ -35,7 +35,7 @@ class HttpResponse:
         self.status = response.status
         self.body = response.read().decode('utf-8')
 
-    def search_link_headers(self, relationship: str):
+    def search_link_headers(self, relationship: str) -> [LinkParserResult]:
         try:
             if self._link_headers is None:
                 self._link_headers = self.link_parser.parse(self.get_headers("Link"))

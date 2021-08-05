@@ -1,6 +1,6 @@
 from mementoweb.validator.errors.header_errors import HeaderTypeNotFoundError
 from mementoweb.validator.errors.uri_errors import HttpConnectionFailError, InvalidUriError, HttpRequestFailError
-from mementoweb.validator.http import HttpConnection, http, HttpResponse
+from mementoweb.validator.util.http import HttpConnection, http, HttpResponse
 from mementoweb.validator.tests.test import BaseTest, TestResult
 from mementoweb.validator.tests.test import TestReport
 

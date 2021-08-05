@@ -3,7 +3,7 @@ from typing import List
 
 from dateutil import parser
 
-from mementoweb.validator.http import HttpResponse, http
+from mementoweb.validator.util.http import HttpResponse, http
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
 from mementoweb.validator.tests.test import TestReport, TestResult
 from mementoweb.validator.types import ResourceType
@@ -67,7 +67,7 @@ class LinkHeaderMementoTest(LinkHeaderTest):
                 TestResult(name=LinkHeaderMementoTest.MEMENTO_NOT_PRESENT, status=TestResult.TEST_FAIL))
         else:
             self.add_test_result(TestResult(name=LinkHeaderMementoTest.MEMENTO_PRESENT, status=TestResult.TEST_PASS))
-            memento_uris = list(map(lambda x: x['link'], mementos))
+            memento_uris = list(map(lambda x: x.uri, mementos))
             self._test_report.memento_uris = memento_uris
 
             if memento_uri in memento_uris:
@@ -79,11 +79,11 @@ class LinkHeaderMementoTest(LinkHeaderTest):
                                                 status=TestResult.TEST_WARN))
 
             for memento in mementos:
-                if memento["datetime"]:
+                if memento.datetime:
                     self.add_test_result(TestResult(LinkHeaderMementoTest.MEMENTO_DATETIME_PRESENT,
                                                     status=TestResult.TEST_PASS))
                     try:
-                        parser.parse(memento["datetime"])
+                        parser.parse(memento.datetime)
                         self.add_test_result(TestResult(LinkHeaderMementoTest.MEMENTO_DATETIME_PARSABLE,
                                                         status=TestResult.TEST_PASS))
                     except:
@@ -96,14 +96,14 @@ class LinkHeaderMementoTest(LinkHeaderTest):
             self._test_report.report_status = TestReport.REPORT_PASS
 
             try:
-                mementos.sort(key=lambda x: parser.parse(x['datetime']))
+                mementos.sort(key=lambda x: parser.parse(x.datetime))
                 timemaps = response.search_link_headers("timemap")
 
                 if not timemaps:
                     print("No timemap link present")
 
                 else:
-                    http(timemaps[0]['link'])
+                    http(timemaps[0].uri)
 
             #         Check partial timemap
             # If not partial timemap then check first lasks

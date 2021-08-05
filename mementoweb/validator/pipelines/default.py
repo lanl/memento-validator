@@ -6,11 +6,11 @@ from mementoweb.validator.tests.test import TestReport
 class PipelineResult:
     reports: List[TestReport] = []
 
-    timemaps: List[str] = None
+    timemaps: List[str] = []
 
-    timegates: List[str] = None
+    timegates: List[str] = []
 
-    mementos: List[str] = None
+    mementos: List[str] = []
 
     def to_json(self):
         return {

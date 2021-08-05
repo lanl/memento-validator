@@ -1,5 +1,5 @@
 from mementoweb.validator.errors.uri_errors import HttpConnectionFailError, InvalidUriError, HttpRequestFailError
-from mementoweb.validator.http import HttpConnection, http
+from mementoweb.validator.util.http import HttpConnection, http
 from mementoweb.validator.tests.test import BaseTest, TestResult
 from mementoweb.validator.tests.test import TestReport
 
