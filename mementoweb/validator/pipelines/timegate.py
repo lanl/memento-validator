@@ -1,4 +1,4 @@
-from mementoweb.validator.http import HttpConnection, http
+from mementoweb.validator.util.http import http
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.pipelines.default import PipelineResult
 from mementoweb.validator.tests.header_test import HeaderTest

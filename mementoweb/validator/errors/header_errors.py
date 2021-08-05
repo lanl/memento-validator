@@ -12,3 +12,7 @@ class LinkHeaderNotFoundError(Exception):
 
 class HeaderParseError(Exception):
     pass
+
+
+class LinkHeaderParseError(Exception):
+    pass

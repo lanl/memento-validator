@@ -1,4 +1,4 @@
-from mementoweb.validator.http import HttpConnection
+from mementoweb.validator.util.http import HttpConnection
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.pipelines.default import PipelineResult
 from mementoweb.validator.tests.content_negotiation_test import ContentNegotiationTest

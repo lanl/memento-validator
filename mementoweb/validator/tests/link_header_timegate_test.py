@@ -1,7 +1,7 @@
 import typing
 from typing import List
 
-from mementoweb.validator.http import HttpResponse
+from mementoweb.validator.util.http import HttpResponse
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
 from mementoweb.validator.tests.test import TestReport, TestResult
 from mementoweb.validator.types import ResourceType
@@ -57,7 +57,7 @@ class LinkHeaderTimeGateTest(LinkHeaderTest):
         else:
             self.add_test_result(TestResult(name=LinkHeaderTimeGateTest.TIMEGATE_PRESENT, status=TestResult.TEST_PASS))
 
-            self._test_report.time_gate_uris = [timegate_uri['link'] for timegate_uri in timegate_uris]
+            self._test_report.time_gate_uris = [timegate_uri.uri for timegate_uri in timegate_uris]
 
         return self._test_report
 

@@ -3,7 +3,7 @@ from typing_extensions import Literal
 from mementoweb.validator.errors.header_errors import HeaderTypeNotFoundError, HeadersNotFoundError, HeaderParseError, \
     LinkHeaderNotFoundError
 from mementoweb.validator.errors.uri_errors import HttpRequestFailError, InvalidUriError, HttpConnectionFailError
-from mementoweb.validator.http import http, HttpConnection
+from mementoweb.validator.util.http import http, HttpConnection
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
 
 

@@ -1,5 +1,5 @@
 from mementoweb.validator.errors.header_errors import HeaderTypeNotFoundError
-from mementoweb.validator.http import HttpResponse
+from mementoweb.validator.util.http import HttpResponse
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
 
 """

@@ -1,7 +1,7 @@
 from typing import List
 
 from mementoweb.validator import util
-from mementoweb.validator.http import HttpConnection, http
+from mementoweb.validator.util.http import HttpConnection, http
 from mementoweb.validator.tests.test import BaseTest, TestReport
 
 

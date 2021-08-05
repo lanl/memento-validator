@@ -1,7 +1,7 @@
 import typing
 from typing import List
 
-from mementoweb.validator.http import HttpResponse
+from mementoweb.validator.util.http import HttpResponse
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
 from mementoweb.validator.tests.test import TestReport, TestResult
 from mementoweb.validator.types import ResourceType
@@ -59,10 +59,10 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
             self.add_test_result(TestResult(LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
 
             for timemap in timemaps:
-                if timemap['type'] == "application/link-format":
+                if timemap.link_type == "application/link-format":
                     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_PRESENT,
                                                     status=TestResult.TEST_PASS))
-                    self._test_report.time_map_uris.append(timemap['link'])
+                    self._test_report.time_map_uris.append(timemap.uri)
 
             if not self._test_report.time_map_uris:
                 # We dont have any valid time map uris -> Fail the report

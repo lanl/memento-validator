@@ -1,4 +1,3 @@
-import re
 from http.client import HTTPConnection, HTTPSConnection, HTTPResponse
 from typing import List
 from urllib.parse import ParseResult, urlparse
@@ -6,6 +5,7 @@ from urllib.parse import ParseResult, urlparse
 from mementoweb.validator.errors.header_errors import HeadersNotFoundError, LinkHeaderNotFoundError, \
     HeaderTypeNotFoundError, HeaderParseError
 from mementoweb.validator.errors.uri_errors import HttpRequestFailError, HttpConnectionFailError, InvalidUriError
+from mementoweb.validator.util.link_parser import LinkParser, RegexLinkParser, LinkParserResult
 
 """
     
@@ -20,9 +20,13 @@ class HttpResponse:
 
     _headers = None
 
+    _link_headers: [LinkParserResult] = None
+
     status = None
 
     body = None
+
+    link_parser: LinkParser = RegexLinkParser()
 
     def __init__(self, response: HTTPResponse = None, uri=""):
         self.uri = uri
@@ -31,10 +35,12 @@ class HttpResponse:
         self.status = response.status
         self.body = response.read().decode('utf-8')
 
-    def search_link_headers(self, relationship: str):
+    def search_link_headers(self, relationship: str) -> [LinkParserResult]:
         try:
-            self._link_headers = self._parse_link_headers(self.get_headers("Link"))
-            return [x for x in self._link_headers if x['relationship'] == relationship]
+            if self._link_headers is None:
+                self._link_headers = self.link_parser.parse(self.get_headers("Link"))
+            # self._link_headers = self._parse_link_headers(self.get_headers("Link"))
+            return [x for x in self._link_headers if x.relationship == relationship]
         except HeadersNotFoundError:
             raise HeadersNotFoundError()
         except HeaderTypeNotFoundError:
@@ -57,42 +63,41 @@ class HttpResponse:
         return self.body
 
     def parse_body(self):
-        return self._parse_link_headers(self.body.replace("\n", ""))
+        return self.link_parser.parse(self.body.replace("\n", ""))
 
-    @staticmethod
-    def _parse_link_headers(link_header: str) -> List:
-        link_header = link_header.strip()
-
-        _link_headers = []
-
-        split_point = re.compile("[,]\s*[<]")
-
-        link_header_splits = [x.replace('>', '').replace('<', '') for x in split_point.split(link_header)]
-        # link_header_splits = [x.replace('>', '').replace('<', '') for x in link_header.split(', <')]
-
-        for item in link_header_splits:
-            # relationship is mandatory
-            relationships = re.findall('((?<=rel=")[^"]*)', item)
-
-            # Append only if theres relationship
-            if relationships:
-                link = item.split(";")[0]
-                relationships = relationships[0].strip().split(" ")
-                for relationship in relationships:
-
-                    type = (re.findall('((?<=type=")[^"]*)', item) or [None])[0]
-                    datetime = (re.findall('((?<=datetime=")[^"]*)', item) or [None])[0]
-                    lic = (re.findall('((?<=license=")[^"]*)', item) or [None])[0]
-
-                    _link_headers.append({
-                        "link": link,
-                        "relationship": relationship,
-                        "type": type,
-                        "datetime": datetime,
-                        "license": lic
-                    })
-
-        return _link_headers
+    # @staticmethod
+    # def _parse_link_headers(link_header: str) -> List:
+    #     link_header = link_header.strip()
+    #
+    #     _link_headers = []
+    #
+    #     split_point = re.compile("[,]\s*[<]")
+    #
+    #     link_header_splits = [x.replace('>', '').replace('<', '') for x in split_point.split(link_header)]
+    #     # link_header_splits = [x.replace('>', '').replace('<', '') for x in link_header.split(', <')]
+    #
+    #     for item in link_header_splits:
+    #         # relationship is mandatory
+    #         relationships = re.findall('((?<=rel=")[^"]*)', item)
+    #
+    #         # Append only if theres relationship
+    #         if relationships:
+    #             link = item.split(";")[0]
+    #             relationships = relationships[0].strip().split(" ")
+    #             for relationship in relationships:
+    #                 type = (re.findall('((?<=type=")[^"]*)', item) or [None])[0]
+    #                 datetime = (re.findall('((?<=datetime=")[^"]*)', item) or [None])[0]
+    #                 lic = (re.findall('((?<=license=")[^"]*)', item) or [None])[0]
+    #
+    #                 _link_headers.append({
+    #                     "link": link,
+    #                     "relationship": relationship,
+    #                     "type": type,
+    #                     "datetime": datetime,
+    #                     "license": lic
+    #                 })
+    #
+    #     return _link_headers
 
 
 class HttpConnection:

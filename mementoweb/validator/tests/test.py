@@ -2,7 +2,7 @@ from typing import List
 
 from typing_extensions import TypedDict
 
-from mementoweb.validator.http import HttpConnection
+from mementoweb.validator.util.http import HttpConnection
 
 
 class TestResult:

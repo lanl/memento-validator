@@ -1,7 +1,7 @@
 from typing import Dict, Callable
 
 from mementoweb.validator.errors.header_errors import HeadersNotFoundError
-from mementoweb.validator.http import HttpResponse
+from mementoweb.validator.util.http import HttpResponse
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
 from mementoweb.validator.types import ResourceType
 
