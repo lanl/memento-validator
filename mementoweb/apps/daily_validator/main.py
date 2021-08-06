@@ -26,8 +26,8 @@ def _get_validator(validator_type: str) -> Union[DefaultPipeline, None]:
     return None
 
 
-if __name__ == '__main__':
-    config = dotenv_values("daily-validator.env")
+def run(file_name = "daily-validator.env"):
+    config = dotenv_values(file_name)
     archive_list_path: str = config.get("config", "config.xml")
 
     email_username: str = config.get("email-username", "username")
