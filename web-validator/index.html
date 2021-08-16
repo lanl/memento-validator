@@ -130,50 +130,55 @@
     </script>
 
     <script id="successTemplate" type="x-tmpl-mustache">
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <th scope="row">URI</th>
-                    <td>{{ data.uri }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Datetime</th>
-                    <td>{{ data.datetime }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Type</th>
-                    <td>{{ data.type }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row">URI</th>
+                            <td>{{ data.uri }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Datetime</th>
+                            <td>{{ data.datetime }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Type</th>
+                            <td>{{ data.type }}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        {{#data.result.reports}}
-            <div class="list-group">
-                <div href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h4 class="mb-1">{{ name }}</h4>
-                    </div>
-                    <p class="mb-1">{{ description }}</p>
-                    <small>{{ source }}</small>
-                </div>
-                {{#tests}}
-                    {{#if (equal result 'Pass') }}
-                        <div href="#" class="list-group-item list-group-item-action text-success" aria-current="true">
-                    {{else if (equal result 'Warn') }}
-                        <div href="#" class="list-group-item list-group-item-action text-warning" aria-current="true">
-                    {{else }}
-                        <div href="#" class="list-group-item list-group-item-action text-danger" aria-current="true">
-                    {{/if}}
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1">{{ name }}</h6>
-                            <h6>{{ result }}</h6>
+                {{#data.result.reports}}
+                    <div class="list-group">
+                        <div href="#" class="list-group-item list-group-item-action" aria-current="true">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h4 class="mb-1">{{ name }}</h4>
+                            </div>
+                            <p class="mb-1">{{ description }}</p>
+                            <small>{{ source }}</small>
                         </div>
-                        <p class="mb-1">{{ description }}</p>
+                        {{#tests}}
+                            {{#if (equal result 'Pass') }}
+                                <div href="#" class="list-group-item list-group-item-action text-success" aria-current="true">
+                            {{else if (equal result 'Warn') }}
+                                <div href="#" class="list-group-item list-group-item-action text-warning" aria-current="true">
+                            {{else }}
+                                <div href="#" class="list-group-item list-group-item-action text-danger" aria-current="true">
+                            {{/if}}
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">{{ name }}</h6>
+                                    <h6>{{ result }}</h6>
+                                </div>
+                                <p class="mb-1">{{ description }}</p>
+                            </div>
+                        {{/tests}}
+                        <br>
                     </div>
-                {{/tests}}
-                <br>
+                {{/data.result.reports}}
             </div>
-        {{/data.result.reports}}
+        </div>
+        <br>
     </script>
 
     <script id="followTemplate" type="x-tmpl-mustache">
