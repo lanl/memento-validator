@@ -12,16 +12,24 @@ class LinkParserResult:
 
     title: str = ""
 
+    link_from: str = ""
+
+    link_until: str = ""
+
     def __init__(self, uri: str = "",
                  relationship: str = "",
                  link_type: str = "",
                  datetime: str = "",
-                 title: str = ""):
+                 title: str = "",
+                 link_from: str = "",
+                 link_until: str = ""):
         self.uri = uri
         self.relationship = relationship
         self.datetime = datetime
         self.link_type = link_type
         self.title = title
+        self.link_from = link_from
+        self.link_until = link_until
 
 
 class LinkParser:
@@ -53,16 +61,16 @@ class RegexLinkParser(LinkParser):
             # Append only if theres relationship
             if relationships:
                 link = item.split(";")[0]
-                relationships = relationships[0].strip().split(" ")
-                for relationship in relationships:
-                    link_type = (re.findall('((?<=type=")[^"]*)', item) or [""])[0]
-                    datetime = (re.findall('((?<=datetime=")[^"]*)', item) or [""])[0]
-                    # License needed ??
-                    # lic = (re.findall('((?<=license=")[^"]*)', item) or [""])[0]
+                relationship = relationships[0].strip()
 
-                    _link_parser_result.append(
-                        LinkParserResult(uri=link, relationship=relationship, datetime=datetime, link_type=link_type)
-                    )
+                link_type = (re.findall('((?<=type=")[^"]*)', item) or [""])[0]
+                datetime = (re.findall('((?<=datetime=")[^"]*)', item) or [""])[0]
+                # License needed ??
+                # lic = (re.findall('((?<=license=")[^"]*)', item) or [""])[0]
+
+                _link_parser_result.append(
+                    LinkParserResult(uri=link, relationship=relationship, datetime=datetime, link_type=link_type)
+                )
 
         return _link_parser_result
 
