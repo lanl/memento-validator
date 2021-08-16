@@ -19,32 +19,32 @@ class TestResult:
 
     TEST_INFO: int = 0
 
-    name: str
+    _name: str
 
-    status: int
+    _status: int
 
-    description: str
+    _description: str
 
     def __init__(self, name: str = "", status: int = TEST_FAIL, description: str = ""):
-        self.name = name
-        self.description = description
-        self.status = status
+        self._name = name
+        self._description = description
+        self._status = status
 
     def result(self) -> str:
-        if self.status == self.TEST_PASS:
+        if self._status == self.TEST_PASS:
             return "Pass"
-        if self.status == self.TEST_INFO:
+        if self._status == self.TEST_INFO:
             return "Info"
-        if self.status == self.TEST_WARN:
+        if self._status == self.TEST_WARN:
             return "Warn"
         else:
             return "Fail"
 
     def to_json(self):
         return {
-            "name": self.name,
-            "description": self.description,
-            "status": self.status,
+            "name": self._name,
+            "description": self._description,
+            "status": self._status,
             "result": self.result()
         }
 

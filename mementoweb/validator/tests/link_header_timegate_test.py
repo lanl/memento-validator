@@ -4,15 +4,14 @@ from typing import List
 from mementoweb.validator.util.http import HttpResponse
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
 from mementoweb.validator.tests.test import TestReport, TestResult
-from mementoweb.validator.types import ResourceType
+from mementoweb.validator.validator_types import ResourceType
 
 
 class LinkHeaderTimeGateTestReport(TestReport):
     time_gate_uris: List[str] = []
 
     def __init__(self, time_gate_uris=None, *args, **kwargs):
-        # super(LinkHeaderTimeGateTest, self).__init__(*args, **kwargs)
-        super().__init__()
+        super(LinkHeaderTimeGateTestReport, self).__init__(*args, **kwargs)
         if time_gate_uris is None:
             time_gate_uris = []
         self.time_gate_uris = time_gate_uris

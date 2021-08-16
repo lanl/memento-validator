@@ -3,7 +3,7 @@ from typing import Dict, Callable
 from mementoweb.validator.errors.header_errors import LinkHeaderNotFoundError, HeadersNotFoundError
 from mementoweb.validator.util.http import HttpResponse
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
-from mementoweb.validator.types import ResourceType
+from mementoweb.validator.validator_types import ResourceType
 
 
 class LinkHeaderTest(BaseTest):

@@ -4,7 +4,7 @@ from typing import List
 from mementoweb.validator.util.http import HttpResponse
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
 from mementoweb.validator.tests.test import TestReport, TestResult
-from mementoweb.validator.types import ResourceType
+from mementoweb.validator.validator_types import ResourceType
 
 
 class LinkHeaderTimeMapTestReport(TestReport):

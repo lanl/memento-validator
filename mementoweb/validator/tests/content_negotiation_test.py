@@ -7,12 +7,17 @@ from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
 """
 
 
+# TODO: rephrase the content negotation
+
 class ContentNegotiationTest(BaseTest):
     HEADERS_NOT_PRESENT = "Headers not present"
 
     CONTENT_NEGOTIATION_HEADERS_NOT_PRESENT = "Resource does not support content negotiation"
 
     CONTENT_NEGOTIATION_HEADERS_PRESENT = "Resource supports content negotiation"
+
+    def __init__(self):
+        super(ContentNegotiationTest, self).__init__()
 
     def test(self, response: HttpResponse) -> TestReport:
 
