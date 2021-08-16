@@ -76,13 +76,16 @@ class Memento(DefaultPipeline):
         self.result.reports.append(LinkHeaderOriginalTest().test(response=connection.get_response(),
                                                                  resource_type=ResourceType.MEMENTO))
 
-        self.result.reports.append(LinkHeaderTimeGateTest().test(response=connection.get_response(),
-                                                                 resource_type=ResourceType.MEMENTO))
-
-        self.result.reports.append(LinkHeaderTimeMapTest().test(response=connection.get_response(),
-                                                                resource_type=ResourceType.MEMENTO))
-
         self.result.reports.append(LinkHeaderMementoTest().test(response=connection.get_response(),
                                                                 resource_type=ResourceType.MEMENTO))
+        lh_tm_report = LinkHeaderTimeMapTest().test(response=connection.get_response(), resource_type=ResourceType.MEMENTO)
+
+        lh_tg_report = LinkHeaderTimeGateTest().test(response=connection.get_response(), resource_type=ResourceType.MEMENTO)
+        self.result.reports.extend([
+            lh_tm_report, lh_tg_report
+        ])
+
+        self.result.timemaps = lh_tm_report.time_map_uris
+        self.result.timegates = lh_tg_report.time_gate_uris
 
         return self.result

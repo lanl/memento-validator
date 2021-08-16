@@ -8,7 +8,7 @@ from mementoweb.validator.tests.link_header_timemap_test import LinkHeaderTimeMa
 from mementoweb.validator.tests.test import TestReport
 from mementoweb.validator.tests.timegate_redirect_test import TimeGateRedirectTest
 from mementoweb.validator.tests.uri_test import URITest
-from mementoweb.validator.types import ResourceType
+from mementoweb.validator.validator_types import ResourceType
 
 
 class TimeGate(DefaultPipeline):

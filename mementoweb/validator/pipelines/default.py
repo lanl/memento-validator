@@ -4,13 +4,19 @@ from mementoweb.validator.tests.test import TestReport
 
 
 class PipelineResult:
-    reports: List[TestReport] = []
+    reports: List[TestReport]
 
-    timemaps: List[str] = []
+    timemaps: List[str]
 
-    timegates: List[str] = []
+    timegates: List[str]
 
-    mementos: List[str] = []
+    mementos: List[str]
+
+    def __init__(self):
+        self.reports = []
+        self.timemaps = []
+        self.timegates = []
+        self.mementos = []
 
     def to_json(self):
         return {
