@@ -131,7 +131,7 @@
 
     <script id="successTemplate" type="x-tmpl-mustache">
         <div class="card">
-            <div class="card-body">
+            <div class="card-header">
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
@@ -148,7 +148,9 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
 
+            <div class="card-body">
                 {{#data.result.reports}}
                     <div class="list-group">
                         <div href="#" class="list-group-item list-group-item-action" aria-current="true">
