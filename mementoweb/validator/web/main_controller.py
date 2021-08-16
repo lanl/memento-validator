@@ -8,7 +8,6 @@ from mementoweb.validator.pipelines.timemap import TimeMap
 
 
 class MainController:
-
     _original: Original
 
     _memento: Memento
@@ -87,12 +86,21 @@ class MainController:
     def _handle_memento(self, uri, datetime):
         result = self._memento.validate(uri, datetime)
 
+        follow = request.args.get("followLinks") or False
+
+        follow_tests = dict()
+        if follow == 'true':
+            follow_tests['timegate'] = [self._follow_timegate(timegate, datetime) for timegate in result.timegates]
+
+            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime)for timemap in result.timemaps]
+
         return {
             "type": "memento",
             "uri": uri,
             "datetime": datetime,
-            "pipeline": self._timegate.name(),
-            "result": result.to_json()
+            "pipeline": self._memento.name(),
+            "result": result.to_json(),
+            "follow": follow_tests
         }
 
     def _handle_timegate(self, uri, datetime):
@@ -102,16 +110,10 @@ class MainController:
         follow = request.args.get("followLinks") or False
 
         follow_tests = dict()
-        if follow:
-            follow_tests['memento'] = [{"uri": memento,
-                                        "datetime": datetime,
-                                        "result": self._memento.validate(memento, datetime).to_json()}
-                                       for memento in result.mementos]
+        if follow == 'true':
+            follow_tests['memento'] = [self._follow_memento(memento, datetime) for memento in result.mementos]
 
-            follow_tests['timemap'] = [{"uri": timemap,
-                                        "datetime": datetime,
-                                        "result": self._memento.validate(timemap, datetime).to_json()}
-                                       for timemap in result.timemaps]
+            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime) for timemap in result.timemaps]
 
         return {
             "type": "timegate",
@@ -140,15 +142,9 @@ class MainController:
 
         follow_tests = dict()
         if follow == 'true':
-            follow_tests['timegate'] = [{"uri": timegate,
-                                         "datetime": datetime,
-                                         "result": TimeGate().validate(timegate, datetime).to_json()}
-                                        for timegate in result.timegates]
+            follow_tests['timegate'] = [self._follow_timegate(timegate, datetime) for timegate in result.timegates]
 
-            follow_tests['timemap'] = [{"uri": timemap,
-                                        "datetime": datetime,
-                                        "result": TimeMap().validate(timemap, datetime).to_json()}
-                                       for timemap in result.timemaps]
+            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime) for timemap in result.timemaps]
 
         return {
             "type": "original",
@@ -158,6 +154,21 @@ class MainController:
             "result": result.to_json(),
             "follow": follow_tests
         }
+
+    def _follow_timemap(self, timemap, datetime):
+        return {"uri": timemap,
+                "datetime": datetime,
+                "result": TimeMap().validate(timemap, datetime).to_json()}
+
+    def _follow_timegate(self, timemap, datetime):
+        return {"uri": timemap,
+                "datetime": datetime,
+                "result": TimeGate().validate(timemap, datetime).to_json()}
+
+    def _follow_memento(self, timemap, datetime):
+        return {"uri": timemap,
+                "datetime": datetime,
+                "result": Memento().validate(timemap, datetime).to_json()}
 
 
 class RequestError(TypedDict):
