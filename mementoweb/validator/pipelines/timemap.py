@@ -29,7 +29,7 @@ class TimeMap(DefaultPipeline):
         self.result.reports.extend([
             TimeMapRedirectTest().test(connection=uri_result.connection),
             ContentTypeHeaderTest().test(response=uri_result.connection.get_response()),
-            TimeMapParseTest().test(connection=uri_result.connection)
+            TimeMapParseTest().test(connection=uri_result.connection, full_test=full)
         ])
 
         # redirect_result = TimeMapRedirectTest().test(connection=uri_result.connection)

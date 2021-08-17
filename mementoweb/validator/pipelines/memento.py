@@ -1,7 +1,7 @@
 from mementoweb.validator.util.http import HttpConnection
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.pipelines.default import PipelineResult
-from mementoweb.validator.tests.content_negotiation_test import ContentNegotiationTest
+from mementoweb.validator.tests.datetime_negotiation_test import DatetimeNegotiationTest
 from mementoweb.validator.tests.link_header_memento_test import LinkHeaderMementoTest
 from mementoweb.validator.tests.link_header_original_test import LinkHeaderOriginalTest
 from mementoweb.validator.tests.link_header_test import ResourceType
@@ -65,7 +65,7 @@ class Memento(DefaultPipeline):
         connection = redirection_report.connection or connection
 
         # Check for content negotiation. i.e memento-datetime
-        content_negotiation_report: TestReport = ContentNegotiationTest().test(uri_report.connection.get_response())
+        content_negotiation_report: TestReport = DatetimeNegotiationTest().test(uri_report.connection.get_response())
         self.result.reports.append(content_negotiation_report)
 
         # Check for link headers and validate, use the updated connection response if redirected

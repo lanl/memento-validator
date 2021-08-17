@@ -1,6 +1,6 @@
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.pipelines.default import PipelineResult
-from mementoweb.validator.tests.content_negotiation_test import ContentNegotiationTest
+from mementoweb.validator.tests.datetime_negotiation_test import DatetimeNegotiationTest
 from mementoweb.validator.tests.link_header_timegate_test import LinkHeaderTimeGateTest
 from mementoweb.validator.tests.link_header_timemap_test import LinkHeaderTimeMapTest
 from mementoweb.validator.tests.test import TestReport
@@ -30,7 +30,7 @@ class Original(DefaultPipeline):
         lh_tg_report = LinkHeaderTimeGateTest().test(response=uri_report.connection.get_response(),
                                                      resource_type=ResourceType.ORIGINAL)
 
-        content_negotiation_report = ContentNegotiationTest().test(response=uri_report.connection.get_response())
+        content_negotiation_report = DatetimeNegotiationTest().test(response=uri_report.connection.get_response())
 
         self.result.reports.extend([
             content_negotiation_report,
