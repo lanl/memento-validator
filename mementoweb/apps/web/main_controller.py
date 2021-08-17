@@ -68,13 +68,13 @@ class MainController:
         full_tm_check = _get_boolean_args("fullTMCheck")
 
         if request_type == "timegate":
-            return self._handle_timegate(uri, datetime, follow)
+            return self._handle_timegate(uri, datetime, follow, full_tm_check)
         elif request_type == "memento":
-            return self._handle_memento(uri, datetime, follow)
+            return self._handle_memento(uri, datetime, follow, full_tm_check)
         elif request_type == "timemap":
             return self._handle_timemap(uri, datetime, follow, full_tm_check)
         elif request_type == "original":
-            return self._handle_original(uri, datetime, follow)
+            return self._handle_original(uri, datetime, follow, full_tm_check)
         else:
             errors.append({
                 "type": "invalid parameters",
@@ -97,14 +97,14 @@ class MainController:
         #     "results": [report.to_json() for report in reports]
         # }
 
-    def _handle_memento(self, uri, datetime, follow):
+    def _handle_memento(self, uri, datetime, follow, full_tm_check):
         result = self._memento.validate(uri, datetime)
 
         follow_tests = dict()
         if follow:
             follow_tests['timegate'] = [self._follow_timegate(timegate, datetime) for timegate in result.timegates]
 
-            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime) for timemap in result.timemaps]
+            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime, full_tm_check) for timemap in result.timemaps]
 
         return {
             "type": "memento",
@@ -115,7 +115,7 @@ class MainController:
             "follow": follow_tests
         }
 
-    def _handle_timegate(self, uri, datetime, follow):
+    def _handle_timegate(self, uri, datetime, follow, full_tm_check):
 
         result = self._timegate.validate(uri, datetime)
 
@@ -123,7 +123,7 @@ class MainController:
         if follow:
             follow_tests['memento'] = [self._follow_memento(memento, datetime) for memento in result.mementos]
 
-            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime) for timemap in result.timemaps]
+            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime, full_tm_check) for timemap in result.timemaps]
 
         return {
             "type": "timegate",
@@ -145,14 +145,14 @@ class MainController:
             "result": result.to_json()
         }
 
-    def _handle_original(self, uri, datetime, follow):
+    def _handle_original(self, uri, datetime, follow, full_tm_check):
         result = Original().validate(uri, datetime)
 
         follow_tests = dict()
         if follow:
             follow_tests['timegate'] = [self._follow_timegate(timegate, datetime) for timegate in result.timegates]
 
-            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime) for timemap in result.timemaps]
+            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime, full_tm_check) for timemap in result.timemaps]
 
         return {
             "type": "original",
@@ -163,10 +163,10 @@ class MainController:
             "follow": follow_tests
         }
 
-    def _follow_timemap(self, timemap, datetime):
+    def _follow_timemap(self, timemap, datetime, full_tm_check):
         return {"uri": timemap,
                 "datetime": datetime,
-                "result": TimeMap().validate(timemap, datetime).to_json()}
+                "result": TimeMap().validate(timemap, datetime, full=full_tm_check).to_json()}
 
     def _follow_timegate(self, timemap, datetime):
         return {"uri": timemap,

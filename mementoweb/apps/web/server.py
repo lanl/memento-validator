@@ -3,7 +3,7 @@ import os
 from dotenv import dotenv_values
 from flask import Flask, jsonify, send_from_directory
 
-from mementoweb.validator.web.main_controller import MainController
+from mementoweb.apps.web.main_controller import MainController
 
 app = Flask(__name__, static_folder='', static_url_path='')
 
