@@ -131,7 +131,7 @@ class LinkHeaderMementoTest(LinkHeaderTest):
                     elif filtered_link.link_until and filtered_link.link_until != self._mementos[0].datetime:
                         partial_timemap = True
 
-                timemap_memento_links = list(filter(lambda x: re.findall('memento', x), timemap_body_links))
+                timemap_memento_links = list(filter(lambda x: re.findall('memento', x.relationship), timemap_body_links))
                 timemap_memento_links.sort(key=lambda x: parser.parse(x.datetime))
 
                 if not partial_timemap:

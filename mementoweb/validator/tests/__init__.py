@@ -1,1 +1,1 @@
-from .content_negotiation_test import ContentNegotiationTest
+from .datetime_negotiation_test import DatetimeNegotiationTest
