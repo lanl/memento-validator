@@ -26,5 +26,5 @@ RUN cp -r docs/build/html/* static/docs/
 
 RUN pip install gunicorn
 
-CMD ["gunicorn", "--bind=0.0.0.0:9000", "mementoweb.validator.web.server:app"]
+CMD ["gunicorn", "--bind=0.0.0.0:9000", "mementoweb.apps.web.server:app"]
 
