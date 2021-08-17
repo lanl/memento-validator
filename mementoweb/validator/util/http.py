@@ -1,3 +1,4 @@
+import re
 from http.client import HTTPConnection, HTTPSConnection, HTTPResponse
 from typing import List
 from urllib.parse import ParseResult, urlparse
@@ -35,12 +36,15 @@ class HttpResponse:
         self.status = response.status
         self.body = response.read().decode('utf-8')
 
-    def search_link_headers(self, relationship: str) -> [LinkParserResult]:
+    def search_link_headers(self, relationship: str, regex=False) -> [LinkParserResult]:
         try:
             if self._link_headers is None:
                 self._link_headers = self.link_parser.parse(self.get_headers("Link"))
             # self._link_headers = self._parse_link_headers(self.get_headers("Link"))
-            return [x for x in self._link_headers if x.relationship == relationship]
+            if not regex:
+                return [x for x in self._link_headers if x.relationship == relationship]
+            else:
+                return list(filter(lambda x: re.findall(relationship, x.relationship), self._link_headers))
         except HeadersNotFoundError:
             raise HeadersNotFoundError()
         except HeaderTypeNotFoundError:
