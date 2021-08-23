@@ -131,11 +131,12 @@ class LinkHeaderMementoTest(LinkHeaderTest):
                     elif filtered_link.link_until and filtered_link.link_until != self._mementos[0].datetime:
                         partial_timemap = True
 
-                timemap_memento_links = list(filter(lambda x: re.findall('memento', x.relationship), timemap_body_links))
+                timemap_memento_links = list(
+                    filter(lambda x: re.findall('memento', x.relationship), timemap_body_links))
                 timemap_memento_links.sort(key=lambda x: parser.parse(x.datetime))
 
-                if not partial_timemap:
-                    if self._mementos[0].uri == timemap_memento_links[0].uri:
+                if not partial_timemap and len(self._mementos) > 0:
+                    if len(timemap_memento_links) > 0 and self._mementos[0].uri == timemap_memento_links[0].uri:
                         self.add_test_result(TestResult(LinkHeaderMementoTest.FIRST_MEMENTO_MATCHES_TIMEMAP_FIRST,
                                                         status=TestResult.TEST_PASS))
                     else:
@@ -143,7 +144,7 @@ class LinkHeaderMementoTest(LinkHeaderTest):
                             LinkHeaderMementoTest.FIRST_MEMENTO_DOES_NOT_MATCH_TIMEMAP_FIRST,
                             status=TestResult.TEST_WARN))
 
-                    if self._mementos[-1].uri == timemap_memento_links[-1].uri:
+                    if len(timemap_memento_links) > 0 and self._mementos[-1].uri == timemap_memento_links[-1].uri:
                         self.add_test_result(TestResult(LinkHeaderMementoTest.LAST_MEMENTO_MATCHES_TIMEMAP_LAST,
                                                         status=TestResult.TEST_PASS))
                     else:

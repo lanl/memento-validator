@@ -40,6 +40,9 @@ class TestResult:
         else:
             return "Fail"
 
+    def name(self):
+        return self._name
+
     def to_json(self):
         return {
             "name": self._name,
