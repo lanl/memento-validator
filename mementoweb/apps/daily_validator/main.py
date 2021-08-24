@@ -29,6 +29,7 @@ def _get_validator(validator_type: str) -> Union[DefaultPipeline, None]:
 
 
 def run(file_name="daily-validator.env"):
+    logging.basicConfig(level=logging.INFO)
     if not os.path.exists(file_name):
         logging.warning(file_name + " not found. Loading from default values.")
 
@@ -64,12 +65,12 @@ def run(file_name="daily-validator.env"):
     links = root.findall(".//link")
     for link in links:
         name = link.get("longname")
-        logging.info("Archive: " + name)
+        logging.info("Starting tests for archive: " + name)
         tests_node = link.find(".//tests")
 
         if tests_node:
             test_info_nodes = tests_node.findall(".//test")
-            output_file = open("out/" + name + ".json", "w")
+            # output_file = open("out/" + name + ".json", "w")
             for test_info in test_info_nodes:
 
                 resource_type = test_info.attrib.pop("type")
@@ -92,13 +93,14 @@ def run(file_name="daily-validator.env"):
                                                 subject=name + " - Daily Validator Report -",
                                                 html_message=html_report)
                         logging.info("Email notifications sent to : " + ",".join(emails))
-                    json.dump({
-                        "type": resource_type,
-                        "params": test_params,
-                        "pipeline": validator.name(),
-                        "results": [report.to_json() for report in result.reports]
-                    }, output_file, ensure_ascii=False, indent=4)
-            output_file.close()
+            #         json.dump({
+            #             "type": resource_type,
+            #             "params": test_params,
+            #             "pipeline": validator.name(),
+            #             "results": [report.to_json() for report in result.reports]
+            #         }, output_file, ensure_ascii=False, indent=4)
+            # output_file.close()
 
+        logging.info("Tests completed for archive: " + name)
     email_server.send_email(receiver=master_emails.split(","), subject="Daily Validator Report",
                             html_message=report_generator._html_start_text + master_report + report_generator._html_end_text)

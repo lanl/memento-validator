@@ -42,7 +42,7 @@ class SecureEmail(Email):
     _server = None
 
     def __init__(self, host="localhost", port=0, username="", password=""):
-        super().__init__(host, port)
+        super().__init__()
         try:
             self._server = smtplib.SMTP_SSL(host, port)
             self._server.login(username, password)
