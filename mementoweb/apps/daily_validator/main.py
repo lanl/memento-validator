@@ -33,7 +33,7 @@ def run(file_name="daily-validator.env"):
     email_server: Email
 
     email_host: str = config.get("email-host", "localhost")
-    email_port: int = config.get("email-port", 0)
+    email_port: int = int(config.get("email-port", 0))
 
     secure_email: bool = strtobool(config.get("secure-email", False))
     if secure_email:
