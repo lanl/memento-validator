@@ -36,14 +36,14 @@ class HTMLReportGenerator:
                  start_text: str = ""):
 
         filtered_reports: List[TestReport] = \
-            list(filter(lambda report: any(test.status == TestResult.TEST_FAIL for test in report.tests), result.reports))
+            list(filter(lambda report: any(test._status == TestResult.TEST_FAIL for test in report.tests), result.reports))
 
         if len(filtered_reports) == 0:
             return ""
         start_text = "<h3>" + name + "</h3>"
 
         for filtered_report in filtered_reports:
-            filtered_report.tests = list(filter(lambda test: test.status == TestResult.TEST_FAIL, filtered_report.tests))
+            filtered_report.tests = list(filter(lambda test: test._status == TestResult.TEST_FAIL, filtered_report.tests))
             start_text += self._report_to_html(filtered_report)
 
         if len(test_parameters) > 0:
@@ -71,7 +71,7 @@ class HTMLReportGenerator:
     def _test_to_html(self, test: TestResult):
         return """
         <tr>
-            <td>""" + test.name + """</td>
+            <td>""" + test.name() + """</td>
             <td>""" + test.result() + """</td>
         </tr>
         """
