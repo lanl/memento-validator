@@ -1,10 +1,12 @@
 import json
 import xml.etree.ElementTree as ElementTree
 from typing import Union
+import logging
+import os
 
 from dotenv import dotenv_values
 from distutils.util import strtobool
-from mementoweb.apps.daily_validator.email_client import Email, SecureEmail, UnsecureEmail
+from mementoweb.apps.daily_validator.email_client import Email, SecureEmail, UnsecureEmail, EmailServerError
 from mementoweb.apps.daily_validator.email_report_generator import HTMLReportGenerator
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.pipelines.memento import Memento
@@ -27,7 +29,11 @@ def _get_validator(validator_type: str) -> Union[DefaultPipeline, None]:
 
 
 def run(file_name="daily-validator.env"):
+    if not os.path.exists(file_name):
+        logging.warning(file_name + " not found. Loading from default values.")
+
     config = dotenv_values(file_name)
+
     archive_list_path: str = config.get("config", "config.xml")
 
     email_server: Email
@@ -35,13 +41,17 @@ def run(file_name="daily-validator.env"):
     email_host: str = config.get("email-host", "localhost")
     email_port: int = int(config.get("email-port", 0))
 
-    secure_email: bool = strtobool(config.get("secure-email", False))
-    if secure_email:
-        email_username: str = config.get("email-username", "username")
-        email_password: str = config.get("email-password", "password")
-        email_server = SecureEmail(username=email_username, password=email_password, host=email_host, port=email_port)
-    else:
-        email_server = UnsecureEmail(port=email_port, host=email_host)
+    secure_email: bool = strtobool(config.get("secure-email", "False"))
+    try:
+        if secure_email:
+            email_username: str = config.get("email-username", "username")
+            email_password: str = config.get("email-password", "password")
+            email_server = SecureEmail(username=email_username, password=email_password, host=email_host, port=email_port)
+        else:
+            email_server = UnsecureEmail(port=email_port, host=email_host)
+    except EmailServerError:
+        logging.error("Unable to connect to email host " + email_host + " port " + str(email_port))
+        return
 
     master_emails: str = config.get("master-emails", "prototeam@googlegroups.com")
 
@@ -54,7 +64,7 @@ def run(file_name="daily-validator.env"):
     links = root.findall(".//link")
     for link in links:
         name = link.get("longname")
-        print("======================" + name + "======================")
+        logging.info("Archive: " + name)
         tests_node = link.find(".//tests")
 
         if tests_node:
@@ -67,8 +77,9 @@ def run(file_name="daily-validator.env"):
                 validator = _get_validator(resource_type)
 
                 if validator is None:
-                    print("Invalid resource type")
+                    logging.error("Invalid resource type " + resource_type + " for " + name)
                 else:
+                    logging.info("Testing" + resource_type + " with parameters " + test_params.__str__())
                     result = validator.validate(**test_params)
 
                     html_report = report_generator.generate(test_params, result, name)
@@ -80,7 +91,7 @@ def run(file_name="daily-validator.env"):
                         email_server.send_email(receiver=emails,
                                                 subject=name + " - Daily Validator Report -",
                                                 html_message=html_report)
-                        print("Email notifications sent to : " + ",".join(emails))
+                        logging.info("Email notifications sent to : " + ",".join(emails))
                     json.dump({
                         "type": resource_type,
                         "params": test_params,
