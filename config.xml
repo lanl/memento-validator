@@ -138,7 +138,7 @@
         <memento uri="http://wayback.archive-it.org/all/*/"/>
         <archive type="snapshot" rewritten-urls="yes" un-rewritten-api-url="http://wayback.archive-it.org/all/{timestamp}id_/{url}" access-policy="public" memento-status="yes"/>
         <tests>
-            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="ttp://wayback.archive-it.org/all/http://www.cia.gov" />
+            <test type="timegate" datetime="Thu, 10 Oct 2010 12:00:00 GMT" uri="http://wayback.archive-it.org/all/http://www.cia.gov" />
         </tests>
     </link>
     <link id="ukparliament" longname="UK Parliament Web Archive">

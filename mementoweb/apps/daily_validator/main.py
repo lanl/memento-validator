@@ -47,14 +47,15 @@ def run(file_name="daily-validator.env"):
         if secure_email:
             email_username: str = config.get("email-username", "username")
             email_password: str = config.get("email-password", "password")
-            email_server = SecureEmail(username=email_username, password=email_password, host=email_host, port=email_port)
+            email_server = SecureEmail(username=email_username, password=email_password, host=email_host,
+                                       port=email_port)
         else:
             email_server = UnsecureEmail(port=email_port, host=email_host)
     except EmailServerError:
         logging.error("Unable to connect to email host " + email_host + " port " + str(email_port))
         return
 
-    master_emails: str = config.get("master-emails", "prototeam@googlegroups.com")
+    master_emails: str = config.get("master-emails")
 
     tree = ElementTree.parse(archive_list_path)
     root = tree.getroot()
@@ -101,6 +102,8 @@ def run(file_name="daily-validator.env"):
             #         }, output_file, ensure_ascii=False, indent=4)
             # output_file.close()
 
-        logging.info("Tests completed for archive: " + name)
-    email_server.send_email(receiver=master_emails.split(","), subject="Daily Validator Report",
-                            html_message=report_generator._html_start_text + master_report + report_generator._html_end_text)
+        logging.info("Ending tests for archive: " + name)
+
+    if master_emails is not None:
+        email_server.send_email(receiver=master_emails.split(","), subject="Daily Validator Report",
+                                html_message=report_generator._html_start_text + master_report + report_generator._html_end_text)
