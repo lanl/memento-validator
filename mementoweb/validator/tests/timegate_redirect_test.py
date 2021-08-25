@@ -44,9 +44,9 @@ class TimeGateRedirectTest(BaseTest):
 
     TIMEGATE_BLANK_INVALID_RETURN = "Timegate does not return 302/200 for blank Accept-Datetime"
 
-    TIMEGATE_BROKEN_VALID_RETURN = "TimeGate returns 302 for broken datetime"
+    TIMEGATE_BROKEN_VALID_RETURN = "TimeGate returns 400 for broken datetime"
 
-    TIMEGATE_BROKEN_INVALID_RETURN = "Timegate does not return 302/ 200 for broken datetime"
+    TIMEGATE_BROKEN_INVALID_RETURN = "Timegate does not return 400 for broken datetime"
 
     REDIRECT_THRESH_PASSED = "Redirect threshold passed"
 
