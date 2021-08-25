@@ -9,7 +9,7 @@ Toolkit includes
 ## 1. Web API
 
 You can either host the web API locally (for testing local URIs), or can use 
-the hosted instance at `http://labs.mementoweb.org/validator/`.
+the LANL hosted instance at `http://labs.mementoweb.org/validator/`.
 
 ### API Specification
 
