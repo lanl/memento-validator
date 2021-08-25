@@ -40,13 +40,13 @@ class TimeGateRedirectTest(BaseTest):
 
     TIMEGATE_PAST_INVALID_RETURN = "Timegate does not return 302 for datetime in past"
 
-    TIMEGATE_BROKEN_RETURN_400 = "TimeGate returns 400 for broken datetime"
+    TIMEGATE_BLANK_VALID_RETURN = "TimeGate returns 200 or redirect for blank Accept-Datetime"
 
-    TIMEGATE_BROKEN_INVALID_RETURN = "Timegate does not return 400 for broken datetime"
+    TIMEGATE_BLANK_INVALID_RETURN = "Timegate does not return 302/200 for blank Accept-Datetime"
 
-    TIMEGATE_BLANK_RETURN_302 = "TimeGate returns 302 for broken datetime"
+    TIMEGATE_BROKEN_VALID_RETURN = "TimeGate returns 302 for broken datetime"
 
-    TIMEGATE_BLANK_INVALID_RETURN = "Timegate does not return 302/ 200 for broken datetime"
+    TIMEGATE_BROKEN_INVALID_RETURN = "Timegate does not return 302/ 200 for broken datetime"
 
     REDIRECT_THRESH_PASSED = "Redirect threshold passed"
 
@@ -104,7 +104,7 @@ class TimeGateRedirectTest(BaseTest):
             self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BROKEN_INVALID_RETURN,
                                             status=TestResult.TEST_FAIL))
         else:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BROKEN_RETURN_400,
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BROKEN_VALID_RETURN,
                                             status=TestResult.TEST_PASS))
             self._test_report.report_status = TestReport.REPORT_PASS
 
@@ -224,11 +224,11 @@ class TimeGateRedirectTest(BaseTest):
         response = assert_connection.get_response()
         response_status: int = response.status
 
-        if response_status != 302:
+        if response_status != 302 or response_status != 200:
             self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_INVALID_RETURN,
                                             status=TestResult.TEST_FAIL))
         else:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_RETURN_302,
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_VALID_RETURN,
                                             status=TestResult.TEST_PASS))
             self._test_report.report_status = TestReport.REPORT_PASS
 
