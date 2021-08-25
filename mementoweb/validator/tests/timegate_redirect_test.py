@@ -182,7 +182,7 @@ class TimeGateRedirectTest(BaseTest):
 
             # Check and test redirection location
             try:
-                redirect_location = response.get_headers("location")
+                redirect_location = response.get_headers("Location")
                 connection = http(redirect_location, datetime=datetime)
                 response_status = connection.get_response().status
                 self.add_test_result(
@@ -220,6 +220,32 @@ class TimeGateRedirectTest(BaseTest):
 
     def _blank(self, assert_connection):
         self._test_report.name += "-blank"
+
+        response = assert_connection.get_response()
+        response_status: int = response.status
+
+        if response_status != 302 or response_status != 200:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_INVALID_RETURN,
+                                            status=TestResult.TEST_FAIL))
+        else:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_VALID_RETURN,
+                                            status=TestResult.TEST_PASS))
+            self._test_report.report_status = TestReport.REPORT_PASS
+
+            # mementos = assert_connection.get_response().search_link_headers("memento")
+            # TODO sort mementos and check
+
+        return self._test_report
+
+
+class TimeGateBlankRedirectTest(TimeGateRedirectTest):
+
+    def test(self, connection: HttpConnection,
+             datetime: str,
+             test_type=Literal["future", "past", "broken", "normal", "blank"],
+             assert_connection: HttpConnection = None,
+             redirect_threshold: int = 5
+             ) -> TimeGateRedirectTestReport:
 
         response = assert_connection.get_response()
         response_status: int = response.status
