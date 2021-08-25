@@ -21,6 +21,8 @@ class App {
 
     private resultElement: HTMLElement;
 
+    private jsonResponseElement: HTMLElement;
+
     private loadingTemplate: string;
 
     private errorTemplate: string;
@@ -30,6 +32,8 @@ class App {
     private followTemplate: string;
 
     private submitButton: HTMLButtonElement;
+
+    private viewJSONButton: HTMLButtonElement;
 
     initialize(){
 
@@ -44,8 +48,11 @@ class App {
         this.errorTemplate = document.getElementById("errorTemplate").innerHTML;
         this.successTemplate = document.getElementById("successTemplate").innerHTML;
         this.followTemplate = document.getElementById("followTemplate").innerHTML;
+        this.jsonResponseElement = document.getElementById("jsonResponse");
 
         this.submitButton = document.getElementById("submit") as HTMLButtonElement;
+        this.viewJSONButton = document.getElementById("viewJson") as HTMLButtonElement;
+
         this.submitButton.addEventListener("click", () => {this.submit();});
 
         Handlebars.registerHelper('equal', function () {
@@ -80,6 +87,8 @@ class App {
         };
 
         this.submitButton.disabled = true;
+        this.viewJSONButton.disabled = true;
+
         let source = Handlebars.compile(this.loadingTemplate);
         this.resultElement.innerHTML = source(this.loadingTemplate, {});
 
@@ -88,6 +97,7 @@ class App {
         }).then(
             result => {
                 this.submitButton.disabled = false;
+                this.viewJSONButton.disabled = false;
                 this.showResult(result.data)
             },
             error => {
@@ -101,6 +111,8 @@ class App {
     }
 
     public showResult(data: {follow: object,errors: Array<object>}){
+
+        this.jsonResponseElement.innerHTML = JSON.stringify(data, null, 2).trim();
 
         if( data.hasOwnProperty("errors")){
             this.showError(data.errors);
