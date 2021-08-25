@@ -7,14 +7,15 @@ from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
 """
 
 
-# TODO: rephrase the content negotation
-
 class DatetimeNegotiationTest(BaseTest):
-    HEADERS_NOT_PRESENT = "Headers not present"
 
-    CONTENT_NEGOTIATION_HEADERS_NOT_PRESENT = "Resource does not support content negotiation"
+    _description = "Tests for the Datetime negotiation capabilities using through Memento-Datetime headers."
 
-    CONTENT_NEGOTIATION_HEADERS_PRESENT = "Resource supports content negotiation"
+    HEADERS_NOT_PRESENT = "Response headers not present"
+
+    CONTENT_NEGOTIATION_HEADERS_NOT_PRESENT = "Resource does not support datetime negotiation"
+
+    CONTENT_NEGOTIATION_HEADERS_PRESENT = "Resource supports datetime negotiation"
 
     def __init__(self):
         super(DatetimeNegotiationTest, self).__init__()

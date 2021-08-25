@@ -6,7 +6,7 @@ from mementoweb.validator.tests.link_header_memento_test import LinkHeaderMement
 from mementoweb.validator.tests.link_header_original_test import LinkHeaderOriginalTest
 from mementoweb.validator.tests.link_header_timemap_test import LinkHeaderTimeMapTest
 from mementoweb.validator.tests.test import TestReport
-from mementoweb.validator.tests.timegate_redirect_test import TimeGateRedirectTest
+from mementoweb.validator.tests.timegate_redirect_test import TimeGateRedirectTest, TimeGateBlankRedirectTest
 from mementoweb.validator.tests.uri_test import URITest
 from mementoweb.validator.validator_types import ResourceType
 
@@ -67,10 +67,10 @@ class TimeGate(DefaultPipeline):
                                                     resource_type=ResourceType.TIMEGATE)
         lh_mem_report = LinkHeaderMementoTest().test(response=redirect_report.connection.get_response(),
                                                      resource_type=ResourceType.TIMEGATE)
-        blank_redirection_report = TimeGateRedirectTest().test(connection=redirect_report.connection,
-                                                               test_type="blank",
-                                                               datetime="",
-                                                               assert_connection=http(uri, datetime=""))
+        blank_redirection_report = TimeGateBlankRedirectTest().test(connection=redirect_report.connection,
+                                                                    test_type="blank",
+                                                                    datetime="",
+                                                                    assert_connection=http(uri, datetime=""))
 
         past_redirect_report = TimeGateRedirectTest().test(connection=redirect_report.connection,
                                                            test_type="past",

@@ -23,6 +23,9 @@ class LinkHeaderTimeGateTestReport(TestReport):
 
 
 class LinkHeaderTimeGateTest(LinkHeaderTest):
+
+    _description = "Tests for the compliance of Link header timegate relation."
+
     TIMEGATE_PRESENT = "Timegate link present"
 
     TIMEGATE_NOT_PRESENT = "Timegate link present"

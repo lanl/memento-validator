@@ -32,7 +32,7 @@ class URITest(BaseTest):
 
     CONNECTION_FAIL: str = "Could not connect to URI"
 
-    _description = "Tests for the validity of the URI of the resource including validity and connectivity"
+    _description = "Tests for the validity of the URI of the resource including validity and connectivity."
 
     _test_report: URITestReport
 

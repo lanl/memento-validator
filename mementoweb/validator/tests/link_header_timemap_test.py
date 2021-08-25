@@ -23,6 +23,9 @@ class LinkHeaderTimeMapTestReport(TestReport):
 
 
 class LinkHeaderTimeMapTest(LinkHeaderTest):
+
+    _description = "Tests the compliance of Link header timemap relation."
+
     TIMEMAP_PRESENT = "Timemap link present"
 
     TIMEMAP_NOT_PRESENT = "Timemap link not present"

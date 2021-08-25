@@ -224,7 +224,7 @@ class TimeGateRedirectTest(BaseTest):
         response = assert_connection.get_response()
         response_status: int = response.status
 
-        if response_status != 302 or response_status != 200:
+        if not (response_status == 302 or response_status == 200):
             self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_INVALID_RETURN,
                                             status=TestResult.TEST_FAIL))
         else:
@@ -250,13 +250,13 @@ class TimeGateBlankRedirectTest(TimeGateRedirectTest):
         response = assert_connection.get_response()
         response_status: int = response.status
 
-        if response_status != 302 or response_status != 200:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_INVALID_RETURN,
-                                            status=TestResult.TEST_FAIL))
-        else:
+        if response_status == 302 or response_status == 200:
             self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_VALID_RETURN,
                                             status=TestResult.TEST_PASS))
             self._test_report.report_status = TestReport.REPORT_PASS
+        else:
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_INVALID_RETURN,
+                                            status=TestResult.TEST_FAIL))
 
             # mementos = assert_connection.get_response().search_link_headers("memento")
             # TODO sort mementos and check

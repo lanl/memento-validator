@@ -28,7 +28,7 @@ class MementoRedirectTest(BaseTest):
 
     INVALID_MEMENTO_STATUS: str = "Memento does not contain status 200, 204, or 206"
 
-    _description = "Tests for the memento redirection. Checks for any redirection and tests for the validity"
+    _description = "Tests for the memento redirection. Checks for any redirection and tests for the validity."
 
     _test_report: MementoRedirectTestReport
 

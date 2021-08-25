@@ -21,6 +21,9 @@ class LinkHeaderMementoTestReport(TestReport):
 
 
 class LinkHeaderMementoTest(LinkHeaderTest):
+
+    _description = "Tests for the compliance of Link header memento relation."
+
     MEMENTO_NOT_PRESENT = "Memento link not present"
 
     MEMENTO_PRESENT = "Memento link present"

@@ -4,6 +4,9 @@ from mementoweb.validator.tests.test import TestReport, TestResult
 
 
 class LinkHeaderOriginalTest(LinkHeaderTest):
+
+    _description = "Tests for the compliance of Link header original relation."
+
     ORIGINAL_NOT_PRESENT = "Original link not present"
 
     ORIGINAL_PRESENT = "Original link present"
