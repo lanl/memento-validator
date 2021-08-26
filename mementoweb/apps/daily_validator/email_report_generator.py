@@ -1,3 +1,16 @@
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 from typing import List
 
 from mementoweb.validator.pipelines.default import PipelineResult
@@ -5,6 +18,12 @@ from mementoweb.validator.tests.test import TestReport, TestResult
 
 
 class HTMLReportGenerator:
+    """
+
+        Functions and methods for generating HTML report from a given Memento Validator report.
+
+    """
+
     _html_start_text = """
         <!DOCTYPE html>
         <html>

@@ -1,3 +1,16 @@
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 import logging
 import os
 import xml.etree.ElementTree as ElementTree
@@ -30,6 +43,15 @@ def _get_validator(validator_type: str) -> Union[DefaultPipeline, None]:
 
 
 def run(file_name="daily-validator.env"):
+    """
+
+    Provides an entry point for the Daily Validator interface. Used by the command line tool or when invoked.
+
+    :param file_name: File containing the configurations for the daily validator.
+    :return: None
+
+    """
+
     logging.basicConfig(level=logging.INFO)
     if not os.path.exists(file_name):
         logging.warning(file_name + " not found. Loading from default values.")
