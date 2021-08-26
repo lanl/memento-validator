@@ -1,3 +1,16 @@
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 from flask import request
 from typing_extensions import TypedDict
 
@@ -18,6 +31,11 @@ def _get_boolean_args(param, default=False):
 
 
 class MainController:
+    """
+
+        Includes functions and attributes for the main controller responsible for the Memento validator HTTP API.
+
+    """
     _original: Original
 
     _memento: Memento
@@ -33,6 +51,13 @@ class MainController:
         self._timegate = TimeGate()
 
     def main(self):
+        """
+
+        Performs validation based on the parameters received in the request. (Includes testing for the parameters)
+
+        :return: dict containing errors or response from the validation process.
+
+        """
         errors: [RequestError] = []
 
         request_type = request.args.get("type")
@@ -84,18 +109,6 @@ class MainController:
         return {
             "errors": errors
         }
-        # dict_reports = {report.name: report for report in reports}
-        # time_gate_report: TimeGateRedirectTestReport = dict_reports.get(TimeGateRedirectTest()._name())
-        #
-        #
-        # print("test")
-        # return {
-        #     "type": request_type,
-        #     "uri": uri,
-        #     "datetime": datetime,
-        #     "pipeline": validator.name(),
-        #     "results": [report.to_json() for report in reports]
-        # }
 
     def _handle_memento(self, uri, datetime, follow, full_tm_check):
         result = self._memento.validate(uri, datetime)
@@ -104,7 +117,8 @@ class MainController:
         if follow:
             follow_tests['timegate'] = [self._follow_timegate(timegate, datetime) for timegate in result.timegates]
 
-            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime, full_tm_check) for timemap in result.timemaps]
+            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime, full_tm_check) for timemap in
+                                       result.timemaps]
 
         return {
             "type": "memento",
@@ -123,7 +137,8 @@ class MainController:
         if follow:
             follow_tests['memento'] = [self._follow_memento(memento, datetime) for memento in result.mementos]
 
-            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime, full_tm_check) for timemap in result.timemaps]
+            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime, full_tm_check) for timemap in
+                                       result.timemaps]
 
         return {
             "type": "timegate",
@@ -152,7 +167,8 @@ class MainController:
         if follow:
             follow_tests['timegate'] = [self._follow_timegate(timegate, datetime) for timegate in result.timegates]
 
-            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime, full_tm_check) for timemap in result.timemaps]
+            follow_tests['timemap'] = [self._follow_timemap(timemap, datetime, full_tm_check) for timemap in
+                                       result.timemaps]
 
         return {
             "type": "original",
@@ -180,6 +196,11 @@ class MainController:
 
 
 class RequestError(TypedDict):
+    """
+
+        Used for typing for denoting errors in API requests.
+
+    """
     type: str
 
     description: str
