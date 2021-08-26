@@ -16,19 +16,14 @@ def docs(path):
     return send_from_directory(os.getcwd() + config.get("docs-dir", "/static/docs/"), path)
 
 
-@app.route("/api-docs/", defaults={'path': 'index.html'})
-@app.route("/api-docs/<path:path>")
-def api_docs(path):
-    return send_from_directory(os.getcwd() + config.get("api-docs-dir", "/static/api-docs/"), path)
+@app.route("/api")
+def main():
+    controller = MainController()
+    return jsonify(controller.main())
 
 
+@app.route("/", defaults={'path': 'index.html'})
 @app.route("/app/", defaults={'path': "index.html"})
 @app.route("/app/<path:path>")
 def webapp_static(path):
     return send_from_directory(os.getcwd() + config.get("app-dir", "/static/app/"), path)
-
-
-@app.route("/")
-def main():
-    controller = MainController()
-    return jsonify(controller.main())
