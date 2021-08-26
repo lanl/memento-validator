@@ -5,10 +5,26 @@
 
 Welcome to Mementoweb's documentation!
 ======================================
+The Mementoweb package/ services allows you to validate your Memento implementation.
+The toolkit includes a core validator library and a selection of applications built on it.
+
+
+.. image:: _static/validator-architecture.png
+   :alt: alternate text
+
+
+.. toctree::
+   :caption: Guides:
+
+   guides/http-api
+   guides/web-validator
+   guides/daily-validator
+   guides/validator-cli
+
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Python Package:
 
    modules
 
