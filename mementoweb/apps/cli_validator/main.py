@@ -1,7 +1,19 @@
-import os
-from pprint import pprint
-import textwrap
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 import click
+import textwrap
+
 
 from mementoweb.validator.pipelines import TimeGate, DefaultPipeline
 from mementoweb.validator.pipelines.memento import Memento
@@ -9,23 +21,16 @@ from mementoweb.validator.pipelines.original import Original
 from mementoweb.validator.pipelines.timemap import TimeMap
 
 
-class CliHandler:
-    _original: Original
-
-    _memento: Memento
-
-    _timemap: TimeMap
-
-    _timegate: TimeGate
-
-    def __init__(self):
-        self._original = Original()
-        self._memento = Memento()
-        self._timemap = TimeMap()
-        self._timegate = TimeGate()
-
-
 def run(uri, resource_type, datetime):
+    """
+
+    Provides entry point for the CLI-validator interface.
+    :param uri: URI of the resource being tested.
+    :param resource_type: Type of the resource (original, memento, timegate, or timemap)
+    :param datetime: Datetime for validating the resource (Should follow BNF format)
+    :return: None. Displays the results in the console.
+
+    """
 
     validator: DefaultPipeline = None
 
