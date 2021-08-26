@@ -1,3 +1,16 @@
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 import re
 from http.client import HTTPConnection, HTTPSConnection, HTTPResponse
 from typing import List
@@ -17,6 +30,12 @@ from mementoweb.validator.util.link_parser import LinkParser, RegexLinkParser, L
 
 
 class HttpResponse:
+    """
+
+        An adapter class for isolating urlib incase of future changes/ issues. Encapsulates HTTP response from an established
+        connection.
+
+    """
     _response: HTTPResponse = None
 
     _headers = None
@@ -40,7 +59,6 @@ class HttpResponse:
         try:
             if self._link_headers is None:
                 self._link_headers = self.link_parser.parse(self.get_headers("Link"))
-            # self._link_headers = self._parse_link_headers(self.get_headers("Link"))
             if not regex:
                 return [x for x in self._link_headers if x.relationship == relationship]
             else:
@@ -69,42 +87,14 @@ class HttpResponse:
     def parse_body(self):
         return self.link_parser.parse(self.body.replace("\n", ""))
 
-    # @staticmethod
-    # def _parse_link_headers(link_header: str) -> List:
-    #     link_header = link_header.strip()
-    #
-    #     _link_headers = []
-    #
-    #     split_point = re.compile("[,]\s*[<]")
-    #
-    #     link_header_splits = [x.replace('>', '').replace('<', '') for x in split_point.split(link_header)]
-    #     # link_header_splits = [x.replace('>', '').replace('<', '') for x in link_header.split(', <')]
-    #
-    #     for item in link_header_splits:
-    #         # relationship is mandatory
-    #         relationships = re.findall('((?<=rel=")[^"]*)', item)
-    #
-    #         # Append only if theres relationship
-    #         if relationships:
-    #             link = item.split(";")[0]
-    #             relationships = relationships[0].strip().split(" ")
-    #             for relationship in relationships:
-    #                 type = (re.findall('((?<=type=")[^"]*)', item) or [None])[0]
-    #                 datetime = (re.findall('((?<=datetime=")[^"]*)', item) or [None])[0]
-    #                 lic = (re.findall('((?<=license=")[^"]*)', item) or [None])[0]
-    #
-    #                 _link_headers.append({
-    #                     "link": link,
-    #                     "relationship": relationship,
-    #                     "type": type,
-    #                     "datetime": datetime,
-    #                     "license": lic
-    #                 })
-    #
-    #     return _link_headers
-
 
 class HttpConnection:
+    """
+
+        An adapter class for HTTPConnection. Used for isolating urlib incase of issues in the future.
+
+    """
+
     _connection: HTTPConnection = None
 
     _response: HttpResponse = None
@@ -134,6 +124,19 @@ def http(uri: str,
          user_agent='Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2',
          method='HEAD'
          ) -> HttpConnection:
+    """
+
+    Initiates HTTP connections using the given parameters using the HTTP Adapter.
+
+    :param uri: URI for the connection
+    :param datetime: Datetime for Accept-Datetime header
+    :param accept: Content type for Accept header
+    :param accept_language: language for Accept-Language head
+    :param proxy_connection: value for Proxy-Connection header
+    :param user_agent: User-Agent header
+    :param method:request method. Defaults to HEAD.
+    :return: HTTP connection using the given parameters.
+    """
     headers = {
         'Accept-Datetime': datetime,
         'Accept': accept,
@@ -144,7 +147,6 @@ def http(uri: str,
 
     params: ParseResult = urlparse(url=uri)
 
-    # TODO - Check tuple handling validatorhandler 212 (Python 2.4 fix??)
     host: str = params.netloc
     if params.port == 80:
         # required??
