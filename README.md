@@ -1,4 +1,6 @@
 # Memento Validator
+ ![](docs/source/_static/validator-logo-200.png)
+ 
 Memento validator toolkit lets you validate your memento implementation.
 Toolkit includes
 1. Web API
