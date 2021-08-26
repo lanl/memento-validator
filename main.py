@@ -1,5 +1,7 @@
 import click
+from pprint import pprint
 from mementoweb.apps.daily_validator.main import run as daily_validator_run
+from mementoweb.apps.cli_validator.main import run as cli_validator_run
 
 
 @click.group()
@@ -24,12 +26,8 @@ def cli_validator():
               type=click.Choice(["original", "memento", "timemap", "timegate"], case_sensitive=False),
               help="Type of resource")
 @click.option("--date", default="Sun, 01 Apr 2010 12:00:00 GMT", help="Date Time for testing the resource")
-@click.option("--follow", default=False, help="Follow up tests or not")
-def cli(uri, type_, date, follow):
-    print(uri)
-    print(type_)
-    print(date)
-    print(follow)
+def cli(uri, type_, date):
+    cli_validator_run(uri, type_, date)
 
 
 command_collection = click.CommandCollection(sources=[daily_validator, cli_validator])

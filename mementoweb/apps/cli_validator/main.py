@@ -45,15 +45,18 @@ def run(uri, resource_type, datetime):
         result = validator.validate(uri, datetime)
         for report in result.reports:
             print("="*99)
-            print("{:<15} | {:<80}|".format('Source', textwrap.shorten(report.name.split(".")[-1], width=75)))
-            print("{:<15} | {:<80}|".format('Description', textwrap.shorten(report.description, width=75)))
+            # print("{:<15} | {:<80}|".format('Source', textwrap.shorten(report.name.split(".")[-1], width=75)))
+            print("{:<98}|".format(textwrap.shorten(report.name, width=98)))
+            print("{:<98}|".format(textwrap.shorten(report.description, width=98)))
 
-            print("="*40+" + "+"="*56)
-            print("{:<40} | {:<55}|".format('Test Name', 'Status'))
-            print("="*40+" + "+"="*56)
+            print("="*60+" + "+"="*36)
+            # print("{:<60} | {:<35}|".format('Test Name', 'Status'))
+            # print("="*60+" + "+"="*36)
             for test in report.tests:
-                print("{:<40} | {:<55}|".format(textwrap.shorten(test.name(), width=40), test.result()))
-            print("-"*40+" + "+"-"*56)
+                print("{:<60} | {:<35}|".format(textwrap.shorten(test.name(), width=60), test.result()))
+            print("-"*60+" + "+"-"*36+"\n")
+
+
 
 
 @click.command()
