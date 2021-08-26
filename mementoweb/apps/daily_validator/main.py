@@ -1,11 +1,12 @@
-import json
-import xml.etree.ElementTree as ElementTree
-from typing import Union
 import logging
 import os
-
-from dotenv import dotenv_values
+import xml.etree.ElementTree as ElementTree
 from distutils.util import strtobool
+from typing import Union
+
+import click
+from dotenv import dotenv_values
+
 from mementoweb.apps.daily_validator.email_client import Email, SecureEmail, UnsecureEmail, EmailServerError
 from mementoweb.apps.daily_validator.email_report_generator import HTMLReportGenerator
 from mementoweb.validator.pipelines import DefaultPipeline
@@ -107,3 +108,13 @@ def run(file_name="daily-validator.env"):
     if master_emails is not None:
         email_server.send_email(receiver=master_emails.split(","), subject="Daily Validator Report",
                                 html_message=report_generator._html_start_text + master_report + report_generator._html_end_text)
+
+
+@click.command()
+@click.option("--env", default="daily-validator.env", help="Location of the .env configuration")
+def daily(env):
+    run(env)
+
+
+if __name__ == '__main__':
+    daily()
