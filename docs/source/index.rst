@@ -14,7 +14,7 @@ The toolkit includes a core validator library and a selection of applications bu
 
 
 .. toctree::
-   :caption: Guides:
+   :caption: Application Guides:
 
    guides/http-api
    guides/web-validator
