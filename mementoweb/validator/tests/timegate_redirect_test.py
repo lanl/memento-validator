@@ -1,13 +1,31 @@
-from typing_extensions import Literal
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
+from dateutil import parser
 
 from mementoweb.validator.errors.header_errors import HeaderTypeNotFoundError, HeadersNotFoundError, HeaderParseError, \
     LinkHeaderNotFoundError
 from mementoweb.validator.errors.uri_errors import HttpRequestFailError, InvalidUriError, HttpConnectionFailError
-from mementoweb.validator.util.http import http, HttpConnection
 from mementoweb.validator.tests.test import BaseTest, TestReport, TestResult
+from mementoweb.validator.util.http import http, HttpConnection
 
 
 class TimeGateRedirectTestReport(TestReport):
+    """
+
+        Test report from testing Timegate redirection. Includes updated HTTP connection based on the type of test.
+
+    """
     connection: HttpConnection = None
 
     def __init__(self, connection: HttpConnection = None, *args, **kwargs):
@@ -16,6 +34,11 @@ class TimeGateRedirectTestReport(TestReport):
 
 
 class TimeGateRedirectTest(BaseTest):
+    """
+
+        Implements testing procedures/ variables for testing TimeGate redirection.
+
+    """
     MISSING_REDIRECTION_LOCATION = "Missing location for redirection"
 
     REDIRECTION_MISSING_ORIGINAL = "Redirection to another timegate"
@@ -30,23 +53,7 @@ class TimeGateRedirectTest(BaseTest):
 
     TIMEGATE_RETURN_200 = "TimeGate returns 200"
 
-    TIMEGATE_RETURN_INVALID_STATUS = "TimeGate does not return 302/ 200"
-
-    TIMEGATE_FUTURE_RETURN_302 = "TimeGate returns 302 for datetime in future"
-
-    TIMEGATE_FUTURE_INVALID_RETURN = "Timegate does not return 302 for datetime in future"
-
-    TIMEGATE_PAST_RETURN_302 = "TimeGate returns 302 for datetime in past"
-
-    TIMEGATE_PAST_INVALID_RETURN = "Timegate does not return 302 for datetime in past"
-
-    TIMEGATE_BLANK_VALID_RETURN = "TimeGate returns 200 or redirect for blank Accept-Datetime"
-
-    TIMEGATE_BLANK_INVALID_RETURN = "Timegate does not return 302/200 for blank Accept-Datetime"
-
-    TIMEGATE_BROKEN_VALID_RETURN = "TimeGate returns 400 for broken datetime"
-
-    TIMEGATE_BROKEN_INVALID_RETURN = "Timegate does not return 400 for broken datetime"
+    TIMEGATE_INVALID_RETURN = "TimeGate does not return 302/ 200"
 
     REDIRECT_THRESH_PASSED = "Redirect threshold passed"
 
@@ -64,98 +71,19 @@ class TimeGateRedirectTest(BaseTest):
             connection=None
         )
 
-    def test(self, connection: HttpConnection,
-             datetime: str,
-             test_type=Literal["future", "past", "broken", "normal", "blank"],
-             assert_connection: HttpConnection = None,
-             redirect_threshold: int = 5
-             ) -> TimeGateRedirectTestReport:
+    def test(self, connection: HttpConnection, datetime: str, redirect_threshold: int = 5) -> TimeGateRedirectTestReport:
         """
+
+            Test the redirection of the TimeGate resource provided as a HttpConnection.
 
         :param connection: Primary connection for testing the redirection
         :param datetime: Datetime used for establishing the primary connection. Should conform the standard specification
-        :param test_type: Test type to perform from "normal" (or ""), "future", "past", "broken" defaults to "normal" (or "")
-        :param assert_connection: Secondary connection for validating memento information. Ignored when test_type is "normal" or ""
-        :param redirect_threshold: Maximum number of redirects for warning (Applicable only for test_type = "normal", otherwise ignored)
-        :return:
+        :param redirect_threshold: Maximum number of redirects for warning
+        :return: Time gate redirection test report containing results
+
         """
 
-        if test_type is None:
-            test_type = "normal"
         self._test_report.connection = connection
-
-        if test_type == "future":
-            return self._future(assert_connection)
-        elif test_type == "past":
-            return self._past(assert_connection)
-        elif test_type == "broken":
-            return self._broken(assert_connection)
-        elif test_type == "blank":
-            return self._blank(assert_connection)
-        else:
-            return self._normal(connection, datetime, max_redirects=redirect_threshold)
-
-    def _broken(self, assert_connection):
-        self._test_report.name += "-broken"
-
-        response_status: int = assert_connection.get_response().status
-
-        if response_status != 400:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BROKEN_INVALID_RETURN,
-                                            status=TestResult.TEST_FAIL))
-        else:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BROKEN_VALID_RETURN,
-                                            status=TestResult.TEST_PASS))
-            self._test_report.report_status = TestReport.REPORT_PASS
-
-        return self._test_report
-
-    def _past(self, assert_connection: HttpConnection = None
-              ) -> TimeGateRedirectTestReport:
-
-        self._test_report.name += "-past"
-
-        response = assert_connection.get_response()
-        response_status: int = response.status
-
-        if response_status != 302:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_PAST_INVALID_RETURN,
-                                            status=TestResult.TEST_FAIL))
-        else:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_PAST_RETURN_302,
-                                            status=TestResult.TEST_PASS))
-            self._test_report.report_status = TestReport.REPORT_PASS
-
-            # mementos = assert_connection.get_response().search_link_headers("memento")
-        # TODO sort mementos and check
-
-        return self._test_report
-
-    def _future(self, assert_connection: HttpConnection = None
-                ) -> TimeGateRedirectTestReport:
-
-        self._test_report.name += "-future"
-
-        response = assert_connection.get_response()
-        response_status: int = response.status
-
-        if response_status != 302:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_FUTURE_INVALID_RETURN,
-                                            status=TestResult.TEST_FAIL))
-        else:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_FUTURE_RETURN_302,
-                                            status=TestResult.TEST_PASS))
-
-            # mementos = assert_connection.get_response().search_link_headers("memento")
-            self._test_report.report_status = TestReport.REPORT_PASS
-            # TODO sort mementos and check
-
-        return self._test_report
-
-    def _normal(self, connection: HttpConnection,
-                datetime: str,
-                max_redirects
-                ) -> TimeGateRedirectTestReport:
 
         response = connection.get_response()
         response_status: int = response.status
@@ -199,7 +127,7 @@ class TimeGateRedirectTest(BaseTest):
                 break
 
             response_status = response.status
-        if redirect_count >= max_redirects:
+        if redirect_count >= redirect_threshold:
             self.add_test_result(TestResult(name=TimeGateRedirectTest.REDIRECT_THRESH_PASSED,
                                             status=TestResult.TEST_WARN))
 
@@ -213,52 +141,211 @@ class TimeGateRedirectTest(BaseTest):
             self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_RETURN_307, status=TestResult.TEST_WARN))
             self._test_report.report_status = TestReport.REPORT_PASS
         else:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_RETURN_INVALID_STATUS,
+            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_INVALID_RETURN,
                                             status=TestResult.TEST_FAIL))
-
-        return self._test_report
-
-    def _blank(self, assert_connection):
-        self._test_report.name += "-blank"
-
-        response = assert_connection.get_response()
-        response_status: int = response.status
-
-        if not (response_status == 302 or response_status == 200):
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_INVALID_RETURN,
-                                            status=TestResult.TEST_FAIL))
-        else:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_VALID_RETURN,
-                                            status=TestResult.TEST_PASS))
-            self._test_report.report_status = TestReport.REPORT_PASS
-
-            # mementos = assert_connection.get_response().search_link_headers("memento")
-            # TODO sort mementos and check
 
         return self._test_report
 
 
 class TimeGateBlankRedirectTest(TimeGateRedirectTest):
 
-    def test(self, connection: HttpConnection,
-             datetime: str,
-             test_type=Literal["future", "past", "broken", "normal", "blank"],
-             assert_connection: HttpConnection = None,
-             redirect_threshold: int = 5
-             ) -> TimeGateRedirectTestReport:
+    TIMEGATE_BLANK_VALID_RETURN = "TimeGate returns 200 or redirect for blank Accept-Datetime"
+
+    TIMEGATE_BLANK_INVALID_RETURN = "Timegate does not return 302/200 for blank Accept-Datetime"
+
+    TIMEGATE_BLANK_VALID_REDIRECT = "TimeGate redirects to last memento without Accept-Datetime"
+
+    TIMEGATE_BLANK_INVALID_REDIRECT = "TimeGate does not redirect to last memento without Accept-Datetime"
+
+    def test(self, connection: HttpConnection, datetime: str, redirect_threshold: int = 5) -> TimeGateRedirectTestReport:
+        """
+
+            Test the redirection of the TimeGate resource provided as a HttpConnection for compliance with empty
+            Accept-Datetime.
+
+        :param connection: Primary connection for testing the redirection
+        :param datetime: Ignored
+        :param redirect_threshold: Ignored
+        :return: Time gate redirection test report containing results
+
+        """
 
         response = assert_connection.get_response()
         response_status: int = response.status
 
         if response_status == 302 or response_status == 200:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_VALID_RETURN,
+
+            self.add_test_result(TestResult(name=TimeGateBlankRedirectTest.TIMEGATE_BLANK_VALID_RETURN,
                                             status=TestResult.TEST_PASS))
-            self._test_report.report_status = TestReport.REPORT_PASS
+            try:
+                mementos = response.search_link_headers("memento", regex=True)
+                mementos.sort(key=lambda x: parser.parse(x.datetime))
+                if len(mementos) > 0:
+
+                    redirect_location = response.get_headers("Location")
+
+                    if redirect_location == mementos[-1].uri:
+                        self.add_test_result(TestResult(name=TimeGateBlankRedirectTest.TIMEGATE_BLANK_VALID_REDIRECT,
+                                                        status=TestResult.TEST_PASS))
+                    else:
+                        self.add_test_result(
+                            TestResult(name=TimeGateBlankRedirectTest.TIMEGATE_BLANK_INVALID_REDIRECT,
+                                       status=TestResult.TEST_WARN))
+
+            except HeaderTypeNotFoundError:
+                self.add_test_result(TestResult(name=TimeGateBlankRedirectTest.MISSING_REDIRECTION_LOCATION))
+
+            except parser.ParserError:
+                pass
+
         else:
-            self.add_test_result(TestResult(name=TimeGateRedirectTest.TIMEGATE_BLANK_INVALID_RETURN,
+            self.add_test_result(TestResult(name=TimeGateBlankRedirectTest.TIMEGATE_BLANK_INVALID_RETURN,
                                             status=TestResult.TEST_FAIL))
 
-            # mementos = assert_connection.get_response().search_link_headers("memento")
-            # TODO sort mementos and check
+        return self._test_report
+
+
+class TimeGateBrokenRedirectTest(TimeGateRedirectTest):
+
+    TIMEGATE_BROKEN_VALID_RETURN = "TimeGate returns 400 for broken datetime"
+
+    TIMEGATE_BROKEN_INVALID_RETURN = "Timegate does not return 400 for broken datetime"
+
+    def test(self, connection: HttpConnection, datetime: str, redirect_threshold: int = 5) -> TimeGateRedirectTestReport:
+        """
+
+        Test the redirection of the TimeGate resource provided as a HttpConnection for compliance with unparsable
+        Accept-Datetime.
+
+        :param connection: Primary connection for testing the redirection
+        :param datetime: Ignored
+        :param redirect_threshold: Ignored
+        :return: Time gate redirection test report containing results
+
+        """
+
+        response_status: int = assert_connection.get_response().status
+
+        if response_status != 400:
+            self.add_test_result(TestResult(name=TimeGateBrokenRedirectTest.TIMEGATE_BROKEN_INVALID_RETURN,
+                                            status=TestResult.TEST_FAIL))
+        else:
+            self.add_test_result(TestResult(name=TimeGateBrokenRedirectTest.TIMEGATE_BROKEN_VALID_RETURN,
+                                            status=TestResult.TEST_PASS))
+            self._test_report.report_status = TestReport.REPORT_PASS
+
+        return self._test_report
+
+
+class TimeGatePastRedirectTest(TimeGateRedirectTest):
+
+    TIMEGATE_PAST_VALID_RETURN = "TimeGate returns 302 for datetime in past"
+
+    TIMEGATE_PAST_INVALID_RETURN = "Timegate does not return 302 for datetime in past"
+
+    TIMEGATE_PAST_VALID_REDIRECT = "TimeGate redirects to first memento for datetime in past"
+
+    TIMEGATE_PAST_INVALID_REDIRECT = "TimeGate does not redirect to first memento for datetime in past"
+
+    def test(self, connection: HttpConnection, datetime: str, redirect_threshold: int = 5) -> TimeGateRedirectTestReport:
+        """
+
+            Test the redirection of the TimeGate resource provided as a HttpConnection for compliance with
+            Accept-Datetime in past (before first memento).
+
+            :param connection: Primary connection for testing the redirection
+            :param datetime: Ignored
+            :param redirect_threshold: Ignored
+            :return: Time gate redirection test report containing results
+
+        """
+
+        response = assert_connection.get_response()
+        response_status: int = response.status
+
+        if response_status != 302:
+            self.add_test_result(TestResult(name=TimeGatePastRedirectTest.TIMEGATE_PAST_INVALID_RETURN,
+                                            status=TestResult.TEST_FAIL))
+        else:
+            self.add_test_result(TestResult(name=TimeGatePastRedirectTest.TIMEGATE_PAST_VALID_RETURN,
+                                            status=TestResult.TEST_PASS))
+
+            try:
+                mementos = response.search_link_headers("memento", regex=True)
+                mementos.sort(key=lambda x: parser.parse(x.datetime))
+                if len(mementos) > 0:
+
+                    redirect_location = response.get_headers("Location")
+
+                    if redirect_location == mementos[0].uri:
+                        self.add_test_result(TestResult(name=TimeGatePastRedirectTest.TIMEGATE_PAST_VALID_REDIRECT,
+                                                        status=TestResult.TEST_PASS))
+                    else:
+                        self.add_test_result(
+                            TestResult(name=TimeGatePastRedirectTest.TIMEGATE_PAST_INVALID_REDIRECT,
+                                       status=TestResult.TEST_WARN))
+
+            except HeaderTypeNotFoundError:
+                self.add_test_result(TestResult(name=TimeGatePastRedirectTest.MISSING_REDIRECTION_LOCATION))
+
+            except parser.ParserError:
+                pass
+
+        return self._test_report
+
+
+class TimeGateFutureRedirectTest(TimeGateRedirectTest):
+
+    TIMEGATE_FUTURE_VALID_RETURN = "TimeGate returns 302 for datetime in future"
+
+    TIMEGATE_FUTURE_INVALID_RETURN = "Timegate does not return 302 for datetime in future"
+
+    TIMEGATE_FUTURE_VALID_REDIRECT = "TimeGate redirects to first memento for datetime in past"
+
+    TIMEGATE_FUTURE_INVALID_REDIRECT = "TimeGate does not redirect to first memento for datetime in past"
+
+    def test(self, connection: HttpConnection, datetime: str, redirect_threshold: int = 5) -> TimeGateRedirectTestReport:
+        """
+
+            Test the redirection of the TimeGate resource provided as a HttpConnection for compliance with
+            Accept-Datetime in future.
+
+            :param connection: Primary connection for testing the redirection
+            :param datetime: Ignored
+            :param redirect_threshold: Ignored
+            :return: Time gate redirection test report containing results
+
+        """
+
+        response = assert_connection.get_response()
+        response_status: int = response.status
+
+        if response_status != 302:
+            self.add_test_result(TestResult(name=TimeGateFutureRedirectTest.TIMEGATE_FUTURE_INVALID_RETURN,
+                                            status=TestResult.TEST_FAIL))
+        else:
+            self.add_test_result(TestResult(name=TimeGateFutureRedirectTest.TIMEGATE_FUTURE_VALID_RETURN,
+                                            status=TestResult.TEST_PASS))
+
+            try:
+                mementos = response.search_link_headers("memento", regex=True)
+                mementos.sort(key=lambda x: parser.parse(x.datetime))
+                if len(mementos) > 0:
+
+                    redirect_location = response.get_headers("Location")
+
+                    if redirect_location == mementos[-1].uri:
+                        self.add_test_result(TestResult(name=TimeGateFutureRedirectTest.TIMEGATE_FUTURE_VALID_REDIRECT,
+                                                        status=TestResult.TEST_PASS))
+                    else:
+                        self.add_test_result(
+                            TestResult(name=TimeGateFutureRedirectTest.TIMEGATE_FUTURE_INVALID_REDIRECT,
+                                       status=TestResult.TEST_WARN))
+
+            except HeaderTypeNotFoundError:
+                self.add_test_result(TestResult(name=TimeGateFutureRedirectTest.MISSING_REDIRECTION_LOCATION))
+
+            except parser.ParserError:
+                pass
 
         return self._test_report

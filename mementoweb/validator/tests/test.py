@@ -1,5 +1,17 @@
-from typing import List
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
 
+from typing import List
 from typing_extensions import TypedDict
 
 from mementoweb.validator.util.http import HttpConnection
@@ -64,6 +76,7 @@ class TestReport:
 
     REPORT_FAIL: int = -1
 
+    # TODO : Ged rid of report_status
     report_status: int
 
     name: str
@@ -81,21 +94,21 @@ class TestReport:
             tests = []
         self.tests = tests
 
-    def result(self) -> str:
-        if self.report_status == self.REPORT_PASS:
-            return "Pass"
-        if self.report_status == self.REPORT_WARN:
-            return "Warn"
-        else:
-            return "Fail"
+    # def result(self) -> str:
+    #     if self.report_status == self.REPORT_PASS:
+    #         return "Pass"
+    #     if self.report_status == self.REPORT_WARN:
+    #         return "Warn"
+    #     else:
+    #         return "Fail"
 
     def to_json(self) -> dict:
         return {
             "name": self.name.split(".")[-1],
             "source": self.name,
             "description": self.description,
-            "status": self.report_status,
-            "result": self.result(),
+            # "status": self.report_status,
+            # "result": self.result(),
             "tests": [test.to_json() for test in self.tests]
         }
 
