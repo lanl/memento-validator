@@ -184,15 +184,15 @@ class MainController:
                 "datetime": datetime,
                 "result": TimeMap().validate(timemap, datetime, full=full_tm_check).to_json()}
 
-    def _follow_timegate(self, timemap, datetime):
-        return {"uri": timemap,
+    def _follow_timegate(self, timegate, datetime):
+        return {"uri": timegate,
                 "datetime": datetime,
-                "result": TimeGate().validate(timemap, datetime).to_json()}
+                "result": TimeGate().validate(timegate, datetime).to_json()}
 
-    def _follow_memento(self, timemap, datetime):
-        return {"uri": timemap,
+    def _follow_memento(self, memento, datetime):
+        return {"uri": memento,
                 "datetime": datetime,
-                "result": Memento().validate(timemap, datetime).to_json()}
+                "result": Memento().validate(memento, datetime).to_json()}
 
 
 class RequestError(TypedDict):
