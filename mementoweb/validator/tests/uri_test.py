@@ -1,3 +1,16 @@
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 from mementoweb.validator.errors.uri_errors import HttpConnectionFailError, InvalidUriError, HttpRequestFailError
 from mementoweb.validator.util.http import HttpConnection, http
 from mementoweb.validator.tests.test import BaseTest, TestResult
@@ -7,7 +20,7 @@ from mementoweb.validator.tests.test import TestReport
 class URITestReport(TestReport):
     """
 
-    URITestReport encapsulates URI test specific results in addition to standard test results
+    URITestReport encapsulates URI test specific results in addition to standard test results.
 
     """
     connection: HttpConnection = None
@@ -20,7 +33,7 @@ class URITestReport(TestReport):
 class URITest(BaseTest):
     """
 
-    Implements URI validation and connectivity tests
+    Implements URI validation and connectivity tests.
 
     """
 
