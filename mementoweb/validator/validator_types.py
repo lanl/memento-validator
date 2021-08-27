@@ -11,14 +11,6 @@
 #  See LICENSE in the project root for license information.
 #
 
-#
-#
-#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
-#                     Research and Prototyping Team, SRO-RL,
-#                     Los Alamos National Laboratory
-#
-#  See LICENSE in the project root for license information.
-#
 
 from enum import Enum
 
