@@ -1,3 +1,16 @@
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 from mementoweb.validator.util.http import HttpResponse
 from mementoweb.validator.tests.link_header_test import LinkHeaderTest
 from mementoweb.validator.tests.test import TestReport, TestResult
@@ -30,12 +43,3 @@ class LinkHeaderOriginalTest(LinkHeaderTest):
 
     def _test_timegate(self, response: HttpResponse) -> TestReport:
         return self._test_memento(response)
-        # if not len(response.search_link_headers("timegate")):
-        #     self.add_test_result(
-        #         TestResult(name=LinkHeaderOriginalTest.TIMEGATE_NOT_PRESENT, status=TestResult.TEST_FAIL))
-        #     self._test_report.report_status = TestReport.REPORT_FAIL
-        # else:
-        #     self.add_test_result(TestResult(name=LinkHeaderOriginalTest.TIMEGATE_PRESENT, status=TestResult.TEST_PASS))
-        #     self._test_report.report_status = TestReport.REPORT_PASS
-        #
-        # return self._test_report

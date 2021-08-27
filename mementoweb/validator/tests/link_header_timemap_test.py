@@ -1,3 +1,16 @@
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 import typing
 from typing import List
 
@@ -8,6 +21,10 @@ from mementoweb.validator.validator_types import ResourceType
 
 
 class LinkHeaderTimeMapTestReport(TestReport):
+    """
+        Test report from Link header timemap relation test.
+        Includes extracted timemap uris in addition to standard test report.
+    """
     time_map_uris: List[str] = []
 
     def __init__(self, time_map_uris=None, *args, **kwargs):
@@ -23,6 +40,11 @@ class LinkHeaderTimeMapTestReport(TestReport):
 
 
 class LinkHeaderTimeMapTest(LinkHeaderTest):
+    """
+
+        Implements testing procedures, variables for link header timemap relation.
+
+    """
 
     _description = "Tests the compliance of Link header timemap relation."
 
@@ -48,6 +70,14 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
 
     def test(self, response: HttpResponse, resource_type: ResourceType = ResourceType.ORIGINAL) -> \
             LinkHeaderTimeMapTestReport:
+        """
+
+        Performs tests on Link header timemap relation for a given HTTP response.
+
+        :param response: HTTP response for testing
+        :param resource_type: type of resource.
+        :return: Link header timemap test report.
+        """
         # Just for typing support
         return typing.cast(LinkHeaderTimeMapTestReport,
                            super(LinkHeaderTimeMapTest, self).test(response, resource_type))
@@ -78,37 +108,5 @@ class LinkHeaderTimeMapTest(LinkHeaderTest):
     def _test_memento(self, response: HttpResponse) -> LinkHeaderTimeMapTestReport:
         return self._test_timegate(response)
 
-        # Duplicate code - test same as timegate
-        # timemaps = response.search_link_headers("timemap")
-        #
-        # if not len(timemaps):
-        #     self.add_test_result(
-        #         TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT, status=TestResult.TEST_WARN))
-        #     self._test_report.report_status = TestReport.REPORT_WARN
-        # else:
-        #     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
-        #     timemap: dict
-        #     for timemap in timemaps:
-        #         # TODO : add matching content type
-        #         if "type" in timemap.keys() and timemap["type"] == "application/link-format":
-        #             self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_PRESENT,
-        #                                             status=TestResult.TEST_PASS))
-        #             self._test_report.report_status = TestReport.REPORT_PASS
-        #             self._test_report.time_map_uris.append(timemap['link'])
-        #         else:
-        #             self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_TYPE_NOT_PRESENT))
-        #
-        # return self._test_report
-
     def _test_original(self, response: HttpResponse) -> LinkHeaderTimeMapTestReport:
         return self._test_timegate(response)
-
-        # Duplicate code - tests same as timegate
-        # if not len(response.search_link_headers("timemap")):
-        #     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_NOT_PRESENT))
-        #     self._test_report.report_status = TestReport.REPORT_FAIL
-        # else:
-        #     self.add_test_result(TestResult(name=LinkHeaderTimeMapTest.TIMEMAP_PRESENT, status=TestResult.TEST_PASS))
-        #     self._test_report.report_status = TestReport.REPORT_PASS
-        #
-        # return self._test_report

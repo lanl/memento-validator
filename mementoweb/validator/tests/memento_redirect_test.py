@@ -1,3 +1,16 @@
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 from mementoweb.validator.errors.header_errors import HeaderTypeNotFoundError
 from mementoweb.validator.errors.uri_errors import HttpConnectionFailError, InvalidUriError, HttpRequestFailError
 from mementoweb.validator.util.http import HttpConnection, http, HttpResponse
@@ -10,6 +23,11 @@ from mementoweb.validator.tests.test import TestReport
 
 
 class MementoRedirectTestReport(TestReport):
+    """
+
+        Test report for Memento redirection. Includes updated redirected HTTP connection.
+
+    """
     connection: HttpConnection = None
 
     def __init__(self, connection: HttpConnection = None, *args, **kwargs):
@@ -18,6 +36,11 @@ class MementoRedirectTestReport(TestReport):
 
 
 class MementoRedirectTest(BaseTest):
+    """
+
+        Implements testing procedures and variables for testing Memento redirection.
+
+    """
     MISSING_REDIRECTION_LOCATION: str = "Missing location for redirection"
 
     REDIRECTION_BEFORE_MEMENTO: str = "Redirection before memento"
@@ -43,6 +66,13 @@ class MementoRedirectTest(BaseTest):
         )
 
     def test(self, response: HttpResponse) -> MementoRedirectTestReport:
+        """
+
+            Test on redirection compliance for a given HTTP response.
+
+        :param response: Http response for testing
+        :return: Memento redirect test report
+        """
         self._test_report.connection = None
         response_status: int = response.status
         while 300 <= response_status < 400:
