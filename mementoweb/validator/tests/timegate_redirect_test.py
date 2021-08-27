@@ -170,7 +170,7 @@ class TimeGateBlankRedirectTest(TimeGateRedirectTest):
 
         """
 
-        response = assert_connection.get_response()
+        response = connection.get_response()
         response_status: int = response.status
 
         if response_status == 302 or response_status == 200:
@@ -224,7 +224,7 @@ class TimeGateBrokenRedirectTest(TimeGateRedirectTest):
 
         """
 
-        response_status: int = assert_connection.get_response().status
+        response_status: int = connection.get_response().status
 
         if response_status != 400:
             self.add_test_result(TestResult(name=TimeGateBrokenRedirectTest.TIMEGATE_BROKEN_INVALID_RETURN,
@@ -260,7 +260,7 @@ class TimeGatePastRedirectTest(TimeGateRedirectTest):
 
         """
 
-        response = assert_connection.get_response()
+        response = connection.get_response()
         response_status: int = response.status
 
         if response_status != 302:
@@ -317,7 +317,7 @@ class TimeGateFutureRedirectTest(TimeGateRedirectTest):
 
         """
 
-        response = assert_connection.get_response()
+        response = connection.get_response()
         response_status: int = response.status
 
         if response_status != 302:
