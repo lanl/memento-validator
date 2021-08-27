@@ -1,3 +1,16 @@
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 from mementoweb.validator.util.http import http
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.pipelines.default import PipelineResult
@@ -6,7 +19,8 @@ from mementoweb.validator.tests.link_header_memento_test import LinkHeaderMement
 from mementoweb.validator.tests.link_header_original_test import LinkHeaderOriginalTest
 from mementoweb.validator.tests.link_header_timemap_test import LinkHeaderTimeMapTest
 from mementoweb.validator.tests.test import TestReport
-from mementoweb.validator.tests.timegate_redirect_test import TimeGateRedirectTest, TimeGateBlankRedirectTest
+from mementoweb.validator.tests.timegate_redirect_test import TimeGateRedirectTest, TimeGateBlankRedirectTest, \
+    TimeGatePastRedirectTest, TimeGateFutureRedirectTest, TimeGateBrokenRedirectTest
 from mementoweb.validator.tests.uri_test import URITest
 from mementoweb.validator.validator_types import ResourceType
 
@@ -67,25 +81,16 @@ class TimeGate(DefaultPipeline):
                                                     resource_type=ResourceType.TIMEGATE)
         lh_mem_report = LinkHeaderMementoTest().test(response=redirect_report.connection.get_response(),
                                                      resource_type=ResourceType.TIMEGATE)
-        blank_redirection_report = TimeGateBlankRedirectTest().test(connection=redirect_report.connection,
-                                                                    test_type="blank",
-                                                                    datetime="",
-                                                                    assert_connection=http(uri, datetime=""))
+        blank_redirection_report = TimeGateBlankRedirectTest().test(connection=http(uri, datetime=""), datetime="")
 
-        past_redirect_report = TimeGateRedirectTest().test(connection=redirect_report.connection,
-                                                           test_type="past",
-                                                           datetime=past_datetime,
-                                                           assert_connection=http(uri, past_datetime))
+        past_redirect_report = TimeGatePastRedirectTest().test(connection=http(uri, past_datetime),
+                                                               datetime=past_datetime)
 
-        future_redirect_report = TimeGateRedirectTest().test(connection=redirect_report.connection,
-                                                             test_type="future",
-                                                             datetime=future_datetime,
-                                                             assert_connection=http(uri, datetime=future_datetime))
+        future_redirect_report = TimeGateFutureRedirectTest().test(connection=http(uri, future_datetime),
+                                                                   datetime=future_datetime)
 
-        broken_redirect_report = TimeGateRedirectTest().test(connection=redirect_report.connection,
-                                                             test_type="broken",
-                                                             assert_connection=http(uri, datetime="BROKEN_DATETIME"),
-                                                             datetime="BROKEN_DATETIME")
+        broken_redirect_report = TimeGateBrokenRedirectTest().test(connection=http(uri, "BROKEN_DATETIME"),
+                                                                   datetime="BROKEN_DATETIME")
         self.result.reports.extend([
             header_report, lh_orig_report, lh_tm_report, lh_mem_report,
             blank_redirection_report, past_redirect_report, future_redirect_report, broken_redirect_report

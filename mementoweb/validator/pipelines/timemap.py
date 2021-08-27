@@ -1,3 +1,16 @@
+#
+#  Copyright (c) 2021. Los Alamos National Laboratory (LANL).
+#  Written by: Bhanuka Mahanama (bhanuka@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  Correspondence: Lyudmila Balakireva, PhD (ludab@lanl.gov)
+#                     Research and Prototyping Team, SRO-RL,
+#                     Los Alamos National Laboratory
+#
+#  See LICENSE in the project root for license information.
+#
+
 from mementoweb.validator.pipelines import DefaultPipeline
 from mementoweb.validator.pipelines.default import PipelineResult
 from mementoweb.validator.tests.content_type_header_test import ContentTypeHeaderTest
@@ -27,23 +40,9 @@ class TimeMap(DefaultPipeline):
             return self.result
 
         self.result.reports.extend([
-            TimeMapRedirectTest().test(connection=uri_result.connection),
+            TimeMapRedirectTest().test(response=uri_result.connection.get_response()),
             ContentTypeHeaderTest().test(response=uri_result.connection.get_response()),
-            TimeMapParseTest().test(connection=uri_result.connection, full_test=full)
+            TimeMapParseTest().test(response=uri_result.connection.get_response(), full_test=full)
         ])
-
-        # redirect_result = TimeMapRedirectTest().test(connection=uri_result.connection)
-        # self.result.reports.append(redirect_result)
-        #
-        # header_self.result.reports = ContentTypeHeaderTest().test(uri_result.connection.get_response())
-        # self.result.reports.append(header_self.result.reports)
-        #
-        # parse_self.result.reports = TimeMapParseTest().test(uri_result.connection)
-        # self.result.reports.append(parse_self.result.reports)
-
-        if not full:
-            return self.result
-
-        # self.result.reports.append(ContentNegotiationTest().test(uri_result.connection))
 
         return self.result
