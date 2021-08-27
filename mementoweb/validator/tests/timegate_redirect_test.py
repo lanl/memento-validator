@@ -195,7 +195,7 @@ class TimeGateBlankRedirectTest(TimeGateRedirectTest):
             except HeaderTypeNotFoundError:
                 self.add_test_result(TestResult(name=TimeGateBlankRedirectTest.MISSING_REDIRECTION_LOCATION))
 
-            except parser.ParserError:
+            except (parser.ParserError, LinkHeaderNotFoundError):
                 pass
 
         else:
@@ -288,7 +288,7 @@ class TimeGatePastRedirectTest(TimeGateRedirectTest):
             except HeaderTypeNotFoundError:
                 self.add_test_result(TestResult(name=TimeGatePastRedirectTest.MISSING_REDIRECTION_LOCATION))
 
-            except parser.ParserError:
+            except (parser.ParserError, LinkHeaderNotFoundError):
                 pass
 
         return self._test_report
@@ -345,7 +345,7 @@ class TimeGateFutureRedirectTest(TimeGateRedirectTest):
             except HeaderTypeNotFoundError:
                 self.add_test_result(TestResult(name=TimeGateFutureRedirectTest.MISSING_REDIRECTION_LOCATION))
 
-            except parser.ParserError:
+            except (parser.ParserError, LinkHeaderNotFoundError):
                 pass
 
         return self._test_report
