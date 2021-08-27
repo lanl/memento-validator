@@ -1,4 +1,4 @@
 Validator CLI
 ======================================
 
-.. image:: _static/cli-validator.png
+.. image:: ../_static/cli-validator.png

@@ -1,4 +1,4 @@
 Web Validator
 ======================================
 
-.. image:: _static/web-validator.png
+.. image:: ../_static/web-validator.png

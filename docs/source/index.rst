@@ -14,6 +14,7 @@ The toolkit includes a core validator library and a selection of applications bu
 
 
 .. toctree::
+   :maxdepth: 2
    :caption: Application Guides:
 
    guides/http-api

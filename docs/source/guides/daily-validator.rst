@@ -1,4 +1,4 @@
 Daily Validator
 ======================================
 
-.. image:: _static/daily-validator.png
+.. image:: ../_static/daily-validator.png
